@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMA Nusantara — Beranda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/home.css">
+
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/cursor.css">
+</head>
+<body>
+  <%- include("partials/header.ejs") %>
+
+  <!-- ================= HERO (PARALLAX) ================= -->
+  <section class="hero" id="beranda">
+    <div class="hero__bg" id="heroBg" style="background-image:url('/img/hero_campus.webp');"></div>
+    <div class="hero__overlay"></div>
+
+    <div class="container hero__content">
+      <p class="hero__eyebrow">Selamat Datang di</p>
+      <h1 class="hero__title">Membentuk Generasi <em>Unggul</em>,<br> Berkarakter, dan Siap Bersaing</h1>
+      <p class="hero__desc">
+        SMA Nusantara hadir sebagai ruang belajar yang modern, inklusif, dan berorientasi pada
+        masa depan setiap siswa.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#layanan" class="btn btn--primary">Lihat Layanan</a>
+        <a href="#fasilitas" class="btn btn--ghost">Jelajahi Fasilitas</a>
+      </div>
+    </div>
+
+    <!-- ================= STATISTIK SINGKAT ================= -->
+    <div class="stats" id="stats">
+      <div class="container stats__grid">
+        <div class="stats__item">
+          <p class="stats__number" data-count="1240">0</p>
+          <p class="stats__label">Murid Aktif</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__number" data-count="86">0</p>
+          <p class="stats__label">Tenaga Pengajar</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__number" data-count="32">0</p>
+          <p class="stats__label">Ruang Kelas</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FASILITAS ================= -->
+  <section class="section facilities" id="fasilitas">
+    <div class="container">
+      <p class="section__eyebrow">Fasilitas Sekolah</p>
+      <h2 class="section__title">Sarana &amp; Prasarana Penunjang Belajar</h2>
+      <p class="section__desc">
+        Dilengkapi fasilitas modern untuk mendukung kegiatan akademik maupun non-akademik siswa.
+      </p>
+
+      <div class="facilities__grid">
+        <%
+          const facilities = [
+            { icon: '📚', name: 'Perpustakaan', count: 3 },
+            { icon: '🔬', name: 'Laboratorium', count: 5 },
+            { icon: '🏀', name: 'Lapangan Olahraga', count: 4 },
+            { icon: '💻', name: 'Ruang Komputer', count: 2 },
+            { icon: '🎭', name: 'Aula Serbaguna', count: 1 },
+            { icon: '🅿️', name: 'Area Parkir', count: 3 }
+          ];
+        %>
+        <% facilities.forEach(function(f){ %>
+          <div class="facility-card">
+            <p class="facility-card__icon"><%= f.icon %></p>
+            <p class="facility-card__count" data-count="<%= f.count %>">0</p>
+            <p class="facility-card__name"><%= f.name %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GURU (SCROLL SAMPING) ================= -->
+  <section class="section teachers" id="guru">
+    <div class="container">
+      <p class="section__eyebrow">Tenaga Pengajar</p>
+      <h2 class="section__title">Kenali Sebagian Guru Kami</h2>
+    </div>
+
+    <div class="teachers__scroll">
+      <%
+        const teachers = [
+          { name: 'Andi Prasetyo, S.Pd.', subject: 'Matematika', photo: '/img/teacher-1.jpg' },
+          { name: 'Rina Wulandari, M.Pd.', subject: 'Bahasa Indonesia', photo: '/img/teacher-2.jpg' },
+          { name: 'Budi Santoso, S.Kom.', subject: 'Informatika', photo: '/img/teacher-3.jpg' },
+          { name: 'Sari Dewi, S.Pd.', subject: 'Bahasa Inggris', photo: '/img/teacher-4.jpg' },
+          { name: 'Fajar Nugraha, S.Si.', subject: 'Fisika', photo: '/img/teacher-5.jpg' }
+        ];
+      %>
+      <% teachers.forEach(function(t){ %>
+        <div class="teacher-card">
+          <img src="<%= t.photo %>" alt="Foto <%= t.name %>" class="teacher-card__photo">
+          <p class="teacher-card__name"><%= t.name %></p>
+          <p class="teacher-card__subject"><%= t.subject %></p>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <!-- ================= LAYANAN / FITUR ================= -->
+  <section class="section services" id="layanan">
+    <div class="container">
+      <p class="section__eyebrow">Layanan Sekolah</p>
+      <h2 class="section__title">Akses Layanan Digital Kami</h2>
+      <p class="section__desc">
+        Berbagai layanan untuk memudahkan siswa dan orang tua dalam mengurus kebutuhan administrasi.
+      </p>
+
+      <div class="services__grid">
+        <%
+          const services = [
+            {
+              icon: '📝',
+              title: 'Layanan PPDB',
+              desc: 'Pendaftaran peserta didik baru secara online, mudah dan cepat.',
+              link: '/ppdb'
+            },
+            {
+              icon: '🎓',
+              title: 'Layanan KJP',
+              desc: 'Informasi dan pengajuan Kartu Jakarta Pintar bagi siswa yang memenuhi syarat.',
+              link: '/kjp'
+            },
+            {
+              icon: '🤝',
+              title: 'Layanan PIP',
+              desc: 'Bantuan Program Indonesia Pintar untuk mendukung kelangsungan pendidikan siswa.',
+              link: '/pip'
+            }
+          ];
+        %>
+        <% services.forEach(function(s){ %>
+          <a href="<%= s.link %>" class="service-card">
+            <p class="service-card__icon"><%= s.icon %></p>
+            <h3 class="service-card__title"><%= s.title %></h3>
+            <p class="service-card__desc"><%= s.desc %></p>
+            <p class="service-card__more">Selengkapnya →</p>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BERITA TERBARU ================= -->
+  <section class="section news" id="berita">
+    <div class="container">
+      <p class="section__eyebrow">Informasi Terkini</p>
+      <h2 class="section__title">Berita &amp; Pengumuman Terbaru</h2>
+
+      <div class="news__grid">
+        <%
+          const newsList = [
+            {
+              image: '/img/news-1.jpg',
+              date: '28 Agustus 2026',
+              title: 'Pembukaan Pendaftaran PPDB Tahun Ajaran Baru',
+              excerpt: 'Sekolah resmi membuka pendaftaran peserta didik baru mulai minggu ini.',
+              link: '/berita/ppdb-dibuka'
+            },
+            {
+              image: '/img/news-2.jpg',
+              date: '20 Agustus 2026',
+              title: 'Tim Sains Sekolah Raih Juara Umum Olimpiade',
+              excerpt: 'Prestasi membanggakan diraih tim olimpiade sains tingkat provinsi.',
+              link: '/berita/juara-olimpiade'
+            },
+            {
+              image: '/img/news-3.jpg',
+              date: '15 Agustus 2026',
+              title: 'Renovasi Perpustakaan Sekolah Rampung',
+              excerpt: 'Perpustakaan kini hadir dengan konsep ruang baca yang lebih nyaman.',
+              link: '/berita/renovasi-perpustakaan'
+            }
+          ];
+        %>
+        <% newsList.forEach(function(n){ %>
+          <a href="<%= n.link %>" class="news-card">
+            <div class="news-card__image" style="background-image:url('<%= n.image %>');"></div>
+            <div class="news-card__body">
+              <p class="news-card__date"><%= n.date %></p>
+              <h3 class="news-card__title"><%= n.title %></h3>
+              <p class="news-card__excerpt"><%= n.excerpt %></p>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+<%- include("partials/footer.ejs") %>
+
+  <!-- ================= FLOATING AI CHAT BUTTON ================= -->
+  <button class="ai-chat-btn" id="aiChatBtn" type="button" aria-label="Buka chat AI">
+    <img src="/img/chat-icon.svg" alt="" class="ai-chat-btn__icon">
+  </button>
+
+  <div class="ai-chat-box" id="aiChatBox">
+    <div class="ai-chat-box__header">
+      <p>Asisten AI Sekolah</p>
+      <button id="aiChatClose" type="button" aria-label="Tutup chat">&times;</button>
+    </div>
+    <div class="ai-chat-box__body" id="aiChatBody">
+      <p class="ai-chat-box__msg ai-chat-box__msg--bot">
+        Halo! Ada yang bisa saya bantu terkait informasi sekolah?
+      </p>
+    </div>
+    <form class="ai-chat-box__form" id="aiChatForm">
+      <input type="text" id="aiChatInput" placeholder="Tulis pertanyaan..." autocomplete="off">
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+
+  <script src="/js/home.js"></script>
+  <script src="/js/header.js"></script>
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

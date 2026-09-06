@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="/css/signup.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Create Account</h1>
+
+      <!-- ================================= -->
+      <!-- GOOGLE SIGNUP -->
+      <!-- ================================= -->
+
+      <div id="google-section">
+        <p class="description">Daftar menggunakan akun Google kamu</p>
+
+        <div
+          id="g_id_onload"
+          data-client_id="<%= cid %>"
+          data-callback="handleGoogleSignup"
+          data-auto_prompt="false"
+        ></div>
+
+        <div class="google-container">
+          <div
+            class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="signup_with"
+            data-shape="rectangular"
+            data-logo_alignment="left"
+          ></div>
+        </div>
+      </div>
+
+      <div id="form-section" class="form-container">
+        <p class="description">Lengkapi data akun kamu</p>
+
+        <form action="/signup/complete" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="email"> Email </label>
+            <input type="email" id="email" name="email" readonly required />
+          </div>
+
+          <div class="form-group">
+            <label for="name"> Nama Lengkap </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Masukkan nama lengkap"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password"> Password </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="jenis_kelamin"> Jenis Kelamin </label>
+            <select id="jenis_kelamin" name="jenis_kelamin" required>
+              <option value="" disabled selected>Pilih jenis kelamin</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="perempuan">Perempuan</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="nisn"> NISN </label>
+            <input
+              type="number"
+              id="nisn"
+              name="nisn"
+              placeholder="Masukkan NISN"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tempat_lahir"> Tempat Lahir </label>
+            <input
+              type="text"
+              id="tempat_lahir"
+              name="tempat_lahir"
+              placeholder="Masukkan tempat lahir"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tanggal_lahir"> Tanggal Lahir </label>
+            <input
+              type="date"
+              id="tanggal_lahir"
+              name="tanggal_lahir"
+              required
+            />
+          </div>
+
+          <!-- ================================= -->
+          <!-- UPLOAD FOTO PROFIL -->
+          <!-- ================================= -->
+          <div class="form-group">
+            <label for="foto_profil"> Foto Profil </label>
+            <input
+              type="file"
+              id="foto_profil"
+              name="foto_profil"
+              accept="image/png, image/jpeg, image/jpg"
+              onchange="previewFotoProfil(event)"
+              required
+            />
+            <div id="foto-preview-container" style="margin-top: 10px; display: none;">
+              <img
+                id="foto-preview"
+                src=""
+                alt="Preview foto profil"
+                style="max-width: 150px; max-height: 150px; border-radius: 8px; object-fit: cover;"
+              />
+            </div>
+            <small id="foto-error" style="color: red; display: none;">
+              Ukuran file terlalu besar (maks. 2MB) atau format tidak didukung.
+            </small>
+          </div>
+
+          <button type="submit">Create Account</button>
+        </form>
+      </div>
+
+      <div class="login">
+        <p>
+          Sudah punya akun?
+          <a href="/#newsletter"> Login </a>
+        </p>
+      </div>
+    </div>
+
+    <script src="/js/signup.js"></script>
+    <script>
+      async function handleGoogleSignup(response) {
+        try {
+          const result = await fetch("/signup/google", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              credential: response.credential,
+            }),
+          });
+
+          const data = await result.json();
+
+          if (!data.success) {
+            alert(data.message || "Google signup gagal");
+
+            return;
+          }
+
+          document.getElementById("email").value = data.email;
+          document.getElementById("google-section").style.display = "none";
+          document.getElementById("form-section").style.display = "block";
+        } catch (error) {
+          console.error(error);
+          alert("Terjadi kesalahan saat signup.");
+        }
+      }
+
+      function previewFotoProfil(event) {
+        const file = event.target.files[0];
+        const errorEl = document.getElementById("foto-error");
+        const previewContainer = document.getElementById("foto-preview-container");
+        const previewImg = document.getElementById("foto-preview");
+
+        errorEl.style.display = "none";
+        previewContainer.style.display = "none";
+
+        if (!file) return;
+
+        const maxSizeBytes = 2 * 1024 * 1024; // 2MB
+        const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+
+        if (!allowedTypes.includes(file.type) || file.size > maxSizeBytes) {
+          errorEl.style.display = "block";
+          event.target.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImg.src = e.target.result;
+          previewContainer.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    </script>
+  </body>
+</html>

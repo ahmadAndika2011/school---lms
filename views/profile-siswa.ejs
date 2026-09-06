@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Siswa</title>
+    <link rel="stylesheet" href="/css/profile-siswa.css" />
+    <link rel="stylesheet" href="/css/cursor.css">
+  </head>
+
+  <body>
+    <div class="profile-container">
+      <div class="profile-card">
+        <div class="profile-photo">
+          <img
+            src="<%= siswa.gambar %>"
+            alt="Foto profil <%= siswa.name %>"
+          />
+        </div>
+
+        <input
+          type="text"
+          class="profile-name-input"
+          name="name"
+          placeholder="Masukkan nama"
+          value="<%= siswa.name ? siswa.name : '' %>"
+        />
+        <p class="profile-email"><%= siswa.email %></p>
+
+        <div class="profile-details">
+          <div class="detail-row">
+            <span class="detail-label">Jenis Kelamin</span>
+            <span class="detail-value"><%= siswa.jenis_kelamin %></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">NISN</span>
+            <span class="detail-value"><%= siswa.nisn %></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">Tempat Lahir</span>
+            <span class="detail-value"><%= siswa.tempat_lahir %></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">Tanggal Lahir</span>
+            <span class="detail-value">
+              <%= new Date(siswa.tanggal_lahir).toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) %>
+            </span>
+          </div>
+        </div>
+
+        <% if (siswa.data_nilai && siswa.data_nilai.length > 0) { %>
+        <div class="profile-nilai">
+          <h2>Data Nilai</h2>
+          <ul>
+            <% siswa.data_nilai.forEach(function(nilai) { %>
+            <li><%= nilai %></li>
+            <% }); %>
+          </ul>
+        </div>
+        <% } else { %>
+        <div class="profile-nilai">
+          <h2>Data Nilai</h2>
+          <p class="empty-state">Belum ada data nilai.</p>
+        </div>
+        <% } %>
+
+        <form action="/logout" method="POST" class="logout-form">
+          <button type="submit" class="logout-button">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/js/cursor.js"></script>
+  </body>
+</html>
