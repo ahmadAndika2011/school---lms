@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - SMA Nusantara</title>
+    <link rel="stylesheet" href="/css/cursor.css" />
+    <link rel="stylesheet" href="/css/login.css">
+  </head>
+  <body>
+    <div class="login-card">
+      <div class="login-icon">&#128274;</div>
+      <h1>Masuk ke Akun</h1>
+      <p class="subtitle">Selamat datang kembali di SMA Nusantara</p>
+
+      <!-- Tampilkan jika ada error login -->
+      <!-- <div class="alert-error">Username atau password salah</div> -->
+
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Masukkan username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Masukkan password"
+            required
+          />
+        </div>
+
+        <div class="form-options">
+          <label> <input type="checkbox" name="remember" /> Ingat saya </label>
+          <a href="/forgot-password">Lupa password?</a>
+        </div>
+
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+
+      <div class="divider">atau</div>
+
+      <p class="signup-text">
+        Belum punya akun? <a href="/signup">Daftar di sini</a>
+      </p>
+    </div>
+
+    <script src="/js/cursor.js"></script>
+  </body>
+</html>

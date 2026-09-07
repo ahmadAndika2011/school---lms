@@ -11,4 +11,4 @@ const ekstrakulikulerSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.Schema("Ekstrakulikuler", ekstrakulikulerSchema)
+module.exports = mongoose.model("Ekstrakulikuler", ekstrakulikulerSchema)

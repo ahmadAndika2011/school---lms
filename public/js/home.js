@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
      SCROLL REVEAL UNTUK SECTION
   ========================================================= */
   const revealTargets = document.querySelectorAll(
-    '.facility-card, .service-card, .news-card, .teacher-card, .section__title, .section__desc'
+    '.facility-card, .service-card, .news-card, .teacher-card, .extracurricular-card, .section__title, .section__desc'
   );
   revealTargets.forEach(function (el) {
     el.classList.add('reveal');

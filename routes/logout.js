@@ -8,7 +8,7 @@ router.post("/logout", (req, res) => {
       return res.status(500).send("Terjadi kesalahan saat logout.");
     }
 
-    res.clearCookie("connect.sid"); // sesuaikan nama cookie kalau kamu custom di session config
+    res.clearCookie("connect.sid");
     res.redirect("/");
   });
 });

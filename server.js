@@ -59,9 +59,11 @@ app.set("views", path.join(__dirname, "views"));
 // 5. Routes Utama
 app.use("/", require("./routes/home"));
 app.use("/", require("./routes/signup"));
+app.use("/", require("./routes/login"));
+app.use("/", require("./routes/logout"));
 app.use("/", require("./routes/profile-siswa"));
 app.use("/", require("./routes/update-nama-siswa"));
-app.use("/", require("./routes/logout"));
+// app.use("/", require("./routes/tambah-ekstrakulikuler"));
 
 // 6. Handle 404 (Halaman Tidak Ditemukan)
 app.use((req, res) => {

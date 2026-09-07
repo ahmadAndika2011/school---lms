@@ -1,92 +1,180 @@
 * {
-        box-sizing: border-box;
-      }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-      body {
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-        margin: 0;
-      }
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f3d24 0%, #145c33 45%, #f5c518 200%);
+  padding: 40px 20px;
+}
 
-      .container {
-        width: 400px;
-        margin: 80px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      }
+.container {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 20px 45px rgba(15, 61, 36, 0.25);
+  border-top: 6px solid #f5c518;
+}
 
-      h1 {
-        text-align: center;
-        margin-bottom: 10px;
-      }
+.container h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #0f3d24;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
 
-      .description {
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-      }
+.description {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
 
-      .google-container {
-        display: flex;
-        justify-content: center;
-      }
+/* ================================= */
+/* GOOGLE SIGNUP SECTION */
+/* ================================= */
 
-      .form-container {
-        display: none;
-      }
+#google-section {
+  margin-bottom: 8px;
+}
 
-      .form-group {
-        margin-bottom: 18px;
-      }
+.google-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
 
-      label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: bold;
-      }
+/* ================================= */
+/* FORM SECTION */
+/* ================================= */
 
-      input,
-      textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-      }
+.form-container {
+  display: none;
+}
 
-      input[readonly] {
-        background: #eee;
-        cursor: not-allowed;
-      }
+.form-group {
+  margin-bottom: 18px;
+}
 
-      textarea {
-        height: 100px;
-        resize: vertical;
-      }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f3d24;
+  margin-bottom: 6px;
+}
 
-      button {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 5px;
-        background: #222;
-        color: white;
-        cursor: pointer;
-        font-size: 15px;
-      }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d9e6dd;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #1f2937;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
 
-      button:hover {
-        background: #444;
-      }
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #145c33;
+  box-shadow: 0 0 0 3px rgba(20, 92, 51, 0.15);
+}
 
-      .login {
-        text-align: center;
-        margin-top: 20px;
-      }
+.form-group input[readonly] {
+  background: #f3f4f6;
+  color: #6b7280;
+}
 
-      .message {
-        margin-top: 15px;
-        text-align: center;
-      }
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.form-group input[type="file"]::file-selector-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #145c33;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: background 0.2s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+  background: #0f3d24;
+}
+
+#foto-preview-container img {
+  border: 2px solid #f5c518;
+}
+
+#foto-error {
+  display: block;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* ================================= */
+/* BUTTON */
+/* ================================= */
+
+button[type="submit"] {
+  width: 100%;
+  padding: 13px;
+  background: #f5c518;
+  color: #0f3d24;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+button[type="submit"]:hover {
+  background: #e0b30f;
+  transform: translateY(-1px);
+}
+
+/* ================================= */
+/* LOGIN LINK */
+/* ================================= */
+
+.login {
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+  margin-top: 22px;
+}
+
+.login a {
+  color: #145c33;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login a:hover {
+  text-decoration: underline;
+}

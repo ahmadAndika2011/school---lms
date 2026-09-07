@@ -6,20 +6,17 @@ const fs = require("fs");
 const https = require("https");
 const path = require("path");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const UPLOAD_DIR = path.join(__dirname, "../public/uploads/gambar-siswa");
 const DEFAULT_GAMBAR = "/uploads/foto-siswa/template.jpg";
 
-// Pastikan folder tujuan ada saat server start
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 
-// ================================
-// KONFIGURASI MULTER (UPLOAD FILE)
-// ================================
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, UPLOAD_DIR);
@@ -33,7 +30,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // maks 2MB, samakan dengan validasi di frontend
+  limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: function (req, file, cb) {
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
     if (!allowedTypes.includes(file.mimetype)) {
@@ -128,10 +125,6 @@ router.post("/signup/google", async (req, res) => {
   }
 });
 
-// ================================
-// upload.single("foto_profil") wajib dipasang di sini
-// "foto_profil" harus SAMA PERSIS dengan atribut name="" di <input type="file"> pada form
-// ================================
 router.post("/signup/complete", upload.single("foto_profil"), async (req, res) => {
   try {
     const googleSignup = req.session.googleSignup;
@@ -145,6 +138,8 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
     const { name, password, jenis_kelamin, nisn, tempat_lahir, tanggal_lahir } =
       req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10)
+
     if (
       !name ||
       !password ||
@@ -156,23 +151,25 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
       return res.status(400).send("Semua field harus diisi.");
     }
 
+    const checkUsername = await Siswa.findOne({name: name})
+    if(checkUsername){
+      return res.status(400).send("Nama sudah ada");
+    }
+
+    if(nisn.length != 10){
+      return res.status(400).send("Panjang nisn harus 10 digit");
+    }
+
     const nisnExists = await Siswa.findOne({ nisn: nisn });
     if (nisnExists) {
       return res.status(400).send("NISN sudah digunakan.");
     }
 
-    // ================================
-    // INI BAGIAN UTAMA: mengambil gambar hasil upload
-    // Setelah melewati middleware `upload.single("foto_profil")`,
-    // multer menaruh info file di `req.file` (bukan req.body)
-    // ================================
     let gambarPath = DEFAULT_GAMBAR;
 
     if (req.file) {
-      // User upload foto sendiri lewat form -> pakai file itu
       gambarPath = `/uploads/gambar-siswa/${req.file.filename}`;
     } else if (googleSignup.picture) {
-      // Kalau tidak upload, fallback ke foto profil Google
       const fileName = `${Date.now()}-${googleSignup.googleId}.jpg`;
       const filePath = path.join(UPLOAD_DIR, fileName);
 
@@ -181,14 +178,13 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
         gambarPath = `/uploads/gambar-siswa/${fileName}`;
       } catch (err) {
         console.error("Gagal download foto profil Google:", err);
-        // Tetap lanjut pakai gambar default kalau download gagal
       }
     }
 
     const siswa = await Siswa.create({
       name: name,
       email: googleSignup.email,
-      password: password,
+      password: hashedPassword,
       googleId: googleSignup.googleId,
       gambar: gambarPath,
       jenis_kelamin: jenis_kelamin,

@@ -111,6 +111,29 @@
     </div>
   </section>
 
+  <!-- ================= EKSTRAKULIKULER ================= -->
+  <section class="section extracurricular" id="ekstrakulikuler">
+    <div class="container">
+      <p class="section__eyebrow">Kegiatan Siswa</p>
+      <h2 class="section__title">Ekstrakulikuler Sekolah</h2>
+      <p class="section__desc">
+        Kembangkan bakat dan minatmu melalui berbagai pilihan ekstrakulikuler berikut.
+      </p>
+
+      <div class="extracurricular__grid">
+        <% ekstrakulikuler.forEach(function(e){ %>
+          <div class="extracurricular-card">
+            <p class="extracurricular-card__icon">🏆</p>
+            <h3 class="extracurricular-card__name"><%= e.nama_ekstrakulikuler %></h3>
+            <p class="extracurricular-card__schedule">
+              <span class="extracurricular-card__label">Jadwal:</span> <%= e.jadwal %>
+            </p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= LAYANAN / FITUR ================= -->
   <section class="section services" id="layanan">
     <div class="container">
