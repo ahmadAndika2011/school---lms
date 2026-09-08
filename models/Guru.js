@@ -9,7 +9,7 @@ const guruSchema = new mongoose.Schema({
         type: String
     },
     nip: {
-        type: Number,
+        type: String,
         required: true
     },
     status: {
@@ -26,4 +26,4 @@ const guruSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.Schema("Guru", guruSchema)
+module.exports = mongoose.model("Guru", guruSchema)

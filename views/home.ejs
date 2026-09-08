@@ -63,21 +63,11 @@
       </p>
 
       <div class="facilities__grid">
-        <%
-          const facilities = [
-            { icon: '📚', name: 'Perpustakaan', count: 3 },
-            { icon: '🔬', name: 'Laboratorium', count: 5 },
-            { icon: '🏀', name: 'Lapangan Olahraga', count: 4 },
-            { icon: '💻', name: 'Ruang Komputer', count: 2 },
-            { icon: '🎭', name: 'Aula Serbaguna', count: 1 },
-            { icon: '🅿️', name: 'Area Parkir', count: 3 }
-          ];
-        %>
-        <% facilities.forEach(function(f){ %>
+        <% fasilitas.forEach(function(f){ %>
           <div class="facility-card">
-            <p class="facility-card__icon"><%= f.icon %></p>
-            <p class="facility-card__count" data-count="<%= f.count %>">0</p>
-            <p class="facility-card__name"><%= f.name %></p>
+            <p class="facility-card__icon"><%= f.gambar %></p>
+            <p class="facility-card__count" data-count="<%= f.jumlah %>">0</p>
+            <p class="facility-card__name"><%= f.nama %></p>
           </div>
         <% }); %>
       </div>
@@ -92,21 +82,16 @@
     </div>
 
     <div class="teachers__scroll">
-      <%
-        const teachers = [
-          { name: 'Andi Prasetyo, S.Pd.', subject: 'Matematika', photo: '/img/teacher-1.jpg' },
-          { name: 'Rina Wulandari, M.Pd.', subject: 'Bahasa Indonesia', photo: '/img/teacher-2.jpg' },
-          { name: 'Budi Santoso, S.Kom.', subject: 'Informatika', photo: '/img/teacher-3.jpg' },
-          { name: 'Sari Dewi, S.Pd.', subject: 'Bahasa Inggris', photo: '/img/teacher-4.jpg' },
-          { name: 'Fajar Nugraha, S.Si.', subject: 'Fisika', photo: '/img/teacher-5.jpg' }
-        ];
-      %>
-      <% teachers.forEach(function(t){ %>
-        <div class="teacher-card">
-          <img src="<%= t.photo %>" alt="Foto <%= t.name %>" class="teacher-card__photo">
-          <p class="teacher-card__name"><%= t.name %></p>
-          <p class="teacher-card__subject"><%= t.subject %></p>
-        </div>
+      <% guru.forEach(function(g){ %>
+        <a href="/profile-guru/<%= g._id %>" class="teacher-card">
+          <% if (g.photo) { %>
+            <img src="/uploads/gambar-guru/<%= g.photo %>" alt="Foto <%= g.nama %>" class="teacher-card__photo">
+          <% } else { %>
+            <img src="/img/default-avatar.png" alt="Foto <%= g.nama %>" class="teacher-card__photo">
+          <% } %>
+          <p class="teacher-card__name"><%= g.nama %></p>
+          <p class="teacher-card__subject"><%= g.jabatan %></p>
+        </a>
       <% }); %>
     </div>
   </section>

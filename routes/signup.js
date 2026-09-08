@@ -156,6 +156,11 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
       return res.status(400).send("Nama sudah ada");
     }
 
+    const guruRegex = /\bguru\b/i;
+    if (guruRegex.test(name)) {
+        return res.status(400).send("Nama tidak valid");
+    }
+
     if(nisn.length != 10){
       return res.status(400).send("Panjang nisn harus 10 digit");
     }
@@ -199,7 +204,7 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
       id: siswa._id,
       name: siswa.name,
       email: siswa.email,
-      gambar: siswa.gambar,
+      role: "siswa"
     };
 
     res.redirect("/");

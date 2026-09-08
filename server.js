@@ -62,8 +62,11 @@ app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/logout"));
 app.use("/", require("./routes/profile-siswa"));
+app.use("/", require("./routes/profile-guru"));
 app.use("/", require("./routes/update-nama-siswa"));
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
+// app.use("/", require("./routes/tambah-fasilitas"));
+// app.use("/", require("./routes/tambah-guru"));
 
 // 6. Handle 404 (Halaman Tidak Ditemukan)
 app.use((req, res) => {

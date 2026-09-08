@@ -27,7 +27,7 @@
               </svg>
               <span>Login</span>
           </a>
-        <% } else { %>
+        <% } else if(user.role === "siswa") { %>
           <a href="/profile" class="navbar__link navbar__link--profile">
             <% if (user.gambar) { %>
               <img src="<%= user.gambar %>" alt="Foto profil <%= user.name %>" class="navbar__avatar" />
@@ -38,6 +38,8 @@
               </svg>
             <% } %>
           </a>
+        <% } else if(user.role) {%>
+          <a href="/profile-guru">Profile Guru</a>
         <% } %>
     </nav>
 
