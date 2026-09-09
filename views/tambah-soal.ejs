@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Soal - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/tambah-soal.css">
+</head>
+<body>
+  <div class="ts-wrapper">
+    <a href="/profile-guru" class="ts-back">&larr; Kembali ke Profile</a>
+
+    <h1 class="ts-title">Tambah Soal</h1>
+    <p class="ts-subtitle">Lengkapi informasi soal, lalu tentukan jumlah pertanyaan untuk mulai mengisi.</p>
+
+    <form id="form-tambah-soal" action="/tambah-soal" method="POST" enctype="multipart/form-data">
+
+      <!-- ================= INFO SOAL ================= -->
+      <div class="ts-card ts-card-info">
+        <div class="ts-field">
+          <label for="judul_soal">Judul Soal</label>
+          <input type="text" id="judul_soal" name="judul_soal" placeholder="Contoh: Ulangan Harian Matematika Bab 1" required>
+        </div>
+
+        <div class="ts-field">
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" rows="3" placeholder="Jelaskan singkat tentang soal ini" required></textarea>
+        </div>
+
+        <div class="ts-field ts-field-jumlah">
+          <label for="jumlah_soal">Jumlah Soal</label>
+          <div class="ts-jumlah-row">
+            <input type="number" id="jumlah_soal" min="1" max="50" placeholder="Contoh: 5">
+            <button type="button" id="btn-generate" class="ts-btn ts-btn-secondary">Buat Card Soal</button>
+          </div>
+          <span class="ts-hint">Tentukan berapa banyak pertanyaan yang ingin dibuat, lalu klik "Buat Card Soal".</span>
+        </div>
+      </div>
+
+      <!-- ================= CARD SOAL (di-generate JS) ================= -->
+      <div id="soal-container" class="ts-soal-container"></div>
+
+      <!-- ================= SUBMIT ================= -->
+      <div id="ts-submit-row" class="ts-submit-row" style="display:none;">
+        <button type="submit" class="ts-btn ts-btn-primary">Simpan Soal</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ================= TEMPLATE CARD SOAL ================= -->
+  <template id="template-card-soal">
+    <div class="ts-card ts-card-soal">
+      <div class="ts-card-soal-header">
+        <span class="ts-soal-index">Soal #<span data-role="nomor"></span></span>
+        <button type="button" class="ts-btn-hapus" data-role="hapus" title="Hapus soal ini">&times;</button>
+      </div>
+
+      <div class="ts-field">
+        <label>Gambar (opsional, bisa lebih dari satu)</label>
+        <div class="ts-gambar-list" data-role="gambar-list"></div>
+        <button type="button" class="ts-btn ts-btn-tambah-gambar" data-role="tambah-gambar">+ Tambah Gambar</button>
+      </div>
+
+      <div class="ts-field">
+        <label>Pertanyaan</label>
+        <textarea rows="2" data-role="pertanyaan" placeholder="Tulis pertanyaan di sini" required></textarea>
+      </div>
+
+      <div class="ts-field">
+        <label>Pilihan Jawaban</label>
+        <span class="ts-hint">Pilih bulatan di samping opsi yang merupakan jawaban benar.</span>
+        <div class="ts-pilihan-list" data-role="pilihan-list"></div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ================= TEMPLATE INPUT GAMBAR ================= -->
+  <template id="template-input-gambar">
+    <div class="ts-gambar-item" data-role="gambar-item">
+      <input type="file" accept="image/*" data-role="gambar-input">
+      <span class="ts-gambar-nama" data-role="gambar-nama">Belum ada file</span>
+      <button type="button" class="ts-btn-hapus-kecil" data-role="hapus-gambar" title="Hapus gambar ini">&times;</button>
+    </div>
+  </template>
+
+  <script src="/js/tambah-soal.js"></script>
+</body>
+</html>

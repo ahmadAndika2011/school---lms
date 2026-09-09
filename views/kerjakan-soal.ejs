@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerjakan Soal - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/kerjakan-soal.css">
+</head>
+<body>
+  <div class="ks-wrapper">
+
+    <!-- ================= HEADER ================= -->
+    <div class="ks-header">
+      <span class="ks-header-label">Sedang Mengerjakan</span>
+      <h1><%= soal.judul %></h1>
+      <p><%= soal.deskripsi %></p>
+
+      <div class="ks-progress-track">
+        <div class="ks-progress-fill" id="ks-progress-fill"></div>
+      </div>
+      <span class="ks-progress-label" id="ks-progress-label">0 dari <%= soal.soal.length %> soal terjawab</span>
+    </div>
+
+    <!-- ================= FORM SOAL ================= -->
+    <form id="form-kerjakan-soal" action="/kerjakan-soal/<%= soal._id %>" method="POST">
+      <div class="ks-soal-list">
+        <% soal.soal.forEach(function (item, index) { %>
+          <div class="ks-card">
+            <span class="ks-nomor"><%= index + 1 %></span>
+            <p class="ks-pertanyaan"><%= item.pertanyaan %></p>
+
+            <% if (item.gambar && item.gambar.length > 0) { %>
+              <div class="ks-gambar-list">
+                <% item.gambar.forEach(function (g) { %>
+                  <img src="/uploads/gambar-soal/<%= g %>" alt="Gambar soal <%= index + 1 %>">
+                <% }); %>
+              </div>
+            <% } %>
+
+            <div class="ks-pilihan-list">
+              <% item.jawaban.forEach(function (opsi) { %>
+                <label class="ks-pilihan-item">
+                  <input
+                    type="radio"
+                    name="jawaban[<%= item._id %>]"
+                    value="<%= opsi.pilihan %>"
+                    required
+                  >
+                  <span class="ks-pilihan-huruf"><%= opsi.pilihan %></span>
+                  <span class="ks-pilihan-teks"><%= opsi.text %></span>
+                </label>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+
+      <div class="ks-submit-row">
+        <button type="submit" class="ks-btn-submit">Selesai &amp; Kumpulkan</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="/js/kerjakan-soal.js"></script>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

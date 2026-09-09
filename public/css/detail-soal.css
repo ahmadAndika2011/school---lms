@@ -1,0 +1,188 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --merah: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #ffffff;
+  color: var(--teks-gelap);
+}
+
+.ds-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.ds-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hijau-tua);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.ds-back:hover {
+  text-decoration: underline;
+}
+
+/* ============ CARD INFO SOAL ============ */
+.ds-card-info {
+  background: var(--hijau-muda);
+  border-radius: 16px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.ds-card-info::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: var(--kuning);
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+.ds-label {
+  color: var(--hijau-tua);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-bottom: 8px;
+  z-index: 1;
+  position: relative;
+}
+
+.ds-judul {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--teks-gelap);
+  margin: 0 0 14px 0;
+  z-index: 1;
+  position: relative;
+  max-width: 600px;
+}
+
+.ds-deskripsi {
+  color: #333;
+  line-height: 1.7;
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 0 20px 0;
+  z-index: 1;
+  position: relative;
+}
+
+.ds-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  z-index: 1;
+  position: relative;
+}
+
+.ds-meta-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--abu);
+}
+
+.ds-meta-item strong {
+  color: var(--teks-gelap);
+}
+
+@media (max-width: 640px) {
+  .ds-card-info {
+    padding: 30px 20px;
+  }
+}
+
+/* ============ SECTION MURID ============ */
+.ds-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.ds-section-header h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  color: var(--teks-gelap);
+  margin: 0;
+}
+
+.ds-table-wrapper {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ds-table thead {
+  background: var(--hijau-tua);
+}
+
+.ds-table thead th {
+  color: #ffffff;
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+.ds-table tbody td {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--teks-gelap);
+  border-top: 1px solid #f0f0f0;
+}
+
+.ds-table tbody tr:hover {
+  background: var(--hijau-muda);
+}
+
+.ds-nilai {
+  font-weight: 700;
+}
+
+.ds-nilai.baik {
+  color: var(--hijau-tua);
+}
+.ds-nilai.kurang {
+  color: var(--merah);
+}
+
+.ds-empty {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--abu);
+  font-size: 14px;
+}

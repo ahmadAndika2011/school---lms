@@ -1,0 +1,273 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --merah: #dc2626;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #ffffff;
+  color: var(--teks-gelap);
+}
+
+.ts-wrapper {
+  max-width: 760px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+}
+
+.ts-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hijau-tua);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.ts-back:hover { text-decoration: underline; }
+
+.ts-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  margin: 0 0 8px 0;
+}
+
+.ts-subtitle {
+  color: var(--abu);
+  margin: 0 0 30px 0;
+  font-size: 15px;
+}
+
+/* ============ CARD DASAR ============ */
+.ts-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 26px;
+  margin-bottom: 20px;
+}
+
+.ts-card-info {
+  background: var(--hijau-muda);
+  border: none;
+}
+
+.ts-field {
+  margin-bottom: 18px;
+}
+
+.ts-field:last-child { margin-bottom: 0; }
+
+.ts-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.ts-field input[type="text"],
+.ts-field input[type="number"],
+.ts-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  resize: vertical;
+}
+
+.ts-field input:focus,
+.ts-field textarea:focus {
+  outline: none;
+  border-color: var(--hijau-tua);
+}
+
+.ts-hint {
+  display: block;
+  color: var(--abu);
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+
+.ts-jumlah-row {
+  display: flex;
+  gap: 10px;
+}
+
+.ts-jumlah-row input {
+  max-width: 160px;
+}
+
+/* ============ BUTTON ============ */
+.ts-btn {
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.ts-btn-secondary {
+  background: var(--hijau-tua);
+  color: #ffffff;
+}
+
+.ts-btn-secondary:hover { background: #0a4a32; }
+
+.ts-btn-primary {
+  background: var(--kuning);
+  color: var(--teks-gelap);
+  padding: 12px 28px;
+  font-size: 15px;
+}
+
+.ts-btn-primary:hover { background: #e0b400; }
+
+.ts-btn-tambah-gambar {
+  background: #ffffff;
+  color: var(--hijau-tua);
+  border: 1px dashed var(--hijau-tua);
+  font-size: 13px;
+  padding: 8px 14px;
+  margin-top: 4px;
+}
+
+.ts-btn-tambah-gambar:hover { background: var(--hijau-muda); }
+
+.ts-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* ============ CARD SOAL ============ */
+.ts-soal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ts-card-soal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.ts-soal-index {
+  font-weight: 700;
+  color: var(--hijau-tua);
+  font-size: 15px;
+}
+
+.ts-btn-hapus {
+  background: none;
+  border: none;
+  color: var(--merah);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.ts-btn-hapus:hover { background: #fee2e2; border-radius: 6px; }
+
+/* ============ GAMBAR ============ */
+.ts-gambar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ts-gambar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fafafa;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.ts-gambar-item input[type="file"] {
+  font-size: 13px;
+  max-width: 220px;
+}
+
+.ts-gambar-nama {
+  flex: 1;
+  font-size: 13px;
+  color: var(--abu);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ts-btn-hapus-kecil {
+  background: none;
+  border: none;
+  color: var(--merah);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+/* ============ PILIHAN JAWABAN ============ */
+.ts-pilihan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.ts-pilihan-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ts-pilihan-huruf {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.ts-pilihan-item input[type="text"] {
+  flex: 1;
+}
+
+.ts-pilihan-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--hijau-tua);
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .ts-jumlah-row { flex-direction: column; }
+  .ts-jumlah-row input { max-width: none; }
+}

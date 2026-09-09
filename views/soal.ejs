@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Soal - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/soal.css">
+</head>
+<body>
+  <div class="sl-wrapper">
+    <a href="/profile-guru" class="sl-back">&larr; Kembali ke Profile</a>
+    <h1 class="sl-title">Daftar Soal</h1>
+
+    <% if (daftarSoal && daftarSoal.length > 0) { %>
+      <div class="sl-grid">
+        <% daftarSoal.forEach(function(s){ %>
+          <a href="/kerjakan-soal/<%= s._id %>" class="sl-card">
+            <h3 class="sl-card-judul"><%= s.judul %></h3>
+            <p class="sl-card-deskripsi"><%= s.deskripsi %></p>
+
+            <div class="sl-card-footer">
+              <div class="sl-guru">
+                <span class="sl-guru-avatar">
+                  <%= s.id_guru && s.id_guru.nama ? s.id_guru.nama.charAt(0) : "?" %>
+                </span>
+                <span><%= s.id_guru && s.id_guru.nama ? s.id_guru.nama : "Guru tidak diketahui" %></span>
+              </div>
+              <span class="sl-jumlah"><%= s.soal ? s.soal.length : 0 %> soal</span>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p class="sl-empty">Belum ada soal yang ditambahkan.</p>
+    <% } %>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

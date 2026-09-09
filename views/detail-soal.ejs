@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Soal - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/detail-soal.css">
+  <link rel="stylesheet" href="/css/cursor.css">
+</head>
+<body>
+  <div class="ds-wrapper">
+    <a href="/profile-guru" class="ds-back">&larr; Kembali ke Profile</a>
+
+    <!-- ================= INFO SOAL ================= -->
+    <div class="ds-card-info">
+      <span class="ds-label">Detail Soal</span>
+      <h1 class="ds-judul"><%= soal.judul %></h1>
+      <p class="ds-deskripsi"><%= soal.deskripsi %></p>
+
+      <div class="ds-meta">
+        <div class="ds-meta-item"><strong>Jumlah Soal:</strong> <%= jumlah_soal %></div>
+      </div>
+    </div>
+
+    <!-- ================= MURID YANG MENGERJAKAN ================= -->
+    <div class="ds-section">
+      <div class="ds-section-header">
+        <h2>Murid yang Sudah Mengerjakan</h2>
+      </div>
+
+      <div class="ds-table-wrapper">
+        <%
+          // DATA DUMMY - ganti dengan data asli dari database (hasil pengerjaan siswa) nanti
+          const muridPengerjaan = [
+            { username: "ahmad.fauzi", nisn: "0051234567", nilai: 90 },
+            { username: "siti.rahma", nisn: "0051234568", nilai: 75 },
+            { username: "budi.santoso", nisn: "0051234569", nilai: 60 },
+            { username: "dewi.lestari", nisn: "0051234570", nilai: 85 }
+          ];
+        %>
+        <table class="ds-table">
+          <thead>
+            <tr>
+              <th>Username Murid</th>
+              <th>NISN</th>
+              <th>Nilai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (muridPengerjaan && muridPengerjaan.length > 0) { %>
+              <% muridPengerjaan.forEach(function(m){ %>
+                <tr>
+                  <td><%= m.username %></td>
+                  <td><%= m.nisn %></td>
+                  <td class="ds-nilai <%= m.nilai >= 70 ? 'baik' : 'kurang' %>"><%= m.nilai %></td>
+                </tr>
+              <% }); %>
+            <% } %>
+          </tbody>
+        </table>
+        <% if (!muridPengerjaan || muridPengerjaan.length === 0) { %>
+          <p class="ds-empty">Belum ada murid yang mengerjakan soal ini.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

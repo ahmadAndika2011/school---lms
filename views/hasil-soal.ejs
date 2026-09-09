@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hasil Soal - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/hasil-soal.css">
+</head>
+<body>
+  <div class="hs-wrapper">
+    <a href="/soal" class="hs-back">&larr; Kembali ke Daftar Soal</a>
+
+    <%
+      // DATA DUMMY - ganti dengan data asli dari database (Siswa & hasil pengerjaan) nanti
+      const siswa = {
+        gambar: "/uploads/foto-siswa/template.jpg",
+        name: "test",
+        email: "test@sma-nusantara.sch.id",
+        jenis_kelamin: "Laki-laki",
+        nisn: 51234567,
+        tempat_lahir: "Jakarta",
+        tanggal_lahir: new Date("2008-05-14")
+      };
+
+      const hasil = {
+        judul_soal: "Ulangan Harian Matematika Bab 1",
+        nilai: 89
+      };
+    %>
+
+    <!-- ================= CARD SISWA ================= -->
+    <div class="hs-card-siswa">
+      <div class="hs-foto">
+        <img src="<%= siswa.gambar %>" alt="Foto <%= siswa.name %>">
+      </div>
+
+      <div class="hs-info">
+        <span class="hs-label">Peserta</span>
+        <h1 class="hs-nama"><%= siswa.name %></h1>
+
+        <div class="hs-meta">
+          <div class="hs-meta-item"><strong>NISN:</strong> <%= siswa.nisn %></div>
+          <div class="hs-meta-item"><strong>Jenis Kelamin:</strong> <%= siswa.jenis_kelamin %></div>
+          <div class="hs-meta-item"><strong>TTL:</strong> <%= siswa.tempat_lahir %>, <%= siswa.tanggal_lahir.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) %></div>
+          <div class="hs-meta-item"><strong>Email:</strong> <%= siswa.email %></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= CARD HASIL ================= -->
+    <div class="hs-card-hasil">
+      <h2>Hasil Pengerjaan</h2>
+      <p class="hs-judul-soal"><%= hasil.judul_soal %></p>
+
+      <div class="hs-nilai-lingkaran <%= hasil.nilai < 70 ? 'kurang' : '' %>">
+        <span class="hs-nilai-angka"><%= hasil.nilai %></span>
+        <span class="hs-nilai-label">/ 100</span>
+      </div>
+
+      <span class="hs-status <%= hasil.nilai < 70 ? 'kurang' : '' %>">
+        <%= hasil.nilai < 70 ? 'Belum Lulus' : 'Lulus' %>
+      </span>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

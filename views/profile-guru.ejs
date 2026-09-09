@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Guru - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/profile-guru.css">
+  <link rel="stylesheet" href="/css/cursor.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div class="guru-wrapper">
+    <div class="guru-topbar">
+      <a href="/" class="guru-back">&larr; Kembali ke Beranda</a>
+
+      <form action="/logout" method="POST" style="margin:0;">
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
+    </div>
+
+    <div class="guru-card">
+      <div class="guru-foto">
+        <% if (guru.photo) { %>
+          <img src="/uploads/gambar-guru/<%= guru.photo %>" alt="Foto <%= guru.nama %>">
+        <% } else { %>
+          <img src="/img/default-avatar.png" alt="Foto Guru">
+        <% } %>
+      </div>
+
+      <div class="guru-info">
+        <span class="guru-label">Tenaga Pengajar</span>
+        <h1 class="guru-nama"><%= guru.nama %></h1>
+        <p class="guru-mapel"><%= guru.jabatan %></p>
+
+        <div class="guru-meta">
+          <div class="guru-meta-item"><strong>NIP:</strong> <%= guru.nip %></div>
+          <div class="guru-meta-item"><strong>Jenis Kelamin:</strong> <%= guru.jenis_kelamin %></div>
+          <div class="guru-meta-item"><strong>Status:</strong> <%= guru.status %></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= DAFTAR SOAL ================= -->
+    <div class="soal-section">
+      <div class="soal-header">
+        <h2>Daftar Soal</h2>
+        <a href="/tambah-soal" class="btn-tambah-soal">Tambah Soal</a>
+      </div>
+
+      <div class="soal-table-wrapper">
+        <table class="soal-table">
+          <thead>
+            <tr>
+              <th>ID Soal</th>
+              <th>Judul Soal</th>
+              <th>Jumlah Pertanyaan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (soal && soal.length > 0) { %>
+              <% soal.forEach(function(s){ %>
+                <tr>
+                  <td><%= s._id %></td>
+                  <td><%= s.judul_soal %></td>
+                  <td><%= s.soal ? s.soal.length : 0 %></td>
+                  <td><a href="/detail-soal/<%= s._id %>" class="link-aksi">Lihat Detail</a></td>
+                </tr>
+              <% }); %>
+            <% } %>
+          </tbody>
+        </table>
+        <% if (!soal || soal.length === 0) { %>
+          <p class="soal-empty">Belum ada soal yang ditambahkan.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

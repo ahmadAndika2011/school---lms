@@ -2,7 +2,8 @@ const mongoose = require("mongoose")
 
 const soalSchema = new mongoose.Schema({
     id_guru: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Guru",
         required: true
     },
     judul: {
@@ -31,7 +32,11 @@ const soalSchema = new mongoose.Schema({
                         required: true
                     }
                 }
-            ]
+            ],
+            jawaban_benar: {
+                type: String,
+                required: true
+            }
         }
     ]
 })

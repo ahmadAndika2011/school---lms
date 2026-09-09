@@ -1,0 +1,216 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #ffffff;
+  color: var(--teks-gelap);
+}
+
+.ks-wrapper {
+  max-width: 760px;
+  margin: 40px auto 100px;
+  padding: 0 20px;
+}
+
+/* ============ HEADER SOAL (sticky) ============ */
+.ks-header {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  z-index: 10;
+}
+
+.ks-header-label {
+  color: var(--hijau-tua);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.ks-header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  margin: 0 0 6px 0;
+}
+
+.ks-header p {
+  color: var(--abu);
+  font-size: 14px;
+  margin: 0 0 12px 0;
+}
+
+.ks-progress-track {
+  background: var(--hijau-muda);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.ks-progress-fill {
+  background: var(--hijau-tua);
+  height: 100%;
+  width: 0%;
+  transition: width 0.2s ease;
+}
+
+.ks-progress-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--abu);
+}
+
+/* ============ CARD PERTANYAAN ============ */
+.ks-soal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ks-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+}
+
+.ks-nomor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.ks-pertanyaan {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.ks-gambar-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.ks-gambar-list img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+}
+
+.ks-pilihan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ks-pilihan-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.ks-pilihan-item:hover {
+  background: var(--hijau-muda);
+}
+
+.ks-pilihan-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--hijau-tua);
+  flex-shrink: 0;
+}
+
+.ks-pilihan-item:has(input:checked) {
+  border-color: var(--hijau-tua);
+  background: var(--hijau-muda);
+}
+
+.ks-pilihan-huruf {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--teks-gelap);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.ks-pilihan-teks {
+  font-size: 14px;
+  flex: 1;
+}
+
+/* ============ SUBMIT ============ */
+.ks-submit-row {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ks-btn-submit {
+  background: var(--kuning);
+  color: var(--teks-gelap);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ks-btn-submit:hover {
+  background: #e0b400;
+}
+
+@media (max-width: 640px) {
+  .ks-gambar-list img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+  }
+}
