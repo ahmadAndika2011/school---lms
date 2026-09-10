@@ -11,24 +11,6 @@
   <div class="hs-wrapper">
     <a href="/soal" class="hs-back">&larr; Kembali ke Daftar Soal</a>
 
-    <%
-      // DATA DUMMY - ganti dengan data asli dari database (Siswa & hasil pengerjaan) nanti
-      const siswa = {
-        gambar: "/uploads/foto-siswa/template.jpg",
-        name: "test",
-        email: "test@sma-nusantara.sch.id",
-        jenis_kelamin: "Laki-laki",
-        nisn: 51234567,
-        tempat_lahir: "Jakarta",
-        tanggal_lahir: new Date("2008-05-14")
-      };
-
-      const hasil = {
-        judul_soal: "Ulangan Harian Matematika Bab 1",
-        nilai: 89
-      };
-    %>
-
     <!-- ================= CARD SISWA ================= -->
     <div class="hs-card-siswa">
       <div class="hs-foto">
@@ -51,7 +33,7 @@
     <!-- ================= CARD HASIL ================= -->
     <div class="hs-card-hasil">
       <h2>Hasil Pengerjaan</h2>
-      <p class="hs-judul-soal"><%= hasil.judul_soal %></p>
+      <p class="hs-judul-soal"><%= soal.judul %></p>
 
       <div class="hs-nilai-lingkaran <%= hasil.nilai < 70 ? 'kurang' : '' %>">
         <span class="hs-nilai-angka"><%= hasil.nilai %></span>
@@ -61,6 +43,40 @@
       <span class="hs-status <%= hasil.nilai < 70 ? 'kurang' : '' %>">
         <%= hasil.nilai < 70 ? 'Belum Lulus' : 'Lulus' %>
       </span>
+    </div>
+
+    <!-- ================= RINCIAN JAWABAN ================= -->
+    <div class="hs-card-detail">
+      <h2>Rincian Jawaban</h2>
+
+      <div class="hs-detail-list">
+        <% soal.soal.forEach(function (pertanyaan, index) { %>
+          <%
+            const jawabanSiswa = hasil.jawaban.find(function (j) {
+              return j.id_pertanyaan.toString() === pertanyaan._id.toString()
+            })
+            const sudahBenar = jawabanSiswa && jawabanSiswa.benar
+          %>
+          <div class="hs-detail-item <%= sudahBenar ? 'benar' : 'salah' %>">
+            <span class="hs-detail-nomor"><%= index + 1 %></span>
+
+            <div class="hs-detail-body">
+              <p class="hs-detail-pertanyaan"><%= pertanyaan.pertanyaan %></p>
+              <p class="hs-detail-jawaban">
+                Jawaban kamu:
+                <strong>
+                  <%= jawabanSiswa && jawabanSiswa.jawaban_dipilih ? jawabanSiswa.jawaban_dipilih.toUpperCase() : "Tidak dijawab" %>
+                </strong>
+                <% if (!sudahBenar) { %>
+                  &middot; Jawaban benar: <strong><%= pertanyaan.jawaban_benar.toUpperCase() %></strong>
+                <% } %>
+              </p>
+            </div>
+
+            <span class="hs-detail-icon"><%= sudahBenar ? "&#10003;" : "&#10005;" %></span>
+          </div>
+        <% }); %>
+      </div>
     </div>
   </div>
 

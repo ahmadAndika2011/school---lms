@@ -68,6 +68,7 @@ app.use("/", require("./routes/soal"));
 app.use("/", require("./routes/hasil-soal"));
 app.use("/", require("./routes/kerjakan-soal"));
 app.use("/", require("./routes/detail-soal"));
+app.use("/", require("./routes/tambah-soal"));
 
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
 // app.use("/", require("./routes/tambah-fasilitas"));

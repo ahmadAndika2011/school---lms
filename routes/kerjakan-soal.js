@@ -8,9 +8,9 @@ router.get("/kerjakan-soal/:id_soal", async (req, res) => {
     const {id_soal} = req.params
 
     const soal = await Soal.findById(id_soal)
-    const hasilSoal = await HasilSoal.findOne({id_siswa: req.session.user.id})
+    const hasilSoal = await HasilSoal.findOne({id_siswa: req.session.user.id, id_soal: id_soal})
     if(hasilSoal){
-        return res.redirect(`/hasil-soal/${hasilSoal.id_siswa}/${hasilSoal._id}`)
+        return res.redirect(`/hasil-soal/${hasilSoal.id_siswa}/${hasilSoal.id_soal}`)
     }
 
     res.render("kerjakan-soal", {soal})

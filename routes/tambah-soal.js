@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer"); // <-- tambahkan ini
-const path = require("path");     // <-- tambahkan ini
+const path = require("path"); // <-- tambahkan ini
 
 const Soal = require("../models/Soal");
 
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const unik = Date.now() + "-" + Math.round(Math.random() * 1e9);
     cb(null, unik + path.extname(file.originalname));
-  }
+  },
 });
 
 const upload = multer({ storage });
@@ -52,14 +52,14 @@ router.post("/tambah-soal", upload.any(), async (req, res) => {
 
         const jawaban = Object.keys(pilihanObj).map((huruf) => ({
           pilihan: huruf,
-          text: pilihanObj[huruf]
+          text: pilihanObj[huruf],
         }));
 
         return {
           gambar: gambarPerSoal[idx] || [],
           pertanyaan: item.pertanyaan,
           jawaban: jawaban,
-          jawaban_benar: item.jawaban_benar
+          jawaban_benar: item.jawaban_benar,
         };
       });
 
@@ -68,10 +68,10 @@ router.post("/tambah-soal", upload.any(), async (req, res) => {
     }
 
     await Soal.create({
-        id_guru: req.session.id,
+      id_guru: req.session.user.id,
       judul: judul_soal,
       deskripsi,
-      soal: daftarSoal
+      soal: daftarSoal,
     });
 
     res.redirect("/profile-guru");
