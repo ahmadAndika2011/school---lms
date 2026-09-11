@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Guru - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/guru.css">
+</head>
+<body>
+  <div class="gr-wrapper">
+    <a href="/dashboard-admin" class="gr-back">&larr; Kembali ke Dashboard</a>
+
+    <div class="gr-header">
+      <h1>Daftar Guru</h1>
+      <span class="gr-jumlah"><%= guru.length %> guru</span>
+    </div>
+
+    <div class="gr-table-wrapper">
+      <table class="gr-table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Status</th>
+            <th>Jabatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (guru && guru.length > 0) { %>
+            <% guru.forEach(function (g) { %>
+              <tr>
+                <td>
+                  <div class="gr-nama-cell">
+                    <span class="gr-avatar"><%= g.nama ? g.nama.charAt(0) : "?" %></span>
+                    <span><%= g.nama %></span>
+                  </div>
+                </td>
+                <td>
+                  <span class="gr-badge <%= g.status && g.status.toLowerCase() !== 'aktif' ? 'nonaktif' : '' %>">
+                    <%= g.status %>
+                  </span>
+                </td>
+                <td><%= g.jabatan %></td>
+              </tr>
+            <% }); %>
+          <% } %>
+        </tbody>
+      </table>
+      <% if (!guru || guru.length === 0) { %>
+        <p class="gr-empty">Belum ada data guru.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

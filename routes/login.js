@@ -4,6 +4,7 @@ const router = express.Router()
 const Siswa = require("../models/Siswa")
 const bcrypt = require("bcrypt")
 const Guru = require("../models/Guru")
+const Admin = require("../models/Admin")
 
 router.get("/login", (req,res) => {
     res.render("login")
@@ -30,6 +31,29 @@ router.post("/login", async (req, res) => {
             name: guru.name,
             nip: guru.nip,
             role: "guru"
+        }
+
+        return res.redirect("/")
+    }
+    
+    if(username.includes("admin")){
+        const admin = await Admin.findOne({username})
+        if(!admin){
+            console.log("Account tidak ada")
+            return res.redirect("/login")
+        }
+
+        const isMatch = await bcrypt.compare(password, admin.password)
+        if(!isMatch){
+            console.log("password salah")
+            return res.redirect("/")
+        }
+
+        req.session.user = {
+            id: admin._id,
+            name: admin.name,
+            password: admin.password,
+            role: "admin"
         }
 
         return res.redirect("/")

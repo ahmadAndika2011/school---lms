@@ -1,0 +1,235 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --merah: #dc2626;
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f9fafb;
+  color: var(--teks-gelap);
+}
+
+.da-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ============ HEADER ============ */
+.da-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+  position: relative;
+  background: var(--hijau-muda);
+  border-radius: 16px;
+  padding: 28px 30px;
+  overflow: hidden;
+}
+
+.da-header::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 130px;
+  height: 130px;
+  background: var(--kuning);
+  border-radius: 50%;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.da-header > div,
+.da-header-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.da-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.da-header-label {
+  color: var(--hijau-tua);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.da-header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+.da-admin-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px 8px 8px;
+}
+
+.da-admin-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--hijau-tua);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.da-admin-nama {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: var(--merah);
+  border: 1px solid var(--merah);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: var(--merah);
+  color: #ffffff;
+}
+
+/* ============ GRID CARD ============ */
+.da-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.da-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--kuning);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.da-card:hover {
+  box-shadow: 0 8px 20px rgba(13, 92, 63, 0.1);
+  transform: translateY(-2px);
+}
+
+.da-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 90px;
+  height: 90px;
+  background: var(--hijau-muda);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.da-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.da-card-nama {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--abu);
+  z-index: 1;
+}
+
+.da-card-jumlah {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  z-index: 1;
+}
+
+.da-card-jumlah span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--abu);
+  margin-left: 6px;
+}
+
+.da-card-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  z-index: 1;
+}
+
+.da-link {
+  color: var(--hijau-tua);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.da-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .da-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

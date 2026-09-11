@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/dashboard-admin.css">
+</head>
+<body>
+  <div class="da-wrapper">
+
+    <!-- ================= HEADER ================= -->
+    <div class="da-header">
+      <div>
+        <span class="da-header-label">Panel Admin</span>
+        <h1>Dashboard</h1>
+      </div>
+
+      <% if (admin) { %>
+        <div class="da-header-actions">
+          <div class="da-admin-chip">
+            <span class="da-admin-avatar"><%= admin.username.charAt(0) %></span>
+            <span class="da-admin-nama"><%= admin.username %></span>
+          </div>
+
+          <form action="/logout" method="POST" style="margin:0;">
+            <button type="submit" class="btn-logout">Logout</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- ================= GRID CARD TABEL ================= -->
+    <%
+      // Susun data ringkasan tiap tabel di sini supaya card-nya bisa di-loop,
+      // tinggal tambah/hapus item kalau ada tabel baru nanti.
+      const daftarTabel = [
+        { nama: "Siswa", jumlah: siswa.length, ikon: "S", url: "/siswa" },
+        { nama: "Guru", jumlah: guru.length, ikon: "G", url: "/guru" },
+        { nama: "Soal", jumlah: soal.length, ikon: "?", url: "/soal" },
+        { nama: "Berita", jumlah: berita.length, ikon: "B", url: "/#berita" },
+        { nama: "Ekstrakulikuler", jumlah: ekstrakulikuler.length, ikon: "E", url: "/#ekstrakulikuler" },
+        { nama: "Fasilitas", jumlah: fasilitas.length, ikon: "F", url: "/#fasilitas" }
+      ];
+    %>
+
+    <div class="da-grid">
+      <% daftarTabel.forEach(function (tabel) { %>
+        <div class="da-card">
+          <div class="da-card-icon"><%= tabel.ikon %></div>
+          <span class="da-card-nama"><%= tabel.nama %></span>
+          <div class="da-card-jumlah">
+            <%= tabel.jumlah %>
+            <span>data</span>
+          </div>
+          <div class="da-card-footer">
+            <a href="<%= tabel.url %>" class="da-link">Selengkapnya &rarr;</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

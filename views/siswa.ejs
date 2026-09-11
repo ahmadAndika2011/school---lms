@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Siswa - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/siswa.css">
+</head>
+<body>
+  <div class="sw-wrapper">
+    <a href="/dashboard-admin" class="sw-back">&larr; Kembali ke Dashboard</a>
+
+    <div class="sw-header">
+      <h1>Daftar Siswa</h1>
+      <span class="sw-jumlah"><%= siswa.length %> siswa</span>
+    </div>
+
+    <div class="sw-table-wrapper">
+      <table class="sw-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>NISN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (siswa && siswa.length > 0) { %>
+            <% siswa.forEach(function (s) { %>
+              <tr>
+                <td>
+                  <div class="sw-nama-cell">
+                    <span class="sw-avatar"><%= s.name ? s.name.charAt(0) : "?" %></span>
+                    <span><%= s.name %></span>
+                  </div>
+                </td>
+                <td><%= s.email %></td>
+                <td><%= s.nisn %></td>
+              </tr>
+            <% }); %>
+          <% } %>
+        </tbody>
+      </table>
+      <% if (!siswa || siswa.length === 0) { %>
+        <p class="sw-empty">Belum ada data siswa.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

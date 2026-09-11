@@ -1,0 +1,143 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #ffffff;
+  color: var(--teks-gelap);
+}
+
+.gr-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.gr-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hijau-tua);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.gr-back:hover {
+  text-decoration: underline;
+}
+
+.gr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gr-header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+.gr-jumlah {
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* ============ TABEL ============ */
+.gr-table-wrapper {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gr-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gr-table thead {
+  background: var(--hijau-tua);
+}
+
+.gr-table thead th {
+  color: #ffffff;
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+.gr-table tbody td {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--teks-gelap);
+  border-top: 1px solid #f0f0f0;
+}
+
+.gr-table tbody tr:hover {
+  background: var(--hijau-muda);
+}
+
+.gr-nama-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gr-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.gr-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--hijau-muda);
+  color: var(--hijau-tua);
+}
+
+.gr-badge.nonaktif {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.gr-empty {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--abu);
+  font-size: 14px;
+}

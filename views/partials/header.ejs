@@ -39,8 +39,10 @@
               </svg>
             <% } %>
           </a>
-        <% } else if(user.role) {%>
+        <% } else if(user.role === "guru") {%>
           <a href="/profile-guru">Profile Guru</a>
+        <% } else if(user.role === "admin") {%>
+          <a href="/dashboard-admin">Dashboard Admin</a>
         <% } %>
     </nav>
 
