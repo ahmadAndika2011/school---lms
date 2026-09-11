@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pengajuan KJP - SMA Nusantara</title>
+    <link rel="stylesheet" href="/css/cursor.css">
+    <link rel="stylesheet" href="/css/layanan-data.css">
+</head>
+<body>
+    <div class="ld-wrapper">
+
+        <div class="ld-header">
+            <div>
+                <span class="ld-label">Panel Admin</span>
+                <h1>Data Pengajuan KJP</h1>
+            </div>
+            <a href="/dashboard-admin" class="btn-back">&larr; Kembali ke Dashboard</a>
+        </div>
+
+        <div class="ld-table-card">
+            <% if (layananKjp.length === 0) { %>
+                <p class="ld-empty">Belum ada data pengajuan KJP.</p>
+            <% } else { %>
+                <table class="ld-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Siswa</th>
+                            <th>NISN Siswa</th>
+                            <th>Selengkapnya</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% layananKjp.forEach(function (item, index) { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= item.nama_siswa %></td>
+                                <td><%= item.nisn_siswa %></td>
+                                <td>
+                                    <a href="/layanan/kjp/detail/<%= item.nisn_siswa %>" class="ld-link">Detail</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </div>
+
+    <script src="/js/cursor.js"></script>
+</body>
+</html>

@@ -144,3 +144,23 @@ body {
     background-color: #FACC15;
     color: #14532D;
 }
+
+.kjp-topbar {
+    padding: 20px 40px 0;
+}
+
+.btn-home {
+    display: inline-block;
+    text-decoration: none;
+    color: #14532D;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 1px solid #FACC15;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-home:hover {
+    background-color: #FEF9C3;
+}

@@ -8,6 +8,9 @@ const Fasilitas = require("../models/Fasilitas");
 const Guru = require("../models/Guru");
 const Siswa = require("../models/Siswa");
 const Soal = require("../models/Soal");
+const LayananPpdb = require("../models/LayananPpdb");
+const LayananKjp = require("../models/LayananKjp");
+const LayananPip = require("../models/LayananPip");
 
 router.get("/dashboard-admin", async (req, res) => {
   const user = req.session.user;
@@ -19,8 +22,11 @@ router.get("/dashboard-admin", async (req, res) => {
   const guru = await Guru.find({});
   const siswa = await Siswa.find({});
   const soal = await Soal.find({});
+  const layananPpdb = await LayananPpdb.find({});
+  const layananKjp = await LayananKjp.find({});
+  const layananPip = await LayananPip.find({});
 
-  res.render("dashboard-admin", { admin, berita, ekstrakulikuler, fasilitas, guru, siswa, soal });
+  res.render("dashboard-admin", { admin, berita, ekstrakulikuler, fasilitas, guru, siswa, soal, layananPpdb, layananKjp, layananPip });
 });
 
 module.exports = router;

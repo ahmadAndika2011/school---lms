@@ -19,6 +19,8 @@
 
       <% if (admin) { %>
         <div class="da-header-actions">
+          <a href="/" class="btn-home">&larr; Kembali ke Home</a>
+
           <div class="da-admin-chip">
             <span class="da-admin-avatar"><%= admin.username.charAt(0) %></span>
             <span class="da-admin-nama"><%= admin.username %></span>
@@ -41,7 +43,10 @@
         { nama: "Soal", jumlah: soal.length, ikon: "?", url: "/soal" },
         { nama: "Berita", jumlah: berita.length, ikon: "B", url: "/#berita" },
         { nama: "Ekstrakulikuler", jumlah: ekstrakulikuler.length, ikon: "E", url: "/#ekstrakulikuler" },
-        { nama: "Fasilitas", jumlah: fasilitas.length, ikon: "F", url: "/#fasilitas" }
+        { nama: "Fasilitas", jumlah: fasilitas.length, ikon: "F", url: "/#fasilitas" },
+        { nama: "Layanan PPDB", jumlah: layananPpdb.length, ikon: "F", url: "/layanan/ppdb/data" },
+        { nama: "Layanan KJP", jumlah: layananKjp.length, ikon: "F", url: "/layanan/kjp/data" },
+        { nama: "Layanan PIP", jumlah: layananPip.length, ikon: "F", url: "/layanan/pip/data" }
       ];
     %>
 

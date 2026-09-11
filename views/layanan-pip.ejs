@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan PIP - SMA Nusantara</title>
+    <link rel="stylesheet" href="/css/cursor.css">
+    <link rel="stylesheet" href="/css/layanan-kjp.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="kjp-topbar">
+      <a href="/#layanan" class="btn-home">&larr; Kembali ke Home</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="kjp-hero">
+        <p class="kjp-label">LAYANAN SEKOLAH</p>
+        <h1>Layanan Program Indonesia Pintar (PIP)</h1>
+        <p class="kjp-desc">
+            Ajukan bantuan Program Indonesia Pintar untuk mendukung
+            kelangsungan pendidikan siswa/i SMA Nusantara.
+        </p>
+    </section>
+
+    <!-- Form Section -->
+    <section class="kjp-form-section">
+        <div class="kjp-form-card">
+            <h2>Formulir Pengajuan PIP</h2>
+
+            <% if (typeof error !== "undefined" && error) { %>
+                <div class="form-error">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/layanan/pip" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="foto_siswa">Foto Siswa</label>
+                    <input type="file" name="foto_siswa" id="foto_siswa" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_siswa">Nama Siswa</label>
+                    <input type="text" name="nama_siswa" id="nama_siswa" placeholder="Masukkan nama lengkap siswa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nisn_siswa">NISN Siswa</label>
+                    <input type="text" name="nisn_siswa" id="nisn_siswa" placeholder="Masukkan NISN siswa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_orang_tua_siswa">Nama Orang Tua</label>
+                    <input type="text" name="nama_orang_tua_siswa" id="nama_orang_tua_siswa" placeholder="Masukkan nama orang tua/wali" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_sekolah_siswa">Nama Sekolah</label>
+                    <input type="text" name="nama_sekolah_siswa" id="nama_sekolah_siswa" placeholder="Masukkan nama sekolah" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Ajukan Sekarang</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="/js/cursor.js"></script>
+</body>
+</html>

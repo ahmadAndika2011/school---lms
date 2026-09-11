@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pendaftar PPDB - SMA Nusantara</title>
+    <link rel="stylesheet" href="/css/cursor.css">
+    <link rel="stylesheet" href="/css/layanan-data.css">
+</head>
+<body>
+    <div class="ld-wrapper">
+
+        <div class="ld-header">
+            <div>
+                <span class="ld-label">Panel Admin</span>
+                <h1>Detail Pendaftar PPDB</h1>
+            </div>
+            <a href="/layanan/ppdb/data" class="btn-back">&larr; Kembali ke Data PPDB</a>
+        </div>
+
+        <div class="ld-detail-card">
+            <img
+                src="/uploads/gambar-siswa-layanan-ppdb/<%= detail.foto_siswa %>"
+                alt="Foto <%= detail.nama_siswa %>"
+                class="ld-detail-foto"
+            >
+
+            <div class="ld-detail-info">
+                <div class="ld-detail-row">
+                    <span class="ld-detail-key">Nama Siswa</span>
+                    <span class="ld-detail-value"><%= detail.nama_siswa %></span>
+                </div>
+                <div class="ld-detail-row">
+                    <span class="ld-detail-key">NISN Siswa</span>
+                    <span class="ld-detail-value"><%= detail.nisn_siswa %></span>
+                </div>
+                <div class="ld-detail-row">
+                    <span class="ld-detail-key">Nama Orang Tua</span>
+                    <span class="ld-detail-value"><%= detail.nama_orang_tua_siswa %></span>
+                </div>
+                <div class="ld-detail-row">
+                    <span class="ld-detail-key">Nama Sekolah</span>
+                    <span class="ld-detail-value"><%= detail.nama_sekolah_siswa %></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/cursor.js"></script>
+</body>
+</html>

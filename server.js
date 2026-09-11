@@ -58,21 +58,41 @@ app.set("views", path.join(__dirname, "views"));
 
 // 5. Routes Utama
 app.use("/", require("./routes/home"));
+
+//? Authenticate
 app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/logout"));
-app.use("/", require("./routes/profile-siswa"));
-app.use("/", require("./routes/profile-guru"));
+
+//? Dashboard Admin
 app.use("/", require("./routes/dashboard-admin"));
+
+//? Siswa
+app.use("/", require("./routes/profile-siswa"));
 app.use("/", require("./routes/update-nama-siswa"));
-app.use("/", require("./routes/soal"));
-app.use("/", require("./routes/guru"));
 app.use("/", require("./routes/siswa"));
+
+//? Guru
+app.use("/", require("./routes/profile-guru"));
+app.use("/", require("./routes/guru"));
+
+//? Soal
+app.use("/", require("./routes/soal"));
 app.use("/", require("./routes/hasil-soal"));
 app.use("/", require("./routes/kerjakan-soal"));
 app.use("/", require("./routes/detail-soal"));
 app.use("/", require("./routes/tambah-soal"));
+
+//? Layanan Sekolah
+app.use("/", require("./routes/layanan-ppdb"));
+app.use("/", require("./routes/layanan-ppdb-data"));
+app.use("/", require("./routes/layanan-ppdb-detail"));
 app.use("/", require("./routes/layanan-kjp"));
+app.use("/", require("./routes/layanan-kjp-data"));
+app.use("/", require("./routes/layanan-kjp-detail"));
+app.use("/", require("./routes/layanan-pip"));
+app.use("/", require("./routes/layanan-pip-data"));
+app.use("/", require("./routes/layanan-pip-detail"));
 
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
 // app.use("/", require("./routes/tambah-fasilitas"));
