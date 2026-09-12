@@ -158,6 +158,26 @@ body {
     font-weight: 600;
 }
 
+.ld-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ld-form-delete {
+  display: inline-flex;
+}
+
+.ld-link--danger {
+  background: #c0392b;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.ld-link--danger:hover {
+  background: #a93226;
+}
+
 @media (max-width: 600px) {
     .ld-detail-card {
         flex-direction: column;

@@ -86,12 +86,15 @@ app.use("/", require("./routes/tambah-soal"));
 //? Layanan Sekolah
 app.use("/", require("./routes/layanan-ppdb"));
 app.use("/", require("./routes/layanan-ppdb-data"));
+app.use("/", require("./routes/hapus-data-ppdb"));
 app.use("/", require("./routes/layanan-ppdb-detail"));
 app.use("/", require("./routes/layanan-kjp"));
 app.use("/", require("./routes/layanan-kjp-data"));
+app.use("/", require("./routes/hapus-data-kjp"));
 app.use("/", require("./routes/layanan-kjp-detail"));
 app.use("/", require("./routes/layanan-pip"));
 app.use("/", require("./routes/layanan-pip-data"));
+app.use("/", require("./routes/hapus-data-pip"));
 app.use("/", require("./routes/layanan-pip-detail"));
 
 //? Berita

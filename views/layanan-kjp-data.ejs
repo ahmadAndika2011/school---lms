@@ -38,7 +38,14 @@
                                 <td><%= item.nama_siswa %></td>
                                 <td><%= item.nisn_siswa %></td>
                                 <td>
-                                    <a href="/layanan/kjp/detail/<%= item.nisn_siswa %>" class="ld-link">Detail</a>
+                                    <div class="ld-actions">
+                                        <a href="/layanan/kjp/detail/<%= item.nisn_siswa %>" class="ld-link">Detail</a>
+
+                                        <form action="/layanan/kjp/data/delete?_method=DELETE" method="POST" class="ld-form-delete" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            <input type="hidden" name="id" value="<%= item._id %>">
+                                            <button type="submit" class="ld-link ld-link--danger">Hapus</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <% }); %>
