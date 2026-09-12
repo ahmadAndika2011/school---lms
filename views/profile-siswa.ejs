@@ -18,13 +18,15 @@
           />
         </div>
 
-        <input
-          type="text"
-          class="profile-name-input"
-          name="name"
-          placeholder="Masukkan nama"
-          value="<%= siswa.name ? siswa.name : '' %>"
-        />
+        <form action="/update-nama-siswa?_method=POST" method="POST">
+          <input
+            type="text"
+            class="profile-name-input"
+            name="nama"
+            placeholder="Masukkan nama"
+            value="<%= siswa.name ? siswa.name : '' %>"
+          />
+        </form>
         <p class="profile-email"><%= siswa.email %></p>
 
         <div class="profile-details">

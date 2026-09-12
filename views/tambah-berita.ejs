@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Berita — SMA Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/cursor.css">
+    <link rel="stylesheet" href="/css/tambah-berita.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- ================= PAGE HEADER ================= -->
+    <section class="page-header">
+      <div class="container">
+        <p class="page-header__eyebrow">Kelola Berita</p>
+        <h1 class="page-header__title">Tambah Berita Baru</h1>
+        <p class="page-header__desc">
+          Isi informasi berita atau pengumuman sekolah di bawah ini agar dapat ditampilkan
+          pada halaman beranda.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= FORM TAMBAH BERITA ================= -->
+    <section class="form-wrapper">
+      <div class="container">
+        <form class="form-card" action="/tambah-berita" method="POST" enctype="multipart/form-data" id="formBerita">
+
+          <div class="form-group">
+            <label class="form-label" for="nama">Judul Berita <span>*</span></label>
+            <input type="text" id="nama" name="nama" class="form-control" placeholder="Contoh: Pembukaan Pendaftaran PPDB Tahun Ajaran Baru" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="tanggal">Tanggal Berita <span>*</span></label>
+              <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="deskripsiSingkat">Deskripsi Singkat <span>*</span></label>
+            <textarea id="deskripsiSingkat" name="deskripsi_singkat" class="form-control" placeholder="Ringkasan singkat berita, akan tampil di kartu berita beranda." required></textarea>
+            <p class="form-hint">Maksimal 1–2 kalimat agar tampil rapi di halaman beranda.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="deskripsiLengkap">Deskripsi Lengkap</label>
+            <textarea id="deskripsiLengkap" name="deskripsi_lengkap" class="form-control" placeholder="Tulis isi lengkap berita di sini..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Gambar Berita <span>*</span></label>
+            <label class="upload-box" for="gambar">
+              <input type="file" id="gambar" name="gambar" accept="image/*" multiple>
+              <p class="upload-box__icon">🖼️</p>
+              <p class="upload-box__text">Klik atau seret gambar ke sini</p>
+              <p class="upload-box__subtext">Bisa unggah lebih dari satu gambar (JPG, PNG)</p>
+            </label>
+            <div class="preview-grid" id="previewGrid"></div>
+          </div>
+
+          <div class="form-actions">
+            <a href="/" class="btn btn--ghost">Batal</a>
+            <button type="submit" class="btn btn--primary">Simpan Berita</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+
+  <script src="/js/cursor.js"></script>
+  <script>
+    const gambarInput = document.getElementById('gambar');
+    const previewGrid = document.getElementById('previewGrid');
+    let selectedFiles = [];
+
+    gambarInput.addEventListener('change', function (e) {
+      const newFiles = Array.from(e.target.files);
+      selectedFiles = selectedFiles.concat(newFiles);
+      renderPreview();
+      syncFilesToInput();
+    });
+
+    function renderPreview() {
+      previewGrid.innerHTML = '';
+      selectedFiles.forEach(function (file, index) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const item = document.createElement('div');
+          item.className = 'preview-item';
+          item.innerHTML =
+            '<img src="' + e.target.result + '" alt="Preview gambar">' +
+            '<button type="button" class="preview-item__remove" data-index="' + index + '">&times;</button>';
+          previewGrid.appendChild(item);
+
+          item.querySelector('.preview-item__remove').addEventListener('click', function () {
+            selectedFiles.splice(index, 1);
+            renderPreview();
+            syncFilesToInput();
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function syncFilesToInput() {
+      const dataTransfer = new DataTransfer();
+      selectedFiles.forEach(function (file) {
+        dataTransfer.items.add(file);
+      });
+      gambarInput.files = dataTransfer.files;
+    }
+  </script>
+</body>
+</html>

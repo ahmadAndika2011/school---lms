@@ -10,7 +10,11 @@ const beritaSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    deskripsi: {
+    deskripsi_singkat: {
+        type: String,
+        required: true
+    },
+    deskripsi_lengkap: {
         type: String,
         required: true
     }

@@ -38,11 +38,11 @@
     <div class="stats" id="stats">
       <div class="container stats__grid">
         <div class="stats__item">
-          <p class="stats__number" data-count="1240">0</p>
+          <p class="stats__number" data-count="<%= jumlahSiswa %>">0</p>
           <p class="stats__label">Murid Aktif</p>
         </div>
         <div class="stats__item">
-          <p class="stats__number" data-count="86">0</p>
+          <p class="stats__number" data-count="<%= jumlahGuru %>">0</p>
           <p class="stats__label">Tenaga Pengajar</p>
         </div>
         <div class="stats__item">
@@ -169,43 +169,36 @@
       <p class="section__eyebrow">Informasi Terkini</p>
       <h2 class="section__title">Berita &amp; Pengumuman Terbaru</h2>
 
-      <div class="news__grid">
-        <%
-          const newsList = [
-            {
-              image: '/img/news-1.jpg',
-              date: '28 Agustus 2026',
-              title: 'Pembukaan Pendaftaran PPDB Tahun Ajaran Baru',
-              excerpt: 'Sekolah resmi membuka pendaftaran peserta didik baru mulai minggu ini.',
-              link: '/berita/ppdb-dibuka'
-            },
-            {
-              image: '/img/news-2.jpg',
-              date: '20 Agustus 2026',
-              title: 'Tim Sains Sekolah Raih Juara Umum Olimpiade',
-              excerpt: 'Prestasi membanggakan diraih tim olimpiade sains tingkat provinsi.',
-              link: '/berita/juara-olimpiade'
-            },
-            {
-              image: '/img/news-3.jpg',
-              date: '15 Agustus 2026',
-              title: 'Renovasi Perpustakaan Sekolah Rampung',
-              excerpt: 'Perpustakaan kini hadir dengan konsep ruang baca yang lebih nyaman.',
-              link: '/berita/renovasi-perpustakaan'
-            }
-          ];
-        %>
-        <% newsList.forEach(function(n){ %>
-          <a href="<%= n.link %>" class="news-card">
-            <div class="news-card__image" style="background-image:url('<%= n.image %>');"></div>
-            <div class="news-card__body">
-              <p class="news-card__date"><%= n.date %></p>
-              <h3 class="news-card__title"><%= n.title %></h3>
-              <p class="news-card__excerpt"><%= n.excerpt %></p>
-            </div>
-          </a>
-        <% }); %>
-      </div>
+      <% if (admin) { %>
+        <a href="/tambah-berita" class="btn btn--news-add">
+          <span>+</span> Tambah Berita
+        </a>
+    <% } %>
+    </div>
+
+    <div class="news__scroll">
+      <%
+        const bulanIndo = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        function formatTanggal(tgl) {
+          const d = new Date(tgl);
+          return d.getDate() + ' ' + bulanIndo[d.getMonth()] + ' ' + d.getFullYear();
+        }
+      %>
+      <% berita.forEach(function(b){ %>
+        <a href="/berita/detail/<%= b._id %>" class="news-card">
+          <div class="news-card__image" style="background-image:url('<%= b.gambar && b.gambar.length > 0 ? '/uploads/gambar-berita/' + b.gambar[0] : '/img/default-news.jpg' %>');">
+          </div>
+          <div class="news-card__body">
+            <p class="news-card__date"><%= formatTanggal(b.tanggal) %></p>
+            <h3 class="news-card__title"><%= b.nama %></h3>
+            <p class="news-card__excerpt"><%= b.deskripsi_singkat %></p>
+          </div>
+        </a>
+      <% }); %>
+
+      <% if (berita.length === 0) { %>
+        <p style="color: var(--color-muted); padding: 20px 0;">Belum ada berita terbaru.</p>
+      <% } %>
     </div>
   </section>
 

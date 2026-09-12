@@ -94,10 +94,14 @@ app.use("/", require("./routes/layanan-pip"));
 app.use("/", require("./routes/layanan-pip-data"));
 app.use("/", require("./routes/layanan-pip-detail"));
 
+//? Berita
+app.use("/", require("./routes/tambah-berita"));
+app.use("/", require("./routes/detail-berita"));
+
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
 // app.use("/", require("./routes/tambah-fasilitas"));
 // app.use("/", require("./routes/tambah-guru"))
-app.use("/", require("./routes/tambah-admin"));
+// app.use("/", require("./routes/tambah-admin"));
 
 // 6. Handle 404 (Halaman Tidak Ditemukan)
 app.use((req, res) => {

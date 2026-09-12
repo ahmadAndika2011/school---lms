@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= berita.nama %> — SMA Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/detail-berita.css">
+</head>
+<body>
+
+  <div class="container back-bar">
+    <a href="/#berita" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"></path>
+        <path d="M12 19l-7-7 7-7"></path>
+      </svg>
+      Kembali ke Berita
+    </a>
+  </div>
+
+  <%
+    const bulanIndo = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    function formatTanggal(tgl) {
+      const d = new Date(tgl);
+      return d.getDate() + ' ' + bulanIndo[d.getMonth()] + ' ' + d.getFullYear();
+    }
+
+    const gambarList = (berita.gambar && berita.gambar.length > 0) ? berita.gambar : [];
+    const gambarUtama = gambarList.length > 0
+      ? '/uploads/gambar-berita/' + gambarList[0]
+      : '/img/default-news.jpg';
+    const gambarLainnya = gambarList.slice(1);
+  %>
+
+  <div class="container">
+    <div class="berita-hero">
+      <img src="<%= gambarUtama %>" alt="<%= berita.nama %>" class="berita-hero__image js-lightbox-img" data-index="0">
+    </div>
+
+    <div class="berita-meta">
+      <span class="berita-meta__date"><%= formatTanggal(berita.tanggal) %></span>
+      <h1 class="berita-title"><%= berita.nama %></h1>
+      <p class="berita-excerpt"><%= berita.deskripsi_singkat %></p>
+    </div>
+
+    <div class="berita-content">
+      <p><%= berita.deskripsi_lengkap %></p>
+    </div>
+
+    <% if (gambarLainnya.length > 0) { %>
+      <div class="berita-gallery">
+        <p class="berita-gallery__title">Galeri Foto</p>
+        <div class="berita-gallery__grid">
+          <% gambarLainnya.forEach(function(g, i){ %>
+            <div class="berita-gallery__item">
+              <img src="/uploads/gambar-berita/<%= g %>" alt="Galeri <%= berita.nama %>" class="js-lightbox-img" data-index="<%= i + 1 %>">
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="berita-footer-nav">
+      <a href="/#berita" class="btn btn--ghost">← Semua Berita</a>
+    </div>
+  </div>
+
+  <!-- ================= LIGHTBOX ================= -->
+  <div class="lightbox" id="lightbox">
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Tutup">&times;</button>
+
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Sebelumnya">&#8249;</button>
+
+    <div class="lightbox__img-wrap">
+      <img src="" alt="" class="lightbox__img" id="lightboxImg">
+      <p class="lightbox__counter" id="lightboxCounter"></p>
+    </div>
+
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Berikutnya">&#8250;</button>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+  <script src="/js/detail-berita.js"></script>
+</body>
+</html>
