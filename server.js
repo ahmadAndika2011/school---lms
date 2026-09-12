@@ -100,6 +100,7 @@ app.use("/", require("./routes/layanan-pip-detail"));
 //? Berita
 app.use("/", require("./routes/tambah-berita"));
 app.use("/", require("./routes/detail-berita"));
+app.use("/", require("./routes/hapus-berita"));
 
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
 // app.use("/", require("./routes/tambah-fasilitas"));

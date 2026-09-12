@@ -66,6 +66,12 @@
 
     <div class="berita-footer-nav">
       <a href="/#berita" class="btn btn--ghost">← Semua Berita</a>
+      <form action="/berita/detail/<%= berita._id %>/delete?_method=DELETE" method="POST">
+        <button class="btn btn--danger"
+         onclick="return confirm('Yakin ingin menghapus berita ini?');">
+         Hapus Berita
+        </button>
+      </form>
     </div>
   </div>
 
