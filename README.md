@@ -1,4 +1,1 @@
-# school---lms
-# school---lms
-
-this project about learning management school
+this project created only one persor and he has name 'andika'
