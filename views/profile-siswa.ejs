@@ -4,78 +4,120 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil Siswa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/profile-siswa.css" />
-    <link rel="stylesheet" href="/css/cursor.css">
+    <link rel="stylesheet" href="/css/cursor.css" />
   </head>
 
   <body>
-    <div class="profile-container">
+    <div class="profile-page">
       <div class="profile-card">
-        <div class="profile-photo">
-          <img
-            src="<%= siswa.gambar %>"
-            alt="Foto profil <%= siswa.name %>"
-          />
-        </div>
 
-        <form action="/update-nama-siswa?_method=POST" method="POST">
-          <input
-            type="text"
-            class="profile-name-input"
-            name="nama"
-            placeholder="Masukkan nama"
-            value="<%= siswa.name ? siswa.name : '' %>"
-          />
-        </form>
-        <p class="profile-email"><%= siswa.email %></p>
-
-        <div class="profile-details">
-          <div class="detail-row">
-            <span class="detail-label">Jenis Kelamin</span>
-            <span class="detail-value"><%= siswa.jenis_kelamin %></span>
-          </div>
-
-          <div class="detail-row">
-            <span class="detail-label">NISN</span>
-            <span class="detail-value"><%= siswa.nisn %></span>
-          </div>
-
-          <div class="detail-row">
-            <span class="detail-label">Tempat Lahir</span>
-            <span class="detail-value"><%= siswa.tempat_lahir %></span>
-          </div>
-
-          <div class="detail-row">
-            <span class="detail-label">Tanggal Lahir</span>
-            <span class="detail-value">
-              <%= new Date(siswa.tanggal_lahir).toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              }) %>
-            </span>
+        <!-- Banner + foto -->
+        <div class="profile-banner">
+          <div class="profile-photo">
+            <img
+              src="<%= siswa.gambar %>"
+              alt="Foto profil <%= siswa.name %>"
+            />
           </div>
         </div>
 
-        <% if (siswa.data_nilai && siswa.data_nilai.length > 0) { %>
-        <div class="profile-nilai">
-          <h2>Data Nilai</h2>
-          <ul>
-            <% siswa.data_nilai.forEach(function(nilai) { %>
-            <li><%= nilai %></li>
-            <% }); %>
-          </ul>
-        </div>
-        <% } else { %>
-        <div class="profile-nilai">
-          <h2>Data Nilai</h2>
-          <p class="empty-state">Belum ada data nilai.</p>
-        </div>
-        <% } %>
+        <div class="profile-body">
+          <form action="/update-nama-siswa?_method=POST" method="POST" class="name-form">
+            <input
+              type="text"
+              class="profile-name-input"
+              name="nama"
+              placeholder="Masukkan nama"
+              value="<%= siswa.name ? siswa.name : '' %>"
+            />
+          </form>
+          <p class="profile-email"><%= siswa.email %></p>
 
-        <form action="/logout" method="POST" class="logout-form">
-          <button type="submit" class="logout-button">Logout</button>
-        </form>
+          <div class="profile-details">
+            <div class="detail-row">
+              <span class="detail-label">Jenis Kelamin</span>
+              <span class="detail-leader"></span>
+              <span class="detail-value"><%= siswa.jenis_kelamin %></span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label">NISN</span>
+              <span class="detail-leader"></span>
+              <span class="detail-value"><%= siswa.nisn %></span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label">Tempat Lahir</span>
+              <span class="detail-leader"></span>
+              <span class="detail-value"><%= siswa.tempat_lahir %></span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label">Tanggal Lahir</span>
+              <span class="detail-leader"></span>
+              <span class="detail-value">
+                <%= new Date(siswa.tanggal_lahir).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }) %>
+              </span>
+            </div>
+          </div>
+
+          <!-- Data Nilai -->
+          <div class="profile-nilai">
+            <h2>Data Nilai</h2>
+
+            <% if (hasilSoal && hasilSoal.length > 0) { %>
+            <div class="nilai-table-wrap">
+              <table class="nilai-table">
+                <thead>
+                  <tr>
+                    <th>Judul Soal</th>
+                    <th>ID Guru</th>
+                    <th>ID Soal</th>
+                    <th>Nilai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% hasilSoal.forEach(function(hasil) {
+                       const soal = hasil.id_soal;
+                       const nilai = hasil.nilai;
+                       const nilaiClass = nilai >= 75 ? "nilai-tinggi" : (nilai >= 50 ? "nilai-sedang" : "nilai-rendah");
+                  %>
+                  <tr>
+                    <td><%= soal ? soal.judul : '-' %></td>
+                    <td class="id-cell" title="<%= soal ? soal.id_guru : '' %>">
+                      <%= soal ? String(soal.id_guru).slice(-6) : '-' %>
+                    </td>
+                    <td class="id-cell" title="<%= soal ? soal._id : hasil.id_soal %>">
+                      <%= soal ? String(soal._id).slice(-6) : String(hasil.id_soal).slice(-6) %>
+                    </td>
+                    <td>
+                      <span class="nilai-chip <%= nilaiClass %>"><%= nilai %></span>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+            <% } else { %>
+            <p class="empty-state">Belum ada data nilai.</p>
+            <% } %>
+          </div>
+
+          <form action="/logout" method="POST" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+          </form>
+        </div>
       </div>
     </div>
 

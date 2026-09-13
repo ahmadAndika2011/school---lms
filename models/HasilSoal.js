@@ -34,7 +34,6 @@ const hasilSoalSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
-// 1 siswa hanya boleh punya 1 hasil per soal (cegah dobel-submit)
 hasilSoalSchema.index({ id_siswa: 1, id_soal: 1 }, { unique: true })
 
 module.exports = mongoose.model("HasilSoal", hasilSoalSchema)

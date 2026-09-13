@@ -2,44 +2,52 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f3d24 0%, #145c33 45%, #f5c518 200%);
+  background: linear-gradient(160deg, #0f3d24 0%, #145c33 45%, #d9a913 220%);
 }
 
-.profile-container {
+.profile-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 48px 20px;
 }
 
 .profile-card {
   width: 100%;
   max-width: 460px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 40px 36px;
-  box-shadow: 0 20px 45px rgba(15, 61, 36, 0.25);
-  border-top: 6px solid #f5c518;
-  text-align: center;
+  background: #fbf7ec; /* kertas hangat, bukan putih polos */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(15, 61, 36, 0.3);
 }
 
 /* ================================= */
-/* FOTO PROFIL */
+/* BANNER + FOTO */
 /* ================================= */
 
+.profile-banner {
+  position: relative;
+  height: 92px;
+  background: linear-gradient(115deg, #0f3d24 0%, #145c33 55%, #f5c518 160%);
+}
+
 .profile-photo {
-  width: 110px;
-  height: 110px;
-  margin: 0 auto 18px;
+  position: absolute;
+  left: 50%;
+  bottom: -42px;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   padding: 4px;
-  background: linear-gradient(135deg, #145c33, #f5c518);
+  background: #fbf7ec;
+  box-shadow: 0 6px 16px rgba(15, 61, 36, 0.25);
 }
 
 .profile-photo img {
@@ -47,73 +55,89 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #ffffff;
   display: block;
+  background: linear-gradient(135deg, #145c33, #f5c518);
 }
 
 /* ================================= */
-/* NAMA & EMAIL */
+/* BODY */
 /* ================================= */
+
+.profile-body {
+  padding: 54px 32px 36px;
+  text-align: center;
+}
+
+.name-form {
+  display: flex;
+  justify-content: center;
+}
 
 .profile-name-input {
   width: 100%;
+  max-width: 260px;
   text-align: center;
-  font-size: 20px;
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
   font-weight: 700;
   color: #0f3d24;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 6px 8px;
+  padding: 4px 8px;
   outline: none;
   background: transparent;
   transition: border-color 0.2s, background 0.2s;
 }
 
 .profile-name-input:hover {
-  background: #f7faf8;
+  background: rgba(20, 92, 51, 0.05);
 }
 
 .profile-name-input:focus {
   border-bottom: 2px solid #145c33;
-  background: #f7faf8;
+  background: rgba(20, 92, 51, 0.05);
 }
 
 .profile-email {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 26px;
+  color: #7c8a7e;
+  font-size: 13px;
+  margin-bottom: 28px;
 }
 
 /* ================================= */
-/* DETAIL SISWA */
+/* DETAIL SISWA — gaya rapor, garis leader putus-putus */
 /* ================================= */
 
 .profile-details {
   text-align: left;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .detail-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #eef2ef;
-}
-
-.detail-row:last-child {
-  border-bottom: none;
+  align-items: baseline;
+  padding: 9px 0;
 }
 
 .detail-label {
-  font-size: 13px;
+  flex: 0 0 auto;
+  font-size: 12.5px;
   font-weight: 600;
   color: #145c33;
+  white-space: nowrap;
+}
+
+.detail-leader {
+  flex: 1 1 auto;
+  margin: 0 8px;
+  border-bottom: 2px dotted #d9cfa8;
+  transform: translateY(-4px);
 }
 
 .detail-value {
-  font-size: 14px;
-  color: #1f2937;
+  flex: 0 0 auto;
+  font-size: 13.5px;
+  color: #26362b;
   font-weight: 500;
   text-align: right;
 }
@@ -125,46 +149,105 @@ body {
 .profile-nilai {
   text-align: left;
   margin-bottom: 26px;
-  background: #f7faf8;
+  background: #f4efdf;
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 18px 18px 6px;
   border-left: 4px solid #f5c518;
 }
 
 .profile-nilai h2 {
-  font-size: 15px;
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
   color: #0f3d24;
   margin-bottom: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.profile-nilai ul {
-  list-style: none;
+.empty-state {
+  font-size: 13px;
+  color: #9a9581;
+  font-style: italic;
+  padding-bottom: 14px;
 }
 
-.profile-nilai li {
-  font-size: 14px;
-  color: #374151;
-  padding: 8px 0;
-  border-bottom: 1px dashed #e2e8e4;
+.nilai-table-wrap {
+  overflow-x: auto;
+  padding-bottom: 12px;
 }
 
-.profile-nilai li:last-child {
+.nilai-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 380px;
+}
+
+.nilai-table thead th {
+  text-align: left;
+  padding: 8px 8px;
+  background: #0f3d24;
+  color: #f5eecb;
+  font-weight: 600;
+  font-size: 11.5px;
+}
+
+.nilai-table thead th:first-child { border-radius: 8px 0 0 8px; }
+.nilai-table thead th:last-child { border-radius: 0 8px 8px 0; text-align: center; }
+
+.nilai-table tbody td {
+  padding: 9px 8px;
+  color: #374536;
+  border-bottom: 1px solid #e6dfc4;
+}
+
+.nilai-table tbody tr:nth-child(odd) {
+  background: rgba(15, 61, 36, 0.035);
+}
+
+.nilai-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.profile-nilai .empty-state {
-  font-size: 13px;
-  color: #9ca3af;
-  font-style: italic;
+.id-cell {
+  font-size: 11.5px;
+  color: #8a8368;
+  cursor: help;
+}
+
+.nilai-table td:last-child {
+  text-align: center;
+}
+
+.nilai-chip {
+  display: inline-block;
+  min-width: 34px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.nilai-chip.nilai-tinggi {
+  background: rgba(20, 92, 51, 0.15);
+  color: #145c33;
+}
+
+.nilai-chip.nilai-sedang {
+  background: rgba(245, 197, 24, 0.25);
+  color: #8a6d06;
+}
+
+.nilai-chip.nilai-rendah {
+  background: rgba(200, 60, 60, 0.15);
+  color: #a13c3c;
 }
 
 /* ================================= */
-/* LOGOUT BUTTON */
+/* LOGOUT */
 /* ================================= */
 
 .logout-form {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .logout-button {
@@ -173,7 +256,7 @@ body {
   background: #f5c518;
   color: #0f3d24;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14.5px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -183,4 +266,14 @@ body {
 .logout-button:hover {
   background: #e0b30f;
   transform: translateY(-1px);
+}
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media (max-width: 400px) {
+  .profile-body {
+    padding: 54px 22px 28px;
+  }
 }
