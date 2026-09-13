@@ -14,13 +14,13 @@ router.post("/login", async (req, res) => {
     const {username, password, remember} = req.body
 
     if(username.includes("guru")){
-        const guru = await Guru.findOne({nama: username})
+        const guru = await Guru.findOne({username: username})
         if(!guru){
             console.log("Account tidak ada")
             return res.redirect("/login")
         }
 
-        const isMatch = guru.nip === password
+        const isMatch = await bcrypt.compare(password, guru.password)
         if(!isMatch){
             console.log("NIP salah")
             return res.redirect("/login")

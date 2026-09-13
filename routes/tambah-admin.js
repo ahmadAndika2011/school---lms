@@ -9,8 +9,9 @@ router.get("/tambah-admin", async (req, res) => {
     const hashedPassword = await bcrypt.hash("11032011", 10);
 
     await Admin.create({
-      username: "admin_andika",
-      password: hashedPassword
+      username: "admin_sekolah",
+      password: hashedPassword,
+      nama: "andika"
     });
 
     return res.send("Success");

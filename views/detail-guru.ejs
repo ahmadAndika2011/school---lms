@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Guru - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/detail-guru.css">
+</head>
+<body>
+  <div class="dg-page">
+    <div class="dg-wrapper">
+      <a href="/guru" class="dg-back">&larr; Kembali ke Daftar Guru</a>
+
+      <div class="dg-card">
+        <div class="dg-banner">
+          <div class="dg-photo">
+            <% if (guru.photo) { %>
+              <img src="/uploads/gambar-guru/<%= guru.photo %>" alt="Foto <%= guru.nama %>">
+            <% } else { %>
+              <span class="dg-photo-fallback"><%= guru.nama ? guru.nama.charAt(0) : "?" %></span>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="dg-body">
+          <h1 class="dg-nama"><%= guru.nama %></h1>
+          <span class="dg-badge <%= guru.status && guru.status.toLowerCase() !== 'aktif' ? 'nonaktif' : '' %>">
+            <%= guru.status %>
+          </span>
+
+          <div class="dg-details">
+            <div class="dg-row">
+              <span class="dg-label">Username</span>
+              <span class="dg-leader"></span>
+              <span class="dg-value"><%= guru.username %></span>
+            </div>
+
+            <div class="dg-row">
+              <span class="dg-label">NIP</span>
+              <span class="dg-leader"></span>
+              <span class="dg-value"><%= guru.nip %></span>
+            </div>
+
+            <div class="dg-row">
+              <span class="dg-label">Jabatan</span>
+              <span class="dg-leader"></span>
+              <span class="dg-value"><%= guru.jabatan %></span>
+            </div>
+
+            <div class="dg-row">
+              <span class="dg-label">Jenis Kelamin</span>
+              <span class="dg-leader"></span>
+              <span class="dg-value"><%= guru.jenis_kelamin %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

@@ -76,6 +76,9 @@ app.use("/", require("./routes/hapus-akun-siswa"));
 //? Guru
 app.use("/", require("./routes/profile-guru"));
 app.use("/", require("./routes/guru"));
+app.use("/", require("./routes/detail-guru"));
+app.use("/", require("./routes/tambah-guru"))
+app.use("/", require("./routes/hapus-guru"))
 
 //? Soal
 app.use("/", require("./routes/soal"));
@@ -105,8 +108,7 @@ app.use("/", require("./routes/hapus-berita"));
 
 // app.use("/", require("./routes/tambah-ekstrakulikuler"));
 // app.use("/", require("./routes/tambah-fasilitas"));
-// app.use("/", require("./routes/tambah-guru"))
-// app.use("/", require("./routes/tambah-admin"));
+// app.use("/", require("./routes/tambah-admin")); 
 
 // 6. Handle 404 (Halaman Tidak Ditemukan)
 app.use((req, res) => {

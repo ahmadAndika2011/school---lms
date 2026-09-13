@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Guru - SMA Nusantara</title>
+  <link rel="stylesheet" href="/css/cursor.css">
+  <link rel="stylesheet" href="/css/tambah-guru.css">
+</head>
+<body>
+  <div class="tg-wrapper">
+    <a href="/guru" class="tg-back">&larr; Kembali ke Daftar Guru</a>
+
+    <div class="tg-header">
+      <h1>Tambah Guru</h1>
+    </div>
+
+    <form action="/tambah-guru" method="POST" enctype="multipart/form-data" class="tg-form">
+
+      <div class="tg-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+      </div>
+
+      <div class="tg-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+      </div>
+
+      <div class="tg-field">
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+      </div>
+
+      <div class="tg-field">
+        <label for="nip">NIP</label>
+        <input type="text" id="nip" name="nip" placeholder="Masukkan NIP" required>
+      </div>
+
+      <div class="tg-field">
+        <label for="jabatan">Jabatan</label>
+        <input type="text" id="jabatan" name="jabatan" placeholder="Contoh: Guru Matematika" required>
+      </div>
+
+      <div class="tg-field">
+        <label for="jenis_kelamin">Jenis Kelamin</label>
+        <select id="jenis_kelamin" name="jenis_kelamin" required>
+          <option value="" disabled selected>Pilih jenis kelamin</option>
+          <option value="Laki-laki">Laki-laki</option>
+          <option value="perempuan">Perempuan</option>
+        </select>
+      </div>
+
+      <div class="tg-field">
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="" disabled selected>Pilih status</option>
+          <option value="Aktif">Aktif</option>
+          <option value="Nonaktif">Nonaktif</option>
+        </select>
+      </div>
+
+      <div class="tg-field">
+        <label for="photo">Foto</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+      </div>
+
+      <div class="tg-actions">
+        <a href="/guru" class="tg-cancel-btn">Batal</a>
+        <button type="submit" class="tg-submit-btn">Simpan Guru</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="/js/cursor.js"></script>
+</body>
+</html>

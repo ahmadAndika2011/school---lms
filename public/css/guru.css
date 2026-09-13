@@ -141,3 +141,71 @@ body {
   color: var(--abu);
   font-size: 14px;
 }
+
+.gr-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gr-tambah-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: #f5c518;
+  color: #0f3d24;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.gr-tambah-btn:hover {
+  background: #e0b30f;
+  transform: translateY(-1px);
+}
+
+.gr-hapus-form {
+  display: inline-block;
+}
+
+.gr-hapus-btn {
+  padding: 6px 14px;
+  background: transparent;
+  color: #a13c3c;
+  font-weight: 600;
+  font-size: 12.5px;
+  border: 1.5px solid rgba(161, 60, 60, 0.35);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.gr-hapus-btn:hover {
+  background: rgba(161, 60, 60, 0.08);
+  border-color: #a13c3c;
+}
+
+.gr-aksi-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gr-detail-btn {
+  padding: 6px 14px;
+  background: transparent;
+  color: #145c33;
+  font-weight: 600;
+  font-size: 12.5px;
+  text-decoration: none;
+  border: 1.5px solid rgba(20, 92, 51, 0.35);
+  border-radius: 7px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.gr-detail-btn:hover {
+  background: rgba(20, 92, 51, 0.08);
+  border-color: #145c33;
+}
