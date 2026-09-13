@@ -269,6 +269,32 @@ body {
 }
 
 /* ================================= */
+/* HAPUS AKUN */
+/* ================================= */
+
+.delete-form {
+  margin-top: 10px;
+}
+
+.delete-button {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: #a13c3c;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1.5px solid rgba(161, 60, 60, 0.35);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.delete-button:hover {
+  background: rgba(161, 60, 60, 0.08);
+  border-color: #a13c3c;
+}
+
+/* ================================= */
 /* RESPONSIVE */
 /* ================================= */
 

@@ -11,7 +11,7 @@ const bcrypt = require("bcrypt");
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const UPLOAD_DIR = path.join(__dirname, "../public/uploads/gambar-siswa");
-const DEFAULT_GAMBAR = "/uploads/foto-siswa/template.jpg";
+const DEFAULT_GAMBAR = "template.jpg";
 
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -170,17 +170,17 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
       return res.status(400).send("NISN sudah digunakan.");
     }
 
-    let gambarPath = DEFAULT_GAMBAR;
+    let gambar = DEFAULT_GAMBAR;
 
     if (req.file) {
-      gambarPath = `/uploads/gambar-siswa/${req.file.filename}`;
+      gambar = req.file.filename;
     } else if (googleSignup.picture) {
       const fileName = `${Date.now()}-${googleSignup.googleId}.jpg`;
       const filePath = path.join(UPLOAD_DIR, fileName);
 
       try {
         await downloadImage(googleSignup.picture, filePath);
-        gambarPath = `/uploads/gambar-siswa/${fileName}`;
+        gambar = fileName;
       } catch (err) {
         console.error("Gagal download foto profil Google:", err);
       }
@@ -191,7 +191,7 @@ router.post("/signup/complete", upload.single("foto_profil"), async (req, res) =
       email: googleSignup.email,
       password: hashedPassword,
       googleId: googleSignup.googleId,
-      gambar: gambarPath,
+      gambar: gambar,
       jenis_kelamin: jenis_kelamin,
       nisn: nisn,
       tempat_lahir: tempat_lahir,

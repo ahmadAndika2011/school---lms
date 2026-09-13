@@ -22,7 +22,7 @@
         <div class="profile-banner">
           <div class="profile-photo">
             <img
-              src="<%= siswa.gambar %>"
+              src="/uploads/gambar-siswa<%= siswa.gambar %>"
               alt="Foto profil <%= siswa.name %>"
             />
           </div>
@@ -76,7 +76,7 @@
           <div class="profile-nilai">
             <h2>Data Nilai</h2>
 
-            <% if (hasilSoal && hasilSoal.length > 0) { %>
+            <% if (typeof hasilSoal !== "undefined" && hasilSoal && hasilSoal.length > 0) { %>
             <div class="nilai-table-wrap">
               <table class="nilai-table">
                 <thead>
@@ -116,6 +116,15 @@
 
           <form action="/logout" method="POST" class="logout-form">
             <button type="submit" class="logout-button">Logout</button>
+          </form>
+
+          <form
+            action="/delete-account/siswa?_method=DELETE"
+            method="POST"
+            class="delete-form"
+            onsubmit="return confirm('Yakin ingin menghapus akun? Data profil dan hasil soal kamu akan hilang permanen dan tidak bisa dikembalikan.');"
+          >
+            <button type="submit" class="delete-button">Hapus Akun</button>
           </form>
         </div>
       </div>

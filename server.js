@@ -68,9 +68,10 @@ app.use("/", require("./routes/logout"));
 app.use("/", require("./routes/dashboard-admin"));
 
 //? Siswa
+app.use("/", require("./routes/siswa"));
 app.use("/", require("./routes/profile-siswa"));
 app.use("/", require("./routes/update-nama-siswa"));
-app.use("/", require("./routes/siswa"));
+app.use("/", require("./routes/hapus-akun-siswa"));
 
 //? Guru
 app.use("/", require("./routes/profile-guru"));
