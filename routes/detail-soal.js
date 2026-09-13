@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 const Soal = require("../models/Soal")
+const HasilSoal = require("../models/HasilSoal")
 
 router.get("/detail-soal/:id_soal", async (req, res) => {
     const {id_soal} = req.params
@@ -9,8 +10,9 @@ router.get("/detail-soal/:id_soal", async (req, res) => {
     const soal = await Soal.findById(id_soal)
     const jumlah_soal = soal.soal.length
 
-    console.log(jumlah_soal)
-    res.render("detail-soal", {soal, jumlah_soal})
+    const hasilSoal = await HasilSoal.find({id_soal: soal._id}).populate("id_siswa")
+
+    res.render("detail-soal", {soal, jumlah_soal, hasilSoal})
 })
 
 module.exports = router

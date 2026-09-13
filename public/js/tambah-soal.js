@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (soalContainer.children.length > 0) {
       const konfirmasi = confirm(
-        "Mengubah jumlah soal akan menghapus card yang sudah diisi. Lanjutkan?"
+        "Mengubah jumlah soal akan menghapus card yang sudah diisi. Lanjutkan?",
       );
       if (!konfirmasi) return;
     }
@@ -38,28 +38,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const fragment = templateCard.content.cloneNode(true);
     const card = fragment.querySelector(".ts-card-soal");
 
-    // tombol hapus soal
-    card.querySelector('[data-role="hapus"]').addEventListener("click", function () {
-      const yakin = confirm("Hapus soal ini?");
-      if (!yakin) return;
-      card.remove();
-      renumberSemuaCard();
-    });
+    card
+      .querySelector('[data-role="hapus"]')
+      .addEventListener("click", function () {
+        const yakin = confirm("Hapus soal ini?");
+        if (!yakin) return;
+        card.remove();
+        renumberSemuaCard();
+      });
 
-    // pertanyaan
     const pertanyaan = card.querySelector('[data-role="pertanyaan"]');
     pertanyaan.dataset.field = "pertanyaan";
 
-    // daftar gambar: mulai dengan 1 input
     const gambarList = card.querySelector('[data-role="gambar-list"]');
-    gambarList.appendChild(buatInputGambar());
+    gambarList.appendChild(buatInputGambar(index)); // <-- kirim index
 
-    // tombol tambah gambar
-    card.querySelector('[data-role="tambah-gambar"]').addEventListener("click", function () {
-      gambarList.appendChild(buatInputGambar());
-    });
+    card
+      .querySelector('[data-role="tambah-gambar"]')
+      .addEventListener("click", function () {
+        const currentIndex = Number(card.dataset.index); // <-- ambil index terkini dari card
+        gambarList.appendChild(buatInputGambar(currentIndex));
+      });
 
-    // pilihan jawaban a-d
     const pilihanList = card.querySelector('[data-role="pilihan-list"]');
     HURUF.forEach(function (huruf) {
       pilihanList.appendChild(buatPilihanItem(huruf));
@@ -70,20 +70,24 @@ document.addEventListener("DOMContentLoaded", function () {
     return card;
   }
 
-  function buatInputGambar() {
+  function buatInputGambar(index) {
     const fragment = templateGambar.content.cloneNode(true);
     const item = fragment.querySelector('[data-role="gambar-item"]');
     const input = item.querySelector('[data-role="gambar-input"]');
     const nama = item.querySelector('[data-role="gambar-nama"]');
     const hapus = item.querySelector('[data-role="hapus-gambar"]');
 
+    if (index !== undefined) {
+      input.name = "soal[" + index + "][gambar][]";
+    }
+
     input.addEventListener("change", function () {
-      nama.textContent = input.files.length > 0 ? input.files[0].name : "Belum ada file";
+      nama.textContent =
+        input.files.length > 0 ? input.files[0].name : "Belum ada file";
     });
 
     hapus.addEventListener("click", function () {
       const list = item.parentElement;
-      // minimal sisakan 1 baris input gambar per soal
       if (list.children.length > 1) {
         item.remove();
       } else {
@@ -101,9 +105,17 @@ document.addEventListener("DOMContentLoaded", function () {
     wrapper.dataset.huruf = huruf;
 
     wrapper.innerHTML =
-      '<input type="radio" data-field="jawaban_benar" value="' + huruf + '">' +
-      '<span class="ts-pilihan-huruf">' + huruf + "</span>" +
-      '<input type="text" data-field="pilihan-' + huruf + '" placeholder="Teks pilihan ' + huruf.toUpperCase() + '" required>';
+      '<input type="radio" data-field="jawaban_benar" value="' +
+      huruf +
+      '">' +
+      '<span class="ts-pilihan-huruf">' +
+      huruf +
+      "</span>" +
+      '<input type="text" data-field="pilihan-' +
+      huruf +
+      '" placeholder="Teks pilihan ' +
+      huruf.toUpperCase() +
+      '" required>';
 
     return wrapper;
   }
@@ -117,9 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const pertanyaan = card.querySelector('[data-field="pertanyaan"]');
     pertanyaan.name = "soal[" + index + "][pertanyaan]";
 
-    card.querySelectorAll('[data-role="gambar-input"]').forEach(function (input) {
-      input.name = "soal[" + index + "][gambar][]";
-    });
+    card
+      .querySelectorAll('[data-role="gambar-input"]')
+      .forEach(function (input) {
+        input.name = "soal[" + index + "][gambar][]";
+      });
 
     card.querySelectorAll(".ts-pilihan-item").forEach(function (item) {
       const huruf = item.dataset.huruf;
@@ -138,23 +152,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Validasi ringan sebelum submit: pastikan tiap soal punya jawaban benar terpilih.
-  document.getElementById("form-tambah-soal").addEventListener("submit", function (e) {
-    const cards = soalContainer.querySelectorAll(".ts-card-soal");
+  document
+    .getElementById("form-tambah-soal")
+    .addEventListener("submit", function (e) {
+      const cards = soalContainer.querySelectorAll(".ts-card-soal");
 
-    if (cards.length === 0) {
-      e.preventDefault();
-      alert("Buat minimal 1 soal terlebih dahulu.");
-      return;
-    }
-
-    for (const card of cards) {
-      const adaJawabanBenar = card.querySelector('[data-field="jawaban_benar"]:checked');
-      if (!adaJawabanBenar) {
+      if (cards.length === 0) {
         e.preventDefault();
-        const nomor = card.querySelector('[data-role="nomor"]').textContent;
-        alert("Pilih jawaban benar untuk Soal #" + nomor + ".");
+        alert("Buat minimal 1 soal terlebih dahulu.");
         return;
       }
-    }
-  });
+
+      for (const card of cards) {
+        const adaJawabanBenar = card.querySelector(
+          '[data-field="jawaban_benar"]:checked',
+        );
+        if (!adaJawabanBenar) {
+          e.preventDefault();
+          const nomor = card.querySelector('[data-role="nomor"]').textContent;
+          alert("Pilih jawaban benar untuk Soal #" + nomor + ".");
+          return;
+        }
+      }
+    });
 });

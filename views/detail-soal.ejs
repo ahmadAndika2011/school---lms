@@ -29,36 +29,29 @@
       </div>
 
       <div class="ds-table-wrapper">
-        <%
-          // DATA DUMMY - ganti dengan data asli dari database (hasil pengerjaan siswa) nanti
-          const muridPengerjaan = [
-            { username: "ahmad.fauzi", nisn: "0051234567", nilai: 90 },
-            { username: "siti.rahma", nisn: "0051234568", nilai: 75 },
-            { username: "budi.santoso", nisn: "0051234569", nilai: 60 },
-            { username: "dewi.lestari", nisn: "0051234570", nilai: 85 }
-          ];
-        %>
         <table class="ds-table">
           <thead>
             <tr>
-              <th>Username Murid</th>
+              <th>Nama Murid</th>
               <th>NISN</th>
               <th>Nilai</th>
             </tr>
           </thead>
           <tbody>
-            <% if (muridPengerjaan && muridPengerjaan.length > 0) { %>
-              <% muridPengerjaan.forEach(function(m){ %>
+            <% if (hasilSoal && hasilSoal.length > 0) { %>
+              <% hasilSoal.forEach(function(h){
+                   const siswa = h.id_siswa;
+              %>
                 <tr>
-                  <td><%= m.username %></td>
-                  <td><%= m.nisn %></td>
-                  <td class="ds-nilai <%= m.nilai >= 70 ? 'baik' : 'kurang' %>"><%= m.nilai %></td>
+                  <td><%= siswa ? siswa.name : '-' %></td>
+                  <td><%= siswa ? siswa.nisn : '-' %></td>
+                  <td class="ds-nilai <%= h.nilai >= 70 ? 'baik' : 'kurang' %>"><%= h.nilai %></td>
                 </tr>
               <% }); %>
             <% } %>
           </tbody>
         </table>
-        <% if (!muridPengerjaan || muridPengerjaan.length === 0) { %>
+        <% if (!hasilSoal || hasilSoal.length === 0) { %>
           <p class="ds-empty">Belum ada murid yang mengerjakan soal ini.</p>
         <% } %>
       </div>

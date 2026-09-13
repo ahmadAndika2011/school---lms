@@ -72,6 +72,7 @@ app.use("/", require("./routes/siswa"));
 app.use("/", require("./routes/profile-siswa"));
 app.use("/", require("./routes/update-nama-siswa"));
 app.use("/", require("./routes/hapus-akun-siswa"));
+app.use("/", require("./routes/detail-siswa"));
 
 //? Guru
 app.use("/", require("./routes/profile-guru"));

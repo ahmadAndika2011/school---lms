@@ -1,0 +1,236 @@
+:root {
+  --hijau-tua: #0d5c3f;
+  --hijau-muda: #e8f3ec;
+  --kuning: #f5c518;
+  --teks-gelap: #1a1a1a;
+  --abu: #6b7280;
+  --border: #e5e7eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #f4f5f4;
+}
+
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 56px 20px;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+}
+
+/* Back link */
+
+.profile-back {
+  display: block;
+  padding: 16px 24px 0;
+  color: var(--hijau-tua);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.profile-back:hover {
+  text-decoration: underline;
+}
+
+/* Banner + foto */
+
+.profile-banner {
+  position: relative;
+  height: 88px;
+  margin-top: 16px;
+  background: var(--hijau-tua);
+}
+
+.profile-photo {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  padding: 4px;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-photo-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hijau-tua);
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Body */
+
+.profile-body {
+  padding: 52px 32px 32px;
+  text-align: center;
+}
+
+.profile-nama {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--teks-gelap);
+  margin-bottom: 4px;
+}
+
+.profile-email {
+  font-size: 13.5px;
+  color: var(--abu);
+  margin-bottom: 28px;
+}
+
+/* Detail rows */
+
+.profile-details {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f1f0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--hijau-tua);
+  white-space: nowrap;
+}
+
+.detail-leader {
+  flex: 1 1 auto;
+  margin: 0 8px;
+  border-bottom: 2px dotted #dcdfdc;
+  transform: translateY(-4px);
+}
+
+.detail-value {
+  flex: 0 0 auto;
+  font-size: 13.5px;
+  color: var(--teks-gelap);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Data Nilai */
+
+.profile-nilai {
+  text-align: left;
+  background: #fafafa;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.profile-nilai h2 {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--teks-gelap);
+  margin-bottom: 12px;
+}
+
+.empty-state {
+  font-size: 13px;
+  color: var(--abu);
+  font-style: italic;
+}
+
+.nilai-table-wrap {
+  overflow-x: auto;
+}
+
+.nilai-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nilai-table thead th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--abu);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nilai-table tbody td {
+  padding: 8px;
+  font-size: 13px;
+  color: var(--teks-gelap);
+  border-bottom: 1px solid #f0f1f0;
+}
+
+.id-cell {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: var(--abu);
+}
+
+.nilai-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nilai-tinggi {
+  background: rgba(13, 92, 63, 0.12);
+  color: var(--hijau-tua);
+}
+
+.nilai-sedang {
+  background: rgba(245, 197, 24, 0.18);
+  color: #92720a;
+}
+
+.nilai-rendah {
+  background: rgba(200, 60, 60, 0.12);
+  color: #a13c3c;
+}
