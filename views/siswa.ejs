@@ -41,7 +41,7 @@
                 <td>
                   <div class="sw-aksi-cell">
                     <a href="/siswa/detail/<%= s.id %>" class="sw-btn sw-btn-detail">Detail</a>
-                    <form action="/siswa/<%= s.id %>/hapus" method="POST" class="sw-form-hapus" onsubmit="return confirm('Yakin ingin menghapus siswa ini?');">
+                    <form action="/hapus-siswa/<%= s.id %>?_method=DELETE" method="POST" class="sw-form-hapus" onsubmit="return confirm('Yakin ingin menghapus siswa ini?');">
                       <button type="submit" class="sw-btn sw-btn-hapus">Hapus</button>
                     </form>
                   </div>
