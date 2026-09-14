@@ -88,6 +88,7 @@ app.use("/", require("./routes/hasil-soal"));
 app.use("/", require("./routes/kerjakan-soal"));
 app.use("/", require("./routes/detail-soal"));
 app.use("/", require("./routes/tambah-soal"));
+app.use("/", require("./routes/hapus-soal"));
 
 //? Layanan Sekolah
 app.use("/", require("./routes/layanan-ppdb"));

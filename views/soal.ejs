@@ -15,20 +15,27 @@
     <% if (daftarSoal && daftarSoal.length > 0) { %>
       <div class="sl-grid">
         <% daftarSoal.forEach(function(s){ %>
-          <a href="/kerjakan-soal/<%= s._id %>" class="sl-card">
-            <h3 class="sl-card-judul"><%= s.judul %></h3>
-            <p class="sl-card-deskripsi"><%= s.deskripsi %></p>
+          <div class="sl-card-wrapper">
+            <a href="/kerjakan-soal/<%= s._id %>" class="sl-card">
+              <h3 class="sl-card-judul"><%= s.judul %></h3>
+              <p class="sl-card-deskripsi"><%= s.deskripsi %></p>
 
-            <div class="sl-card-footer">
-              <div class="sl-guru">
-                <span class="sl-guru-avatar">
-                  <%= s.id_guru && s.id_guru.nama ? s.id_guru.nama.charAt(0) : "?" %>
-                </span>
-                <span><%= s.id_guru && s.id_guru.nama ? s.id_guru.nama : "Guru tidak diketahui" %></span>
+              <div class="sl-card-footer">
+                <div class="sl-guru">
+                  <span class="sl-guru-avatar">
+                    <%= s.id_guru && s.id_guru.nama ? s.id_guru.nama.charAt(0) : "?" %>
+                  </span>
+                  <span><%= s.id_guru && s.id_guru.nama ? s.id_guru.nama : "Guru tidak diketahui" %></span>
+                </div>
+                <span class="sl-jumlah"><%= s.soal ? s.soal.length : 0 %> soal</span>
               </div>
-              <span class="sl-jumlah"><%= s.soal ? s.soal.length : 0 %> soal</span>
-            </div>
-          </a>
+            </a>
+
+            <form action="/hapus-soal/<%= s._id %>?_method=DELETE" method="POST" class="sl-hapus-form"
+                  onsubmit="return confirm('Yakin ingin menghapus soal &quot;<%= s.judul %>&quot;?');">
+              <button type="submit" class="sl-hapus-btn">Hapus Soal</button>
+            </form>
+          </div>
         <% }); %>
       </div>
     <% } else { %>

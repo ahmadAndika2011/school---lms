@@ -1,32 +1,36 @@
 const express = require("express")
 const router = express.Router()
 
-const LayananPpdb = require("../models/LayananPpdb")
-const path = require("path")
-const fs = require("fs")
+const controllers = require("../controllers/hapus-data-ppdb-controllers")
 
-router.delete("/layanan/ppdb/data/delete", async (req, res) => {
-    const {id} = req.body
-    const ppdbData = await LayananPpdb.findById(id)
-    if(ppdbData.foto_siswa){
-        const pathGambar =  path.join(
-            __dirname,
-            "..",
-            "public",
-            "uploads",
-            "gambar-siswa-layanan-ppdb",
-            ppdbData.foto_siswa
-        ) 
+router.delete("/layanan/ppdb/data/delete", controllers.hapusDataPpdb)
 
-        fs.unlink(pathGambar, (err) => {
-            if(err){
-                console.log("error: ", err)
-            }
-        })
-    }
+// const LayananPpdb = require("../models/LayananPpdb")
+// const path = require("path")
+// const fs = require("fs")
 
-    await LayananPpdb.findByIdAndDelete(id)
-    res.redirect("/layanan/ppdb/data")
-})
+// router.delete("/layanan/ppdb/data/delete", async (req, res) => {
+//     const {id} = req.body
+//     const ppdbData = await LayananPpdb.findById(id)
+//     if(ppdbData.foto_siswa){
+//         const pathGambar =  path.join(
+//             __dirname,
+//             "..",
+//             "public",
+//             "uploads",
+//             "gambar-siswa-layanan-ppdb",
+//             ppdbData.foto_siswa
+//         ) 
+
+//         fs.unlink(pathGambar, (err) => {
+//             if(err){
+//                 console.log("error: ", err)
+//             }
+//         })
+//     }
+
+//     await LayananPpdb.findByIdAndDelete(id)
+//     res.redirect("/layanan/ppdb/data")
+// })
 
 module.exports = router

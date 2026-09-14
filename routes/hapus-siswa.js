@@ -1,33 +1,37 @@
 const express = require("express")
 const router = express.Router()
 
-const Siswa = require("../models/Siswa")
-const path = require("path")
-const fs = require("fs")
+const controllers = require("../controllers/hapus-siswa-controllers")
 
-router.delete("/hapus-siswa/:siswa_id", async (req, res) => {
-    const {siswa_id} =  req.params
-    const siswa = await Siswa.findById(siswa_id)
-    if(siswa.gambar){
-        const filePath = path.join(
-            __dirname,
-            "..",
-            "public",
-            "uploads",
-            "gambar-siswa",
-            siswa.gambar
-        )
+router.delete("/hapus-siswa/:siswa_id", controllers.hapusSiswa)
 
-        fs.unlink(filePath, (err) => {
-            if(err){
-                console.log("error : ", err)
-            }
-        })
-    }
+// const Siswa = require("../models/Siswa")
+// const path = require("path")
+// const fs = require("fs")
 
-    await Siswa.findByIdAndDelete(siswa._id)
+// router.delete("/hapus-siswa/:siswa_id", async (req, res) => {
+//     const {siswa_id} =  req.params
+//     const siswa = await Siswa.findById(siswa_id)
+//     if(siswa.gambar){
+//         const filePath = path.join(
+//             __dirname,
+//             "..",
+//             "public",
+//             "uploads",
+//             "gambar-siswa",
+//             siswa.gambar
+//         )
 
-    res.redirect("/siswa")
-})
+//         fs.unlink(filePath, (err) => {
+//             if(err){
+//                 console.log("error : ", err)
+//             }
+//         })
+//     }
+
+//     await Siswa.findByIdAndDelete(siswa._id)
+
+//     res.redirect("/siswa")
+// })
 
 module.exports = router
