@@ -1,18 +1,22 @@
 const express = require("express")
 const router = express.Router()
 
-const Soal = require("../models/Soal")
-const HasilSoal = require("../models/HasilSoal")
+const controllers = require("../controllers/detail-soal-controllers")
 
-router.get("/detail-soal/:id_soal", async (req, res) => {
-    const {id_soal} = req.params
+router.get("/detail-soal/:id_soal", controllers.detailSoal)
 
-    const soal = await Soal.findById(id_soal)
-    const jumlah_soal = soal.soal.length
+// const Soal = require("../models/Soal")
+// const HasilSoal = require("../models/HasilSoal")
 
-    const hasilSoal = await HasilSoal.find({id_soal: soal._id}).populate("id_siswa")
+// router.get("/detail-soal/:id_soal", async (req, res) => {
+//     const {id_soal} = req.params
 
-    res.render("detail-soal", {soal, jumlah_soal, hasilSoal})
-})
+//     const soal = await Soal.findById(id_soal)
+//     const jumlah_soal = soal.soal.length
+
+//     const hasilSoal = await HasilSoal.find({id_soal: soal._id}).populate("id_siswa")
+
+//     res.render("detail-soal", {soal, jumlah_soal, hasilSoal})
+// })
 
 module.exports = router

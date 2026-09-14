@@ -1,12 +1,16 @@
 const express = require("express")
 const router = express.Router()
 
-const Guru = require("../models/Guru")
+const controllers = require("../controllers/guru-controllers")
 
-router.get("/guru", async (req, res) => {
-    const guru = await Guru.find({})
+router.get("/guru", controllers.guru)
 
-    res.render("guru", {guru})
-})
+// const Guru = require("../models/Guru")
+
+// router.get("/guru", async (req, res) => {
+//     const guru = await Guru.find({})
+
+//     res.render("guru", {guru})
+// })
 
 module.exports = router

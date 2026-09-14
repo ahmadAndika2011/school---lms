@@ -1,36 +1,40 @@
 const express = require("express")
 const router = express.Router()
 
-const Berita = require("../models/Berita")
-const path = require("path")
-const fs = require("fs")
+const controllers = require("../controllers/hapus-berita-controllers")
 
-router.delete("/berita/detail/:id/delete", async (req, res) => {
-    const {id} = req.params
-    const berita = await Berita.findById(id)
+router.delete("/berita/detail/:id/delete", controllers.hapusBerita)
 
-    if(berita.gambar.length > 0){
-        berita.gambar.forEach((file) => {
-            const filePath = path.join(
-                __dirname,
-                "..",
-                "public",
-                "uploads",
-                "gambar-berita",
-                file
-            )
+// const Berita = require("../models/Berita")
+// const path = require("path")
+// const fs = require("fs")
 
-            fs.unlink(filePath, (err) => {
-                if(err){
-                    console.log("error: ", err)
-                }
-            })
-        })
-    }
+// router.delete("/berita/detail/:id/delete", async (req, res) => {
+//     const {id} = req.params
+//     const berita = await Berita.findById(id)
 
-    await Berita.findByIdAndDelete(id)
+//     if(berita.gambar.length > 0){
+//         berita.gambar.forEach((file) => {
+//             const filePath = path.join(
+//                 __dirname,
+//                 "..",
+//                 "public",
+//                 "uploads",
+//                 "gambar-berita",
+//                 file
+//             )
 
-    res.redirect("/#berita")
-})
+//             fs.unlink(filePath, (err) => {
+//                 if(err){
+//                     console.log("error: ", err)
+//                 }
+//             })
+//         })
+//     }
+
+//     await Berita.findByIdAndDelete(id)
+
+//     res.redirect("/#berita")
+// })
 
 module.exports = router
