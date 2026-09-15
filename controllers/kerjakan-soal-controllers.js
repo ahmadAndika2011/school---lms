@@ -15,7 +15,6 @@ module.exports.getKerjakanSoal = async (req, res) => {
 
 module.exports.postKerjakanSoal = async (req, res) => {
     const {id_soal} = req.params
-
     const siswa = req.session.user
 
     const soal = await Soal.findById(id_soal)
@@ -24,7 +23,6 @@ module.exports.postKerjakanSoal = async (req, res) => {
 
     const detailJawaban = soal.soal.map((pertanyaan) => {
         const dipilih = jawabanSiswa[pertanyaan._id.toString()] || null
-
         const benar = dipilih === pertanyaan.jawaban_benar
         if (benar) jumlahBenar++
 
@@ -38,16 +36,26 @@ module.exports.postKerjakanSoal = async (req, res) => {
     const totalSoal = soal.soal.length
     const nilai = totalSoal > 0 ? Math.round((jumlahBenar / totalSoal) * 100) : 0
 
+    if (!req.file) {
+        return res.status(400).json({ message: "Rekaman layar tidak ditemukan. Soal tidak dapat dikumpulkan." })
+    }
+
+    const jumlahKeluarTab = parseInt(req.body.jumlahKeluarTab) || 0
+    const keluarTab = req.body.keluarTab === "true"
+
     await HasilSoal.findOneAndUpdate(
         { id_siswa: siswa.id, id_soal: soal._id },
         {
-            id_siswa: siswa._id,
+            id_siswa: siswa.id,
             id_soal: soal._id,
             jawaban: detailJawaban,
-            nilai
+            nilai,
+            video: req.file.filename,
+            keluarTab,
+            jumlahKeluarTab
         },
         { upsert: true, new: true }
     )
 
-    res.redirect(`/hasil-soal/${siswa.id}/${soal._id}`)
+    res.status(200).json({ redirectUrl: `/hasil-soal/${siswa.id}/${soal._id}` })
 }

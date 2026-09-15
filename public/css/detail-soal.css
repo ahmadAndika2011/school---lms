@@ -186,3 +186,12 @@ body {
   color: var(--abu);
   font-size: 14px;
 }
+
+.ds-badge-danger {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}

@@ -35,17 +35,38 @@
               <th>Nama Murid</th>
               <th>NISN</th>
               <th>Nilai</th>
+              <th>Keluar Tab</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <% if (hasilSoal && hasilSoal.length > 0) { %>
               <% hasilSoal.forEach(function(h){
-                   const siswa = h.id_siswa;
+                  const siswa = h.id_siswa;
               %>
                 <tr>
                   <td><%= siswa ? siswa.name : '-' %></td>
                   <td><%= siswa ? siswa.nisn : '-' %></td>
                   <td class="ds-nilai <%= h.nilai >= 70 ? 'baik' : 'kurang' %>"><%= h.nilai %></td>
+                  <td>
+                    <% if (h.keluarTab) { %>
+                      <span class="ds-badge-warning">Keluar tab (<%= h.jumlahKeluarTab %>x)</span>
+                    <% } else { %>
+                      <span class="ds-badge-ok">Tidak keluar</span>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% if (h.ditutupPaksa) { %>
+                      <span class="ds-badge-danger">
+                        Tab ditutup paksa
+                        <% if (h.waktuDitutupPaksa) { %>
+                          (<%= new Date(h.waktuDitutupPaksa).toLocaleString('id-ID') %>)
+                        <% } %>
+                      </span>
+                    <% } else { %>
+                      <span class="ds-badge-ok">Selesai normal</span>
+                    <% } %>
+                  </td>
                 </tr>
               <% }); %>
             <% } %>

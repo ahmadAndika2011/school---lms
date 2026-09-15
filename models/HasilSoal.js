@@ -31,7 +31,20 @@ const hasilSoalSchema = new mongoose.Schema({
     nilai: {
         type: Number,
         required: true
-    }
+    },
+    video: {
+        type: String,
+        required: false,
+        default: null
+    },
+    keluarTab: {
+        type: Boolean,
+        default: false
+    },
+    jumlahKeluarTab: {
+        type: Number,
+        default: 0
+    },
 }, { timestamps: true })
 
 hasilSoalSchema.index({ id_siswa: 1, id_soal: 1 }, { unique: true })
