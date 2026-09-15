@@ -1,58 +1,64 @@
 const express = require("express")
 const router = express.Router()
 
-const Soal = require("../models/Soal")
-const HasilSoal = require("../models/HasilSoal")
+const controllers = require("../controllers/kerjakan-soal-controllers")
 
-router.get("/kerjakan-soal/:id_soal", async (req, res) => {
-    const {id_soal} = req.params
+router.get("/kerjakan-soal/:id_soal", controllers.getKerjakanSoal)
 
-    const soal = await Soal.findById(id_soal)
-    const hasilSoal = await HasilSoal.findOne({id_siswa: req.session.user.id, id_soal: id_soal})
-    if(hasilSoal){
-        return res.redirect(`/hasil-soal/${hasilSoal.id_siswa}/${hasilSoal.id_soal}`)
-    }
+router.post("/kerjakan-soal/:id_soal", controllers.postKerjakanSoal)
 
-    res.render("kerjakan-soal", {soal})
-})
+// const Soal = require("../models/Soal")
+// const HasilSoal = require("../models/HasilSoal")
 
-router.post("/kerjakan-soal/:id_soal", async (req, res) => {
-    const {id_soal} = req.params
+// router.get("/kerjakan-soal/:id_soal", async (req, res) => {
+//     const {id_soal} = req.params
 
-    const siswa = req.session.user
+//     const soal = await Soal.findById(id_soal)
+//     const hasilSoal = await HasilSoal.findOne({id_siswa: req.session.user.id, id_soal: id_soal})
+//     if(hasilSoal){
+//         return res.redirect(`/hasil-soal/${hasilSoal.id_siswa}/${hasilSoal.id_soal}`)
+//     }
 
-    const soal = await Soal.findById(id_soal)
-    const jawabanSiswa = req.body.jawaban || {}
-    let jumlahBenar = 0
+//     res.render("kerjakan-soal", {soal})
+// })
 
-    const detailJawaban = soal.soal.map((pertanyaan) => {
-        const dipilih = jawabanSiswa[pertanyaan._id.toString()] || null
+// router.post("/kerjakan-soal/:id_soal", async (req, res) => {
+//     const {id_soal} = req.params
 
-        const benar = dipilih === pertanyaan.jawaban_benar
-        if (benar) jumlahBenar++
+//     const siswa = req.session.user
 
-        return {
-            id_pertanyaan: pertanyaan._id,
-            jawaban_dipilih: dipilih,
-            benar
-        }
-    })
+//     const soal = await Soal.findById(id_soal)
+//     const jawabanSiswa = req.body.jawaban || {}
+//     let jumlahBenar = 0
 
-    const totalSoal = soal.soal.length
-    const nilai = totalSoal > 0 ? Math.round((jumlahBenar / totalSoal) * 100) : 0
+//     const detailJawaban = soal.soal.map((pertanyaan) => {
+//         const dipilih = jawabanSiswa[pertanyaan._id.toString()] || null
 
-    await HasilSoal.findOneAndUpdate(
-        { id_siswa: siswa.id, id_soal: soal._id },
-        {
-            id_siswa: siswa._id,
-            id_soal: soal._id,
-            jawaban: detailJawaban,
-            nilai
-        },
-        { upsert: true, new: true }
-    )
+//         const benar = dipilih === pertanyaan.jawaban_benar
+//         if (benar) jumlahBenar++
 
-    res.redirect(`/hasil-soal/${siswa.id}/${soal._id}`)
-})
+//         return {
+//             id_pertanyaan: pertanyaan._id,
+//             jawaban_dipilih: dipilih,
+//             benar
+//         }
+//     })
+
+//     const totalSoal = soal.soal.length
+//     const nilai = totalSoal > 0 ? Math.round((jumlahBenar / totalSoal) * 100) : 0
+
+//     await HasilSoal.findOneAndUpdate(
+//         { id_siswa: siswa.id, id_soal: soal._id },
+//         {
+//             id_siswa: siswa._id,
+//             id_soal: soal._id,
+//             jawaban: detailJawaban,
+//             nilai
+//         },
+//         { upsert: true, new: true }
+//     )
+
+//     res.redirect(`/hasil-soal/${siswa.id}/${soal._id}`)
+// })
 
 module.exports = router

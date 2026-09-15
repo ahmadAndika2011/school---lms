@@ -40,183 +40,191 @@ const upload = multer({
   },
 });
 
-function downloadImage(url, filepath) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (response) => {
-        if (response.statusCode !== 200) {
-          reject(new Error(`Gagal download gambar, status ${response.statusCode}`));
-          return;
-        }
+const controllers = require("../controllers/signup-controllers")
 
-        const fileStream = fs.createWriteStream(filepath);
-        response.pipe(fileStream);
+router.get("/signup", controllers.getSignup)
 
-        fileStream.on("finish", () => {
-          fileStream.close(resolve);
-        });
+router.post("/signup/google", controllers.signupGoogle)
 
-        fileStream.on("error", (err) => {
-          fs.unlink(filepath, () => reject(err));
-        });
-      })
-      .on("error", (err) => {
-        reject(err);
-      });
-  });
-}
+router.post("/signup/complete", upload.single("foto_profil"), controllers.signupComplete)
 
-router.get("/signup", (req, res) => {
-  res.render("signup", {
-    cid: process.env.CLIENT_ID,
-  });
-});
+// function downloadImage(url, filepath) {
+//   return new Promise((resolve, reject) => {
+//     https
+//       .get(url, (response) => {
+//         if (response.statusCode !== 200) {
+//           reject(new Error(`Gagal download gambar, status ${response.statusCode}`));
+//           return;
+//         }
 
-router.post("/signup/google", async (req, res) => {
-  try {
-    if (req.session.user) {
-      return res.redirect("/");
-    }
+//         const fileStream = fs.createWriteStream(filepath);
+//         response.pipe(fileStream);
 
-    const { credential } = req.body;
-    if (!credential) {
-      return res.status(400).json({
-        success: false,
-        message: "Credential Google tidak ditemukan",
-      });
-    }
+//         fileStream.on("finish", () => {
+//           fileStream.close(resolve);
+//         });
 
-    const ticket = await client.verifyIdToken({
-      idToken: credential,
-      audience: process.env.CLIENT_ID,
-    });
+//         fileStream.on("error", (err) => {
+//           fs.unlink(filepath, () => reject(err));
+//         });
+//       })
+//       .on("error", (err) => {
+//         reject(err);
+//       });
+//   });
+// }
 
-    const payload = ticket.getPayload();
-    const googleId = payload.sub;
-    const email = payload.email;
-    const picture = payload.picture;
+// router.get("/signup", (req, res) => {
+//   res.render("signup", {
+//     cid: process.env.CLIENT_ID,
+//   });
+// });
 
-    const existingUser = await Siswa.findOne({ email: email });
+// router.post("/signup/google", async (req, res) => {
+//   try {
+//     if (req.session.user) {
+//       return res.redirect("/");
+//     }
 
-    if (existingUser) {
-      return res.json({
-        success: false,
-        message: "Email ini sudah terdaftar. Silakan login.",
-      });
-    }
+//     const { credential } = req.body;
+//     if (!credential) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Credential Google tidak ditemukan",
+//       });
+//     }
 
-    req.session.googleSignup = {
-      googleId: googleId,
-      email: email,
-      picture: picture,
-    };
+//     const ticket = await client.verifyIdToken({
+//       idToken: credential,
+//       audience: process.env.CLIENT_ID,
+//     });
 
-    res.json({
-      success: true,
-      email: email,
-    });
-  } catch (error) {
-    console.error("Google signup error:", error);
+//     const payload = ticket.getPayload();
+//     const googleId = payload.sub;
+//     const email = payload.email;
+//     const picture = payload.picture;
 
-    res.status(500).json({
-      success: false,
-      message: "Google signup gagal",
-    });
-  }
-});
+//     const existingUser = await Siswa.findOne({ email: email });
 
-router.post("/signup/complete", upload.single("foto_profil"), async (req, res) => {
-  try {
-    const googleSignup = req.session.googleSignup;
+//     if (existingUser) {
+//       return res.json({
+//         success: false,
+//         message: "Email ini sudah terdaftar. Silakan login.",
+//       });
+//     }
 
-    if (!googleSignup) {
-      return res
-        .status(401)
-        .send("Session Google tidak ditemukan. Silakan signup ulang.");
-    }
+//     req.session.googleSignup = {
+//       googleId: googleId,
+//       email: email,
+//       picture: picture,
+//     };
 
-    const { name, password, jenis_kelamin, nisn, tempat_lahir, tanggal_lahir } =
-      req.body;
+//     res.json({
+//       success: true,
+//       email: email,
+//     });
+//   } catch (error) {
+//     console.error("Google signup error:", error);
 
-    const hashedPassword = await bcrypt.hash(password, 10)
+//     res.status(500).json({
+//       success: false,
+//       message: "Google signup gagal",
+//     });
+//   }
+// });
 
-    if (
-      !name ||
-      !password ||
-      !jenis_kelamin ||
-      !nisn ||
-      !tempat_lahir ||
-      !tanggal_lahir
-    ) {
-      return res.status(400).send("Semua field harus diisi.");
-    }
+// router.post("/signup/complete", upload.single("foto_profil"), async (req, res) => {
+//   try {
+//     const googleSignup = req.session.googleSignup;
 
-    const checkUsername = await Siswa.findOne({name: name})
-    if(checkUsername){
-      return res.status(400).send("Nama sudah ada");
-    }
+//     if (!googleSignup) {
+//       return res
+//         .status(401)
+//         .send("Session Google tidak ditemukan. Silakan signup ulang.");
+//     }
 
-    const guruRegex = /\bguru\b/i;
-    if (guruRegex.test(name)) {
-        return res.status(400).send("Nama tidak valid");
-    }
+//     const { name, password, jenis_kelamin, nisn, tempat_lahir, tanggal_lahir } =
+//       req.body;
 
-    if(nisn.length != 10){
-      return res.status(400).send("Panjang nisn harus 10 digit");
-    }
+//     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const nisnExists = await Siswa.findOne({ nisn: nisn });
-    if (nisnExists) {
-      return res.status(400).send("NISN sudah digunakan.");
-    }
+//     if (
+//       !name ||
+//       !password ||
+//       !jenis_kelamin ||
+//       !nisn ||
+//       !tempat_lahir ||
+//       !tanggal_lahir
+//     ) {
+//       return res.status(400).send("Semua field harus diisi.");
+//     }
 
-    let gambar = DEFAULT_GAMBAR;
+//     const checkUsername = await Siswa.findOne({name: name})
+//     if(checkUsername){
+//       return res.status(400).send("Nama sudah ada");
+//     }
 
-    if (req.file) {
-      gambar = req.file.filename;
-    } else if (googleSignup.picture) {
-      const fileName = `${Date.now()}-${googleSignup.googleId}.jpg`;
-      const filePath = path.join(UPLOAD_DIR, fileName);
+//     const guruRegex = /\bguru\b/i;
+//     if (guruRegex.test(name)) {
+//         return res.status(400).send("Nama tidak valid");
+//     }
 
-      try {
-        await downloadImage(googleSignup.picture, filePath);
-        gambar = fileName;
-      } catch (err) {
-        console.error("Gagal download foto profil Google:", err);
-      }
-    }
+//     if(nisn.length != 10){
+//       return res.status(400).send("Panjang nisn harus 10 digit");
+//     }
 
-    const siswa = await Siswa.create({
-      name: name,
-      email: googleSignup.email,
-      password: hashedPassword,
-      googleId: googleSignup.googleId,
-      gambar: gambar,
-      jenis_kelamin: jenis_kelamin,
-      nisn: nisn,
-      tempat_lahir: tempat_lahir,
-      tanggal_lahir: tanggal_lahir,
-    });
+//     const nisnExists = await Siswa.findOne({ nisn: nisn });
+//     if (nisnExists) {
+//       return res.status(400).send("NISN sudah digunakan.");
+//     }
 
-    delete req.session.googleSignup;
+//     let gambar = DEFAULT_GAMBAR;
 
-    req.session.user = {
-      id: siswa._id,
-      name: siswa.name,
-      email: siswa.email,
-      role: "siswa"
-    };
+//     if (req.file) {
+//       gambar = req.file.filename;
+//     } else if (googleSignup.picture) {
+//       const fileName = `${Date.now()}-${googleSignup.googleId}.jpg`;
+//       const filePath = path.join(UPLOAD_DIR, fileName);
 
-    res.redirect("/");
-  } catch (error) {
-    console.error("Complete signup error:", error);
+//       try {
+//         await downloadImage(googleSignup.picture, filePath);
+//         gambar = fileName;
+//       } catch (err) {
+//         console.error("Gagal download foto profil Google:", err);
+//       }
+//     }
 
-    if (error instanceof multer.MulterError || error.message === "Format file tidak didukung.") {
-      return res.status(400).send(error.message);
-    }
+//     const siswa = await Siswa.create({
+//       name: name,
+//       email: googleSignup.email,
+//       password: hashedPassword,
+//       googleId: googleSignup.googleId,
+//       gambar: gambar,
+//       jenis_kelamin: jenis_kelamin,
+//       nisn: nisn,
+//       tempat_lahir: tempat_lahir,
+//       tanggal_lahir: tanggal_lahir,
+//     });
 
-    res.status(500).send("Terjadi kesalahan saat membuat akun.");
-  }
-});
+//     delete req.session.googleSignup;
+
+//     req.session.user = {
+//       id: siswa._id,
+//       name: siswa.name,
+//       email: siswa.email,
+//       role: "siswa"
+//     };
+
+//     res.redirect("/");
+//   } catch (error) {
+//     console.error("Complete signup error:", error);
+
+//     if (error instanceof multer.MulterError || error.message === "Format file tidak didukung.") {
+//       return res.status(400).send(error.message);
+//     }
+
+//     res.status(500).send("Terjadi kesalahan saat membuat akun.");
+//   }
+// });
 
 module.exports = router;

@@ -3,8 +3,7 @@ const router = express.Router();
 
 const multer = require("multer");
 const path = require("path");
-const LayananKjp = require("../models/LayananKjp");
-const fs = require("fs")
+const controllers = require("../controllers/layanan-kjp-controllers")
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,41 +17,47 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.get("/layanan/kjp", (req, res) => {
-  res.render("layanan-kjp");
-});
+router.get("/layanan/kjp", controllers.getLayananKjp)
+router.post("/layanan/kjp", upload.any(), controllers.postLayananKjp)
 
-router.post("/layanan/kjp", upload.any(), async (req, res) => {
-  Object.entries(req.body).forEach(([key, value]) => {
-    console.log(key, value);
-  });
+// const LayananKjp = require("../models/LayananKjp");
+// const fs = require("fs")
 
-  const { nama_siswa, nisn_siswa, nama_orang_tua_siswa, nama_sekolah_siswa } =
-    req.body;
+// router.get("/layanan/kjp", (req, res) => {
+//   res.render("layanan-kjp");
+// });
 
-  const checkLayanan = await LayananKjp.findOne({ nisn_siswa: nisn_siswa });
-  if (checkLayanan) {
-    if(req.files && req.files[0]){
-        fs.unlink(req.files[0].path, (err) => {
-            if (err) console.log("gagal hapus file")
-        })
-    }
+// router.post("/layanan/kjp", upload.any(), async (req, res) => {
+//   Object.entries(req.body).forEach(([key, value]) => {
+//     console.log(key, value);
+//   });
 
-    console.log("Data sudah ada");
-    return res.redirect("/layanan/kjp");
-  }
+//   const { nama_siswa, nisn_siswa, nama_orang_tua_siswa, nama_sekolah_siswa } =
+//     req.body;
 
-  foto = req.files[0].filename;
+//   const checkLayanan = await LayananKjp.findOne({ nisn_siswa: nisn_siswa });
+//   if (checkLayanan) {
+//     if(req.files && req.files[0]){
+//         fs.unlink(req.files[0].path, (err) => {
+//             if (err) console.log("gagal hapus file")
+//         })
+//     }
 
-  await LayananKjp.create({
-    foto_siswa: foto,
-    nama_siswa: nama_siswa,
-    nisn_siswa: nisn_siswa,
-    nama_orang_tua_siswa: nama_orang_tua_siswa,
-    nama_sekolah_siswa: nama_sekolah_siswa,
-  });
+//     console.log("Data sudah ada");
+//     return res.redirect("/layanan/kjp");
+//   }
 
-  res.redirect("/layanan/kjp");
-});
+//   foto = req.files[0].filename;
+
+//   await LayananKjp.create({
+//     foto_siswa: foto,
+//     nama_siswa: nama_siswa,
+//     nisn_siswa: nisn_siswa,
+//     nama_orang_tua_siswa: nama_orang_tua_siswa,
+//     nama_sekolah_siswa: nama_sekolah_siswa,
+//   });
+
+//   res.redirect("/layanan/kjp");
+// });
 
 module.exports = router;

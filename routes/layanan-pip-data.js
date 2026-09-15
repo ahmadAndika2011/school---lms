@@ -1,12 +1,16 @@
 const express = require("express")
 const router = express.Router()
 
-const LayananPip = require("../models/LayananPip")
+const controllers = require("../controllers/layanan-pip-data-controllers")
 
-router.get("/layanan/pip/data", async (req, res) => {
-    const layananPip = await LayananPip.find({})
+router.get("/layanan/pip/data", controllers.layananPipData)
 
-    res.render("layanan-pip-data", {layananPip})
-})
+// const LayananPip = require("../models/LayananPip")
+
+// router.get("/layanan/pip/data", async (req, res) => {
+//     const layananPip = await LayananPip.find({})
+
+//     res.render("layanan-pip-data", {layananPip})
+// })
 
 module.exports = router
