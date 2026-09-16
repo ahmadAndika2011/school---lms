@@ -10,7 +10,7 @@ const sessionMiddleware = require("./config/session");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
-const hapusVideoKadaluarsa = require("./utils/hapus-video-expired");
+const hapusVideoKadaluarsa = require("./jobs/hapus-video-expired");
 
 setInterval(() => {
     hapusVideoKadaluarsa().catch(console.error);
