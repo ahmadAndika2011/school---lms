@@ -5,23 +5,26 @@ const path = require("path"); // <-- tambahkan ini
 
 
 // ================= KONFIGURASI UPLOAD =================
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "..", "public", "uploads", "gambar-soal"));
-  },
-  filename: function (req, file, cb) {
-    const unik = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, unik + path.extname(file.originalname));
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname, "..", "public", "uploads", "gambar-soal"));
+//   },
+//   filename: function (req, file, cb) {
+//     const unik = Date.now() + "-" + Math.round(Math.random() * 1e9);
+//     cb(null, unik + path.extname(file.originalname));
+//   },
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
+const {createUploader} = require("../middleware/upload-image")
+const upload = createUploader("gambar-soal")
 const controllers = require("../controllers/tambah-soal-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/tambah-soal", controllers.getTambahSoal)
+router.get("/tambah-soal", checkAuth, controllers.getTambahSoal)
 
-router.post("/tambah-soal", upload.any(), controllers.postTambahSoal)
+router.post("/tambah-soal", checkAuth, upload.any(), controllers.postTambahSoal)
 
 // const Soal = require("../models/Soal");
 

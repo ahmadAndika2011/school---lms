@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const controllers = require("../controllers/logout-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.post("/logout", controllers.logout)
+router.post("/logout", checkAuth, controllers.logout)
 
 // router.post("/logout", (req, res) => {
 //   req.session.destroy((err) => {

@@ -5,17 +5,20 @@ const multer = require("multer");
 const path = require("path");
 const controllers = require("../controllers/layanan-pip-controllers")
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/uploads/gambar-siswa-layanan-pip");
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/uploads/gambar-siswa-layanan-pip");
+//   },
+//   filename: (req, file, cb) => {
+//     const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
     
-    cb(null, uniqueName + path.extname(file.originalname));
-  },
-});
-const upload = multer({ storage: storage });
+//     cb(null, uniqueName + path.extname(file.originalname));
+//   },
+// });
+// const upload = multer({ storage: storage });
+
+const {createUploader} = require("../middleware/upload-image")
+const upload = createUploader("gambar-siswa-layanan-pip")
 
 router.get("/layanan/pip", controllers.getLayananPip)
 

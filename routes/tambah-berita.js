@@ -19,10 +19,11 @@ const {createUploader} = require("../middleware/upload-image")
 const upload = createUploader("gambar-berita")
 
 const controllers = require("../controllers/tambah-berita-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/tambah-berita", controllers.getTambahBerita)
+router.get("/tambah-berita", checkAuth, controllers.getTambahBerita)
 
-router.post("/tambah-berita", upload.array("gambar", 10), controllers.postTambahBerita)
+router.post("/tambah-berita", checkAuth, upload.array("gambar", 10), controllers.postTambahBerita)
 
 // const Berita = require("../models/Berita")
 

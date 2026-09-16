@@ -5,21 +5,25 @@ const controllers = require("../controllers/layanan-ppdb-controllers")
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/uploads/gambar-siswa-layanan-ppdb");
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/uploads/gambar-siswa-layanan-ppdb");
+//   },
+//   filename: (req, file, cb) => {
+//     const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
     
-    cb(null, uniqueName + path.extname(file.originalname));
-  },
-});
-const upload = multer({ storage: storage });
+//     cb(null, uniqueName + path.extname(file.originalname));
+//   },
+// });
+// const upload = multer({ storage: storage });
 
-router.get("/layanan/ppdb", controllers.getLayananPpdb)
+const {createUploader} = require("../middleware/upload-image")
+const upload = createUploader("gambar-siswa-layanan-ppdb")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.post("/layanan/ppdb", upload.any(), controllers.postLayananPpdb)
+router.get("/layanan/ppdb", checkAuth, controllers.getLayananPpdb)
+
+router.post("/layanan/ppdb", checkAuth, upload.any(), controllers.postLayananPpdb)
 
 // const LayananPpdb = require("../models/LayananPpdb");
 // const fs = require("fs")

@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/layanan-ppdb-data-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/layanan/ppdb/data", controllers.layananPpdbData)
+router.get("/layanan/ppdb/data", checkAuth, controllers.layananPpdbData)
 
 // const LayananPpdb = require("../models/LayananPpdb")
 

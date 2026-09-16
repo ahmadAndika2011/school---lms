@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 const controllers = require("../controllers/soal-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/soal", controllers.soal)
+router.get("/soal", checkAuth, controllers.soal)
 
 // const Soal = require("../models/Soal")
 
