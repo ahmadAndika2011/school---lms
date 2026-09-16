@@ -195,3 +195,169 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
 }
+
+```css
+/* =========================================
+   VIDEO PREVIEW
+========================================= */
+
+.ds-video-cell {
+  min-width: 180px;
+}
+
+.ds-video {
+  width: 160px;
+  height: 90px;
+  display: block;
+
+  object-fit: cover;
+
+  background: #000;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ds-video:hover {
+  transform: scale(1.04);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.ds-video-hint {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+  color: var(--abu);
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   VIDEO MODAL
+========================================= */
+
+.ds-video-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.85);
+}
+
+
+/* Modal aktif */
+
+.ds-video-modal.active {
+  display: flex;
+}
+
+
+/* Video besar */
+
+.ds-video-modal video {
+  width: 100%;
+
+  max-width: 1100px;
+
+  max-height: 90vh;
+
+  border-radius: 12px;
+
+  background: #000;
+
+  outline: none;
+}
+
+
+/* =========================================
+   TOMBOL CLOSE
+========================================= */
+
+.ds-video-close {
+  position: absolute;
+
+  top: 20px;
+  right: 25px;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  color: #fff;
+
+  font-size: 30px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ds-video-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+
+  .ds-video {
+    width: 130px;
+    height: 75px;
+  }
+
+  .ds-video-modal {
+    padding: 15px;
+  }
+
+  .ds-video-modal video {
+    max-height: 80vh;
+  }
+
+  .ds-video-close {
+    top: 10px;
+    right: 10px;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 26px;
+  }
+
+}

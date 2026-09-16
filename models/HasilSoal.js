@@ -37,6 +37,10 @@ const hasilSoalSchema = new mongoose.Schema({
         required: false,
         default: null
     },
+    videoUploadedAt: {
+        type: Date,
+        default: null
+    },
     keluarTab: {
         type: Boolean,
         default: false

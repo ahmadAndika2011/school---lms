@@ -10,6 +10,11 @@ const sessionMiddleware = require("./config/session");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const hapusVideoKadaluarsa = require("./utils/hapus-video-expired");
+
+setInterval(() => {
+    hapusVideoKadaluarsa().catch(console.error);
+}, 5 * 1000); // cek tiap 5 detik untuk testing
 
 // 1. Database
 connectDB();

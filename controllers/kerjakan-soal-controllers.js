@@ -51,6 +51,7 @@ module.exports.postKerjakanSoal = async (req, res) => {
             jawaban: detailJawaban,
             nilai,
             video: req.file.filename,
+            videoUploadedAt: new Date(),
             keluarTab,
             jumlahKeluarTab
         },
