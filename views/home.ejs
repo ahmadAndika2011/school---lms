@@ -204,10 +204,29 @@
 
 <%- include("partials/footer.ejs") %>
 
-  <!-- ================= FLOATING AI CHAT BUTTON ================= -->
-  <button class="ai-chat-btn" id="aiChatBtn" type="button" aria-label="Buka chat AI">
-    <img src="/img/chat-icon.svg" alt="" class="ai-chat-btn__icon">
-  </button>
+  <!-- ================= FLOATING CHAT BUTTON (PILIHAN) ================= -->
+  <div class="chat-fab" id="chatFab">
+    <div class="chat-fab__options" id="chatFabOptions">
+      <a
+        href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20sekolah"
+        target="_blank"
+        rel="noopener"
+        class="chat-fab__option chat-fab__option--wa"
+      >
+        <span class="chat-fab__option-icon">💬</span>
+        <span>Chat WhatsApp</span>
+      </a>
+
+      <button type="button" class="chat-fab__option chat-fab__option--ai" id="chatFabAiBtn">
+        <span class="chat-fab__option-icon">🤖</span>
+        <span>Chat AI</span>
+      </button>
+    </div>
+
+    <button class="ai-chat-btn" id="aiChatBtn" type="button" aria-label="Buka pilihan chat">
+      <img src="/img/chat-icon.svg" alt="" class="ai-chat-btn__icon">
+    </button>
+  </div>
 
   <div class="ai-chat-box" id="aiChatBox">
     <div class="ai-chat-box__header">

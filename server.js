@@ -59,6 +59,9 @@ app.set("views", path.join(__dirname, "views"));
 // 5. Routes Utama
 app.use("/", require("./routes/home"));
 
+//? AI chat
+app.use("/api/ai-chat", require("./routes/ai-chat"))
+
 //? Authenticate
 app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));

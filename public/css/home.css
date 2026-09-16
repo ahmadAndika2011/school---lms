@@ -747,3 +747,72 @@ a {
     right: 16px;
   }
 }
+
+.chat-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.chat-fab__options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 24px; /* dari 8px -> 24px, naikkan jaraknya ke tombol utama */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.chat-fab__options.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.chat-fab__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #1a1a1a;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  white-space: nowrap;
+  width: max-content;
+  margin-bottom: 48px;
+}
+
+.chat-fab__option-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.chat-fab__option--wa {
+  border: 1.5px solid #25d366;
+}
+
+.chat-fab__option--ai {
+  border: 1.5px solid var(--color-primary, #2f6f4f);
+}
+
+.chat-fab__options.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
