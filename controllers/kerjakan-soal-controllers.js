@@ -1,7 +1,9 @@
 const Soal = require("../models/Soal")
 const HasilSoal = require("../models/HasilSoal")
 
-module.exports.getKerjakanSoal = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.getKerjakanSoal = asyncHandler(async (req, res) => {
     const {id_soal} = req.params
 
     const soal = await Soal.findById(id_soal)
@@ -11,9 +13,9 @@ module.exports.getKerjakanSoal = async (req, res) => {
     }
 
     res.render("kerjakan-soal", {soal})
-}
+})
 
-module.exports.postKerjakanSoal = async (req, res) => {
+module.exports.postKerjakanSoal = asyncHandler(async (req, res) => {
     const {id_soal} = req.params
     const siswa = req.session.user
 
@@ -59,4 +61,4 @@ module.exports.postKerjakanSoal = async (req, res) => {
     )
 
     res.status(200).json({ redirectUrl: `/hasil-soal/${siswa.id}/${soal._id}` })
-}
+})

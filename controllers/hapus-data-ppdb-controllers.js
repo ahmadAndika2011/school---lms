@@ -2,7 +2,9 @@ const LayananPpdb = require("../models/LayananPpdb")
 const path = require("path")
 const fs = require("fs")
 
-module.exports.hapusDataPpdb = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusDataPpdb = asyncHandler(async (req, res) => {
     const {id} = req.body
     const ppdbData = await LayananPpdb.findById(id)
     if(ppdbData.foto_siswa){
@@ -24,4 +26,4 @@ module.exports.hapusDataPpdb = async (req, res) => {
 
     await LayananPpdb.findByIdAndDelete(id)
     res.redirect("/layanan/ppdb/data")
-}
+})

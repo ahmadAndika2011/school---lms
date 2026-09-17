@@ -5,7 +5,7 @@ const controllers = require("../controllers/hapus-soal-controllers")
 const {checkAuth} = require("../middleware/check-auth")
 const {checkRole} = require("../middleware/check-role")
 
-router.delete("/hapus-soal/:id_soal", checkAuth, checkRole("admin"), controllers.hapusSoal)
+router.delete("/hapus-soal/:id_soal", checkAuth, checkRole("admin", "guru"), controllers.hapusSoal)
 
 // const Soal = require("../models/Soal")
 // const HasilSoal = require("../models/HasilSoal")

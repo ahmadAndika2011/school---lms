@@ -1,11 +1,13 @@
 const LayananPpdb = require("../models/LayananPpdb");
 const fs = require("fs")
 
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.getLayananPpdb = (req, res) => {
   res.render("layanan-ppdb");
 }
 
-module.exports.postLayananPpdb = async (req, res) => {
+module.exports.postLayananPpdb = asyncHandler(async (req, res) => {
   Object.entries(req.body).forEach(([key, value]) => {
     console.log(key, value);
   });
@@ -34,4 +36,4 @@ module.exports.postLayananPpdb = async (req, res) => {
   });
 
   res.redirect("/layanan/ppdb");
-}
+})

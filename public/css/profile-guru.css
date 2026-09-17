@@ -281,3 +281,28 @@ body {
 .link-aksi:hover {
   text-decoration: underline;
 }
+
+.link-aksi {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 12px;
+}
+
+.sl-hapus-form {
+  display: inline;
+}
+
+.sl-hapus-btn {
+  background: none;
+  border: none;
+  color: #c62828;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.sl-hapus-btn:hover {
+  text-decoration: underline;
+}

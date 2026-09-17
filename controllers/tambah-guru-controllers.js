@@ -1,11 +1,13 @@
 const Guru = require("../models/Guru");
 const bcrypt = require("bcrypt")
 
-module.exports.getTambahGuru = async (req, res) => {
-  res.render("tambah-guru")
-}
+const {asyncHandler} = require("../utils/async-handler")
 
-module.exports.postTambahGuru = async (req, res) => {
+module.exports.getTambahGuru = asyncHandler(async (req, res) => {
+  res.render("tambah-guru")
+})
+
+module.exports.postTambahGuru = asyncHandler(async (req, res) => {
   const photo = req.files[0].filename
   const {username, password, nama, nip, jabatan, jenis_kelamin, status} = req.body
   const hashPassword = await bcrypt.hash(password, 10)
@@ -22,4 +24,4 @@ module.exports.postTambahGuru = async (req, res) => {
   })
 
   res.redirect("/tambah-guru")
-}
+})

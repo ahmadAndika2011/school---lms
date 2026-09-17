@@ -3,11 +3,13 @@ const path = require("path");
 const LayananKjp = require("../models/LayananKjp");
 const fs = require("fs")
 
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.getLayananKjp = (req, res) => {
   res.render("layanan-kjp");
 }
 
-module.exports.postLayananKjp = async (req, res) => {
+module.exports.postLayananKjp = asyncHandler(async (req, res) => {
   Object.entries(req.body).forEach(([key, value]) => {
     console.log(key, value);
   });
@@ -38,4 +40,4 @@ module.exports.postLayananKjp = async (req, res) => {
   });
 
   res.redirect("/layanan/kjp");
-}
+})

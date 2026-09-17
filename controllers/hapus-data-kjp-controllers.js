@@ -2,7 +2,9 @@ const LayananKjp = require("../models/LayananKjp");
 const path = require("path");
 const fs = require("fs");
 
-module.exports.hapusDataKjp = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusDataKjp = asyncHandler(async (req, res) => {
   const { id } = req.body;
   const kjpData = await LayananKjp.findById(id);
   if (kjpData.foto_siswa) {
@@ -24,4 +26,4 @@ module.exports.hapusDataKjp = async (req, res) => {
 
   await LayananKjp.findByIdAndDelete(id);
   res.redirect("/layanan/kjp/data");
-}
+})

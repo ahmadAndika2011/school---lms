@@ -61,12 +61,18 @@
           </thead>
           <tbody>
             <% if (soal && soal.length > 0) { %>
-              <% soal.forEach(function(s){ %>
+              <% soal.slice().reverse().forEach(function(s){ %>
                 <tr>
                   <td><%= s._id %></td>
-                  <td><%= s.judul_soal %></td>
+                  <td><%= s.judul %></td>
                   <td><%= s.soal ? s.soal.length : 0 %></td>
-                  <td><a href="/detail-soal/<%= s._id %>" class="link-aksi">Lihat Detail</a></td>
+                  <td>
+                    <a href="/detail-soal/<%= s._id %>" class="link-aksi">Lihat Detail</a>
+                    <form action="/hapus-soal/<%= s._id %>?_method=DELETE" method="POST" class="sl-hapus-form"
+                          onsubmit="return confirm('Yakin ingin menghapus soal &quot;<%= s.judul_soal %>&quot;?');">
+                      <button type="submit" class="sl-hapus-btn">Hapus Soal</button>
+                    </form>
+                  </td>
                 </tr>
               <% }); %>
             <% } %>

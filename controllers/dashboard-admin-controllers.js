@@ -9,7 +9,9 @@ const LayananPpdb = require("../models/LayananPpdb");
 const LayananKjp = require("../models/LayananKjp");
 const LayananPip = require("../models/LayananPip");
 
-module.exports.dashboardAdmin = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.dashboardAdmin = asyncHandler(async (req, res) => {
   const user = req.session.user;
   const admin = await Admin.findOne({ password: user.password });
 
@@ -24,4 +26,4 @@ module.exports.dashboardAdmin = async (req, res) => {
   const layananPip = await LayananPip.find({});
 
   res.render("dashboard-admin", { admin, berita, ekstrakulikuler, fasilitas, guru, siswa, soal, layananPpdb, layananKjp, layananPip });
-}
+})

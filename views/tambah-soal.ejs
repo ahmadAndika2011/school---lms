@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Soal - SMA Nusantara</title>
   <link rel="stylesheet" href="/css/tambah-soal.css">
+  <link rel="stylesheet" href="/css/cursor.css">
 </head>
 <body>
   <div class="ts-wrapper">
@@ -13,7 +14,7 @@
     <h1 class="ts-title">Tambah Soal</h1>
     <p class="ts-subtitle">Lengkapi informasi soal, lalu tentukan jumlah pertanyaan untuk mulai mengisi.</p>
 
-    <form id="form-tambah-soal" action="/tambah-soal" method="POST" enctype="multipart/form-data">
+    <form id="form-tambah-soal" action="/tambah-soal" method="POST" enctype="multipart/form-data" autocomplete="off">
 
       <!-- ================= INFO SOAL ================= -->
       <div class="ts-card ts-card-info">
@@ -84,5 +85,6 @@
   </template>
 
   <script src="/js/tambah-soal.js"></script>
+  <script src="/js/cursor.js"></script>
 </body>
 </html>

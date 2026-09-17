@@ -3,7 +3,9 @@ const HasilSoal = require("../models/HasilSoal")
 const fs = require("fs")
 const path = require("path")
 
-module.exports.hapusSoal = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusSoal = asyncHandler(async (req, res) => {
     const {id_soal} = req.params
     const soal = await Soal.findById(id_soal)
     const hasilSoal = await HasilSoal.find({id_soal: soal._id})
@@ -34,5 +36,5 @@ module.exports.hapusSoal = async (req, res) => {
 
     await Soal.findByIdAndDelete(soal._id)
 
-    res.redirect("/soal")
-}
+    res.json({ success: true, message: "Soal berhasil dihapus." });
+})

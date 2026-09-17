@@ -6,6 +6,7 @@ const {checkAuth} = require("../middleware/check-auth")
 const {checkRole} = require("../middleware/check-role")
 
 router.get("/detail-soal/:id_soal", checkAuth, checkRole("guru"), controllers.detailSoal)
+router.get("/detail-soal/:id_soal/download", checkAuth, checkRole("guru"), controllers.downloadHasilSoal)
 
 // const Soal = require("../models/Soal")
 // const HasilSoal = require("../models/HasilSoal")

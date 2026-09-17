@@ -3,11 +3,13 @@ const bcrypt = require("bcrypt")
 const Guru = require("../models/Guru")
 const Admin = require("../models/Admin")
 
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.getLogin = (req,res) => {
     res.render("login")
 }
 
-module.exports.postLogin = async (req, res) => {
+module.exports.postLogin = asyncHandler(async (req, res) => {
     const {username, password, remember} = req.body
 
     if(username.includes("guru")){
@@ -79,4 +81,4 @@ module.exports.postLogin = async (req, res) => {
         role: "siswa"
     }
     res.redirect("/")
-}
+})

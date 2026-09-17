@@ -1,3 +1,5 @@
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {

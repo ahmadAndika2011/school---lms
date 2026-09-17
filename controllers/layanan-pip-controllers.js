@@ -1,11 +1,13 @@
 const LayananPip = require("../models/LayananPip");
 const fs = require("fs")
 
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.getLayananPip = (req, res) => {
   res.render("layanan-pip");
 }
 
-module.exports.postLayananPip = async (req, res) => {
+module.exports.postLayananPip = asyncHandler(async (req, res) => {
   Object.entries(req.body).forEach(([key, value]) => {
     console.log(key, value);
   });
@@ -35,4 +37,4 @@ module.exports.postLayananPip = async (req, res) => {
   });
 
   res.redirect("/layanan/pip");
-}
+})

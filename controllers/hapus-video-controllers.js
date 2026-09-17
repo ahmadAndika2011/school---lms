@@ -2,7 +2,9 @@ const fs = require("fs")
 const path = require("path")
 const HasilSoal = require("../models/HasilSoal")
 
-module.exports.hapusVideo = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusVideo = asyncHandler(async (req, res) => {
     const {id_hasil_soal} = req.params
 
     const hasilSoal = await HasilSoal.findById(id_hasil_soal)
@@ -26,7 +28,7 @@ module.exports.hapusVideo = async (req, res) => {
 
     hasilSoal.video = null
     hasilSoal.videoUploadedAt = null
-    await hasilVideo.save()
+    await hasilSoal.save()
 
     res.status(200).json({ success: true })
-}
+})

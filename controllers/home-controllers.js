@@ -6,7 +6,9 @@ const Berita = require("../models/Berita")
 const Soal = require("../models/Soal")
 const Admin = require("../models/Admin")
 
-module.exports.home = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.home = asyncHandler(async (req, res) => {
     const user = req.session.user || null
     const ekstrakulikuler = await Ekstrakulikuler.find({})
     const fasilitas = await Fasilitas.find({})
@@ -37,4 +39,4 @@ module.exports.home = async (req, res) => {
 
 
     res.render("home", {user: user, ekstrakulikuler, fasilitas, berita, guru, jumlahGuru, jumlahSiswa, admin, soal, izinSignupSiswa})
-}
+})

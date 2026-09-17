@@ -1,7 +1,9 @@
 const Guru = require("../models/Guru")
 
-module.exports.guru = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.guru = asyncHandler(async (req, res) => {
     const guru = await Guru.find({})
 
     res.render("guru", {guru})
-}
+})

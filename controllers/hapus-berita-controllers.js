@@ -2,7 +2,9 @@ const Berita = require("../models/Berita")
 const path = require("path")
 const fs = require("fs")
 
-module.exports.hapusBerita = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusBerita = asyncHandler(async (req, res) => {
     const {id} = req.params
     const berita = await Berita.findById(id)
 
@@ -28,4 +30,4 @@ module.exports.hapusBerita = async (req, res) => {
     await Berita.findByIdAndDelete(id)
 
     res.redirect("/#berita")
-}
+})

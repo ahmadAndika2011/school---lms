@@ -2,7 +2,9 @@ const LayananPip = require("../models/LayananPip")
 const path = require("path")
 const fs = require("fs")
 
-module.exports.hapusDataPip = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusDataPip = asyncHandler(async (req, res) => {
     const {id} = req.body
     const pipData = await LayananPip.findById(id)
     if(pipData.foto_siswa){
@@ -24,4 +26,4 @@ module.exports.hapusDataPip = async (req, res) => {
 
     await LayananPip.findByIdAndDelete(id)
     res.redirect("/layanan/pip/data")
-}
+})

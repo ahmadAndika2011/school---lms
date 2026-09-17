@@ -1,60 +1,38 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Soal - SMA Nusantara</title>
-
   <link rel="stylesheet" href="/css/detail-soal.css">
   <link rel="stylesheet" href="/css/cursor.css">
 </head>
-
 <body>
-
   <div class="ds-wrapper">
-
-    <a href="/profile-guru" class="ds-back">
-      &larr; Kembali ke Profile
-    </a>
+    <a href="/profile-guru" class="ds-back">&larr; Kembali ke Profile</a>
 
     <!-- ================= INFO SOAL ================= -->
-
     <div class="ds-card-info">
-
       <span class="ds-label">Detail Soal</span>
-
-      <h1 class="ds-judul">
-        <%= soal.judul %>
-      </h1>
-
-      <p class="ds-deskripsi">
-        <%= soal.deskripsi %>
-      </p>
+      <h1 class="ds-judul"><%= soal.judul %></h1>
+      <p class="ds-deskripsi"><%= soal.deskripsi %></p>
 
       <div class="ds-meta">
-        <div class="ds-meta-item">
-          <strong>Jumlah Soal:</strong>
-          <%= jumlah_soal %>
-        </div>
+        <div class="ds-meta-item"><strong>Jumlah Soal:</strong> <%= jumlah_soal %></div>
       </div>
-
     </div>
 
-
     <!-- ================= MURID YANG MENGERJAKAN ================= -->
-
     <div class="ds-section">
-
       <div class="ds-section-header">
         <h2>Murid yang Sudah Mengerjakan</h2>
+        <a href="/detail-soal/<%= soal._id %>/download" class="btn-download-hasil">
+          &#8681; Download Hasil (Excel)
+        </a>
       </div>
 
-
       <div class="ds-table-wrapper">
-
         <table class="ds-table">
-
           <thead>
             <tr>
               <th>Nama Murid</th>
@@ -65,409 +43,79 @@
               <th>Status</th>
             </tr>
           </thead>
-
-
           <tbody>
-
             <% if (hasilSoal && hasilSoal.length > 0) { %>
-
-              <% hasilSoal.forEach(function(h){
-
-                  const siswa = h.id_siswa;
-
-                  const videoExpireAt = h.video && h.videoUploadedAt
-                    ? new Date(h.videoUploadedAt).getTime() + (15 * 60 * 1000)
-                    : null;
-
+              <% hasilSoal.forEach(function (h) {
+                   const siswa = h.id_siswa;
+                   const videoExpireAt = (h.video && h.videoUploadedAt)
+                     ? new Date(h.videoUploadedAt).getTime() + (15 * 60 * 1000)
+                     : null;
               %>
-
                 <tr>
-
-                  <!-- NAMA -->
-                  <td>
-                    <%= siswa ? siswa.name : '-' %>
-                  </td>
-
-
-                  <!-- NISN -->
-                  <td>
-                    <%= siswa ? siswa.nisn : '-' %>
-                  </td>
-
-
-                  <!-- NILAI -->
+                  <td><%= siswa ? siswa.name : "-" %></td>
+                  <td><%= siswa ? siswa.nisn : "-" %></td>
                   <td class="ds-nilai <%= h.nilai >= 70 ? 'baik' : 'kurang' %>">
                     <%= h.nilai %>
                   </td>
 
-
                   <!-- VIDEO -->
                   <td>
-
-                    <div
-                      class="ds-video-cell"
-                      data-hasil-id="<%= h._id %>"
-                      data-expire-at="<%= videoExpireAt || '' %>"
-                    >
-
+                    <div class="ds-video-cell"
+                         data-hasil-id="<%= h._id %>"
+                         data-expire-at="<%= videoExpireAt || '' %>">
                       <% if (h.video) { %>
-
-                        <video
-                          class="ds-video"
-                          preload="metadata"
-                          onclick="openVideoModal(this)"
-                        >
-                          <source
-                            src="/uploads/video-kerjakan-soal/<%= h.video %>"
-                            type="video/mp4"  
-                          >
+                        <video class="ds-video" preload="metadata" onclick="openVideoModal(this)">
+                          <source src="/uploads/video-kerjakan-soal/<%= h.video %>" type="video/mp4">
                         </video>
-
-                        <span class="ds-video-hint">
-                          Klik untuk memperbesar
-                        </span>
-
+                        <span class="ds-video-hint">Klik untuk memperbesar</span>
                       <% } else { %>
-
-                        <span class="ds-video-kosong">
-                          Tidak ada / sudah terhapus
-                        </span>
-
+                        <span class="ds-video-kosong">Tidak ada / sudah terhapus</span>
                       <% } %>
-
                     </div>
-
                   </td>
-
 
                   <!-- KELUAR TAB -->
                   <td>
-
                     <% if (h.keluarTab) { %>
-
-                      <span class="ds-badge-warning">
-                        Keluar tab (<%= h.jumlahKeluarTab %>x)
-                      </span>
-
+                      <span class="ds-badge-warning">Keluar tab (<%= h.jumlahKeluarTab %>x)</span>
                     <% } else { %>
-
-                      <span class="ds-badge-ok">
-                        Tidak keluar
-                      </span>
-
+                      <span class="ds-badge-ok">Tidak keluar</span>
                     <% } %>
-
                   </td>
-
 
                   <!-- STATUS -->
                   <td>
-
                     <% if (h.ditutupPaksa) { %>
-
                       <span class="ds-badge-danger">
-
                         Tab ditutup paksa
-
                         <% if (h.waktuDitutupPaksa) { %>
-                          (<%= new Date(h.waktuDitutupPaksa).toLocaleString('id-ID') %>)
+                          (<%= new Date(h.waktuDitutupPaksa).toLocaleString("id-ID") %>)
                         <% } %>
-
                       </span>
-
                     <% } else { %>
-
-                      <span class="ds-badge-ok">
-                        Selesai normal
-                      </span>
-
+                      <span class="ds-badge-ok">Selesai normal</span>
                     <% } %>
-
                   </td>
-
                 </tr>
-
               <% }); %>
-
             <% } %>
-
           </tbody>
-
         </table>
 
-
         <% if (!hasilSoal || hasilSoal.length === 0) { %>
-
-          <p class="ds-empty">
-            Belum ada murid yang mengerjakan soal ini.
-          </p>
-
+          <p class="ds-empty">Belum ada murid yang mengerjakan soal ini.</p>
         <% } %>
-
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- ================================================= -->
-  <!-- VIDEO MODAL -->
-  <!-- ================================================= -->
-
-  <div
-    class="ds-video-modal"
-    id="videoModal"
-  >
-
-    <!-- Tombol tutup -->
-    <button
-      class="ds-video-close"
-      type="button"
-      onclick="closeVideoModal()"
-    >
-      &times;
-    </button>
-
-
-    <!-- Video besar -->
-    <video
-      id="modalVideo"
-      controls
-      playsinline
-    ></video>
-
+  <!-- ================= VIDEO MODAL ================= -->
+  <div class="ds-video-modal" id="videoModal">
+    <button class="ds-video-close" type="button" onclick="closeVideoModal()">&times;</button>
+    <video id="modalVideo" controls playsinline></video>
   </div>
 
-
-  <!-- Cursor -->
   <script src="/js/cursor.js"></script>
-
-
-  <script>
-
-    /* =================================================
-       VIDEO MODAL
-    ================================================= */
-
-    function openVideoModal(videoElement) {
-
-      const modal = document.getElementById("videoModal");
-      const modalVideo = document.getElementById("modalVideo");
-
-      /*
-       * Ambil source video yang sedang diklik
-       */
-      const source = videoElement.querySelector("source");
-
-      if (!source) return;
-
-
-      /*
-       * Masukkan source ke video modal
-       */
-      modalVideo.src = source.src;
-
-
-      /*
-       * Tampilkan modal
-       */
-      modal.classList.add("active");
-
-
-      /*
-       * Mencegah halaman ikut scroll
-       */
-      document.body.style.overflow = "hidden";
-
-
-      /*
-       * Mulai video
-       */
-      modalVideo.play().catch(function () {
-        // Browser bisa memblokir autoplay.
-        // Video tetap bisa dimainkan secara manual.
-      });
-
-    }
-
-
-    /* =================================================
-       TUTUP VIDEO MODAL
-    ================================================= */
-
-    function closeVideoModal() {
-
-      const modal = document.getElementById("videoModal");
-      const modalVideo = document.getElementById("modalVideo");
-
-
-      /*
-       * Pause video
-       */
-      modalVideo.pause();
-
-
-      /*
-       * Hapus source agar resource video dilepas
-       */
-      modalVideo.removeAttribute("src");
-      modalVideo.load();
-
-
-      /*
-       * Tutup modal
-       */
-      modal.classList.remove("active");
-
-
-      /*
-       * Aktifkan kembali scroll halaman
-       */
-      document.body.style.overflow = "";
-
-    }
-
-
-    /* =================================================
-       KLIK AREA GELAP UNTUK MENUTUP
-    ================================================= */
-
-    document
-      .getElementById("videoModal")
-      .addEventListener("click", function (e) {
-
-        if (e.target === this) {
-          closeVideoModal();
-        }
-
-      });
-
-
-    /* =================================================
-       ESC UNTUK MENUTUP
-    ================================================= */
-
-    document.addEventListener("keydown", function (e) {
-
-      if (e.key === "Escape") {
-
-        const modal = document.getElementById("videoModal");
-
-        if (modal.classList.contains("active")) {
-          closeVideoModal();
-        }
-
-      }
-
-    });
-
-
-    /* =================================================
-       HAPUS VIDEO SETELAH 15 MENIT
-    ================================================= */
-
-    document
-      .querySelectorAll(".ds-video-cell")
-      .forEach(function (cell) {
-
-        const expireAt = Number(cell.dataset.expireAt);
-        const hasilId = cell.dataset.hasilId;
-
-
-        if (!expireAt || !hasilId) return;
-
-
-        const sisaWaktu = expireAt - Date.now();
-
-
-        async function hapusVideoSekarang() {
-
-          try {
-
-            await fetch(
-              `/hapus-video/${hasilId}`,
-              {
-                method: "DELETE"
-              }
-            );
-
-          } catch (err) {
-
-            console.error(
-              "Gagal menghapus video:",
-              err
-            );
-
-          }
-
-
-          /*
-           * Hapus video dari halaman
-           */
-          const video = cell.querySelector(".ds-video");
-
-          if (video) {
-            video.remove();
-          }
-
-
-          /*
-           * Hapus tulisan hint
-           */
-          const hint = cell.querySelector(".ds-video-hint");
-
-          if (hint) {
-            hint.remove();
-          }
-
-
-          /*
-           * Tampilkan status video
-           */
-          if (!cell.querySelector(".ds-video-kosong")) {
-
-            const span =
-              document.createElement("span");
-
-            span.className =
-              "ds-video-kosong";
-
-            span.textContent =
-              "Video sudah terhapus (lebih dari 15 menit)";
-
-            cell.appendChild(span);
-
-          }
-
-        }
-
-
-        /*
-         * Kalau sudah lewat 15 menit
-         */
-        if (sisaWaktu <= 0) {
-
-          hapusVideoSekarang();
-
-        }
-
-        /*
-         * Kalau belum, tunggu sampai waktunya
-         */
-        else {
-
-          setTimeout(
-            hapusVideoSekarang,
-            sisaWaktu
-          );
-
-        }
-
-      });
-
-  </script>
-
+  <script src="/js/detail-soal.js"></script>
 </body>
 </html>
-```

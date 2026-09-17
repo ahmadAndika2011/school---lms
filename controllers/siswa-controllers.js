@@ -1,7 +1,9 @@
 const Siswa = require("../models/Siswa")
 
-module.exports.siswa = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.siswa = asyncHandler(async (req, res) => {
     const siswa = await Siswa.find({})
 
     res.render("siswa", {siswa})
-}
+})

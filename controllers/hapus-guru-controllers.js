@@ -2,7 +2,9 @@ const Guru = require("../models/Guru")
 const path = require("path")
 const fs = require("fs")
 
-module.exports.hapusGuru = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusGuru = asyncHandler(async (req, res) => {
     const {guru_id} =  req.params
     const guru = await Guru.findById(guru_id)
     if(guru.photo){
@@ -25,4 +27,4 @@ module.exports.hapusGuru = async (req, res) => {
     await Guru.findByIdAndDelete(guru._id)
 
     res.redirect("/guru")
-}
+})

@@ -1,3 +1,12 @@
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+    // Reset paksa: kosongkan form & hapus semua card yang mungkin ter-restore
+    document.getElementById("form-tambah-soal").reset();
+    document.getElementById("soal-container").innerHTML = "";
+    document.getElementById("ts-submit-row").style.display = "none";
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const HURUF = ["a", "b", "c", "d"];
 
@@ -17,18 +26,35 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (soalContainer.children.length > 0) {
-      const konfirmasi = confirm(
-        "Mengubah jumlah soal akan menghapus card yang sudah diisi. Lanjutkan?",
-      );
-      if (!konfirmasi) return;
+    const jumlahSaatIni = soalContainer.children.length;
+
+    if (jumlah === jumlahSaatIni) {
+      submitRow.style.display = "flex";
+      return;
     }
 
-    soalContainer.innerHTML = "";
+    if (jumlah > jumlahSaatIni) {
+      // Bertambah: tambahkan card baru saja, card lama tidak disentuh.
+      for (let i = jumlahSaatIni; i < jumlah; i++) {
+        const card = buatCardSoal(i);
+        soalContainer.appendChild(card);
+      }
+    } else {
+      // Berkurang: minta konfirmasi karena akan menghapus card kelebihan.
+      const konfirmasi = confirm(
+        "Mengurangi jumlah soal akan menghapus " +
+          (jumlahSaatIni - jumlah) +
+          " card terakhir yang sudah diisi. Lanjutkan?",
+      );
+      if (!konfirmasi) {
+        inputJumlah.value = jumlahSaatIni; // kembalikan nilai input
+        return;
+      }
 
-    for (let i = 0; i < jumlah; i++) {
-      const card = buatCardSoal(i);
-      soalContainer.appendChild(card);
+      while (soalContainer.children.length > jumlah) {
+        soalContainer.lastElementChild.remove();
+      }
+      renumberSemuaCard();
     }
 
     submitRow.style.display = "flex";

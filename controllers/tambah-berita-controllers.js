@@ -1,10 +1,12 @@
 const Berita = require("../models/Berita")
 
+const {asyncHandler} = require("../utils/async-handler")
+
 module.exports.getTambahBerita = (req, res) => {
     res.render("tambah-berita")
 }
 
-module.exports.postTambahBerita = async (req, res) => {
+module.exports.postTambahBerita = asyncHandler(async (req, res) => {
     const {nama, tanggal, deskripsi_singkat, deskripsi_lengkap} = req.body
     const gambar = req.files
     let listGambar = []
@@ -20,4 +22,4 @@ module.exports.postTambahBerita = async (req, res) => {
         deskripsi_lengkap: deskripsi_lengkap
     })
     res.redirect("/#berita")
-}
+})

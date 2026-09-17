@@ -1,6 +1,8 @@
 const Siswa = require("../models/Siswa")
 
-module.exports.updateNamaSiswa = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.updateNamaSiswa = asyncHandler(async (req, res) => {
     const {nama} = req.body
     const user = req.session.user
 
@@ -8,4 +10,4 @@ module.exports.updateNamaSiswa = async (req, res) => {
     user.name = nama.trim()
 
     res.redirect("/profile")
-}
+})

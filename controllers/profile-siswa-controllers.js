@@ -1,7 +1,9 @@
 const Siswa = require("../models/Siswa")
 const HasilSoal = require("../models/HasilSoal")
 
-module.exports.profileSiswa = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.profileSiswa = asyncHandler(async (req, res) => {
     const user = req.session.user
     const siswa = await Siswa.findOne({email: user.email})
     
@@ -20,4 +22,4 @@ module.exports.profileSiswa = async (req, res) => {
     const hasilSoal = await HasilSoal.find({id_siswa: siswa._id}).populate("id_soal").sort({createdAt: -1})
 
     res.render("profile-siswa", {siswa, hasilSoal})
-}
+})

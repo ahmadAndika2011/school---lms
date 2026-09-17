@@ -3,7 +3,9 @@ const Siswa = require("../models/Siswa")
 const fs = require("fs")
 const path = require("path")
 
-module.exports.hapusAkunSiswa = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusAkunSiswa = asyncHandler(async (req, res) => {
     const user = req.session.user
     const siswa = await Siswa.findById(user.id) 
     
@@ -38,4 +40,4 @@ module.exports.hapusAkunSiswa = async (req, res) => {
 
         res.redirect("/")
     })
-}
+})

@@ -2,7 +2,9 @@ const Siswa = require("../models/Siswa")
 const path = require("path")
 const fs = require("fs")
 
-module.exports.hapusSiswa = async (req, res) => {
+const {asyncHandler} = require("../utils/async-handler")
+
+module.exports.hapusSiswa = asyncHandler(async (req, res) => {
     const {siswa_id} =  req.params
     const siswa = await Siswa.findById(siswa_id)
     if(siswa.gambar){
@@ -25,4 +27,4 @@ module.exports.hapusSiswa = async (req, res) => {
     await Siswa.findByIdAndDelete(siswa._id)
 
     res.redirect("/siswa")
-}
+})
