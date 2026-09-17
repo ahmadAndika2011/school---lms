@@ -1,10 +1,11 @@
 const express = require("express")
 const router = express.Router()
 
-const {checkAuth} = require("../middleware/check-auth")
 const controllers = require("../controllers/izin-signup-siswa-controllers")
+const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.post("/dashboard-admin/toggle-signup-siswa", checkAuth, controllers.izinSignupSiswa)
+router.post("/dashboard-admin/toggle-signup-siswa", checkAuth, checkRole("admin"), controllers.izinSignupSiswa)
 
 
 // const Admin = require("../models/Admin")

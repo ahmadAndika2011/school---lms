@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/detail-soal-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/detail-soal/:id_soal", checkAuth, controllers.detailSoal)
+router.get("/detail-soal/:id_soal", checkAuth, checkRole("guru"), controllers.detailSoal)
 
 // const Soal = require("../models/Soal")
 // const HasilSoal = require("../models/HasilSoal")

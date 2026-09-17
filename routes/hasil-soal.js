@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/hasil-soal-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/hasil-soal/:id_siswa/:id_soal", checkAuth, controllers.hasilSoal)
+router.get("/hasil-soal/:id_siswa/:id_soal", checkAuth, checkRole("siswa"), controllers.hasilSoal)
 
 // const Siswa = require("../models/Siswa")
 // const Soal = require("../models/Soal")

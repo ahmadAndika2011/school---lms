@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/layanan-ppdb-detail-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/layanan/ppdb/detail/:nisn_siswa", checkAuth, controllers.layananPpdbDetail)
+router.get("/layanan/ppdb/detail/:nisn_siswa", checkAuth, checkRole("admin"), controllers.layananPpdbDetail)
 
 // const LayananPpdb = require("../models/LayananPpdb")
 

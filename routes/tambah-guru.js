@@ -17,10 +17,11 @@ const upload = multer({storage})
 
 const controllers = require("../controllers/tambah-guru-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/tambah-guru", checkAuth, controllers.getTambahGuru)
+router.get("/tambah-guru", checkAuth, checkRole("admin"), controllers.getTambahGuru)
 
-router.post("/tambah-guru", checkAuth, upload.array("photo"), controllers.postTambahGuru)
+router.post("/tambah-guru", checkAuth, checkRole("admin"), upload.array("photo"), controllers.postTambahGuru)
 
 // const Guru = require("../models/Guru");
 // const bcrypt = require("bcrypt")

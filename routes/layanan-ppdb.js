@@ -20,10 +20,10 @@ const path = require("path");
 const {createUploader} = require("../middleware/upload-image")
 const upload = createUploader("gambar-siswa-layanan-ppdb")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/layanan/ppdb", checkAuth, controllers.getLayananPpdb)
-
-router.post("/layanan/ppdb", checkAuth, upload.any(), controllers.postLayananPpdb)
+router.get("/layanan/ppdb", checkAuth, checkRole("siswa"), controllers.getLayananPpdb)
+router.post("/layanan/ppdb", checkAuth, checkRole("siswa"), upload.any(), controllers.postLayananPpdb)
 
 // const LayananPpdb = require("../models/LayananPpdb");
 // const fs = require("fs")

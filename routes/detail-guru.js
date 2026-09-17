@@ -4,8 +4,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/detail-guru-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/guru/detail/:id_guru", checkAuth, controllers.detailGuru)
+router.get("/guru/detail/:id_guru", checkAuth, checkRole("admin"), controllers.detailGuru)
 
 // const Guru = require("../models/Guru")
 

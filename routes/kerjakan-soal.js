@@ -8,6 +8,12 @@ const controllers = require("../controllers/kerjakan-soal-controllers")
 const {createUploader} = require("../middleware/upload-image.js")
 const upload = createUploader("video-kerjakan-soal")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role.js")
+
+router.get("/kerjakan-soal/:id_soal", checkAuth, checkRole("siswa"), controllers.getKerjakanSoal)
+router.post("/kerjakan-soal/:id_soal", checkAuth, checkRole("siswa"), upload.single("video"), controllers.postKerjakanSoal)
+
+module.exports = router
 
 // const uploadDir = path.join(__dirname, "..", "public", "uploads", "video-kerjakan-soal")
 // if (!fs.existsSync(uploadDir)) {
@@ -23,8 +29,3 @@ const {checkAuth} = require("../middleware/check-auth")
 // })
 
 // const upload = multer({ storage })
-
-router.get("/kerjakan-soal/:id_soal", controllers.getKerjakanSoal)
-router.post("/kerjakan-soal/:id_soal", upload.single("video"), controllers.postKerjakanSoal)
-
-module.exports = router

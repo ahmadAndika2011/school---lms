@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/layanan-pip-detail-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/layanan/pip/detail/:nisn_siswa", checkAuth, controllers.layananPipDetail)
+router.get("/layanan/pip/detail/:nisn_siswa", checkAuth, checkRole("admin"), controllers.layananPipDetail)
 
 // const LayananPip = require("../models/LayananPip")
 

@@ -20,10 +20,11 @@ const upload = createUploader("gambar-berita")
 
 const controllers = require("../controllers/tambah-berita-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/tambah-berita", checkAuth, controllers.getTambahBerita)
+router.get("/tambah-berita", checkAuth, checkRole("admin"), controllers.getTambahBerita)
 
-router.post("/tambah-berita", checkAuth, upload.array("gambar", 10), controllers.postTambahBerita)
+router.post("/tambah-berita", checkAuth, checkRole("admin"), upload.array("gambar", 10), controllers.postTambahBerita)
 
 // const Berita = require("../models/Berita")
 

@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/hapus-data-pip=controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.delete("/layanan/pip/data/delete", checkAuth, controllers.hapusDataPip)
+router.delete("/layanan/pip/data/delete", checkAuth, checkRole("admin"), controllers.hapusDataPip)
 
 // const LayananPip = require("../models/LayananPip")
 // const path = require("path")

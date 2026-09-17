@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/hapus-akun-siswa-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.delete("/delete-account/siswa", checkAuth, controllers.hapusAkunSiswa)
+router.delete("/delete-account/siswa", checkAuth, checkRole("siswa"), controllers.hapusAkunSiswa)
 
 // const Siswa = require("../models/Siswa")
 // const fs = require("fs")

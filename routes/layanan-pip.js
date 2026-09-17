@@ -20,10 +20,10 @@ const controllers = require("../controllers/layanan-pip-controllers")
 const {createUploader} = require("../middleware/upload-image")
 const upload = createUploader("gambar-siswa-layanan-pip")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/layanan/pip", checkAuth, controllers.getLayananPip)
-
-router.post("/layanan/pip", checkAuth, upload.any(), controllers.postLayananPip)
+router.get("/layanan/pip", checkAuth, checkRole("siswa"), controllers.getLayananPip)
+router.post("/layanan/pip", checkAuth, checkRole("siswa"), upload.any(), controllers.postLayananPip)
 
 // const LayananPip = require("../models/LayananPip");
 // const fs = require("fs")

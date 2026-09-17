@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/hapus-berita-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.delete("/berita/detail/:id/delete", checkAuth, controllers.hapusBerita)
+router.delete("/berita/detail/:id/delete", checkAuth, checkRole("admin"), controllers.hapusBerita)
 
 // const Berita = require("../models/Berita")
 // const path = require("path")

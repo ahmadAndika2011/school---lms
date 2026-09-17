@@ -3,8 +3,9 @@ const router = express.Router()
 
 const controllers = require("../controllers/update-nama-siswa-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.post("/update-nama-siswa", checkAuth, controllers.updateNamaSiswa)
+router.post("/update-nama-siswa", checkAuth, checkRole("siswa"), controllers.updateNamaSiswa)
 
 // const Siswa = require("../models/Siswa")
 

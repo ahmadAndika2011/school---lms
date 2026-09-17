@@ -21,10 +21,11 @@ const {createUploader} = require("../middleware/upload-image")
 const upload = createUploader("gambar-soal")
 const controllers = require("../controllers/tambah-soal-controllers")
 const {checkAuth} = require("../middleware/check-auth")
+const {checkRole} = require("../middleware/check-role")
 
-router.get("/tambah-soal", checkAuth, controllers.getTambahSoal)
+router.get("/tambah-soal", checkAuth, checkRole("guru"), controllers.getTambahSoal)
 
-router.post("/tambah-soal", checkAuth, upload.any(), controllers.postTambahSoal)
+router.post("/tambah-soal", checkAuth, checkRole("guru"), upload.any(), controllers.postTambahSoal)
 
 // const Soal = require("../models/Soal");
 
