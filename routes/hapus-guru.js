@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/hapus-guru-controllers")
-const {checkAuth} = reuqire("../middleware/check-auth")
+const {checkAuth} = require("../middleware/check-auth")
 
 router.delete("/hapus-guru/:guru_id", checkAuth, controllers.hapusGuru)
 

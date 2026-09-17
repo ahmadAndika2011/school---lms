@@ -21,6 +21,19 @@
         <div class="da-header-actions">
           <a href="/" class="btn-home">&larr; Kembali ke Home</a>
 
+          <form action="/dashboard-admin/toggle-signup-siswa" method="POST" class="da-toggle-form">
+            <label class="da-toggle-label">
+              <span>Izin Signup Siswa</span>
+              <input
+                type="checkbox"
+                name="izin_signup_siswa"
+                onchange="this.form.submit()"
+                <%= admin.izin_signup_siswa ? "checked" : "" %>
+              >
+              <span class="da-toggle-switch"></span>
+            </label>
+          </form>
+
           <div class="da-admin-chip">
             <span class="da-admin-avatar"><%= admin.username.charAt(0) %></span>
             <span class="da-admin-nama"><%= admin.username %></span>

@@ -5,7 +5,7 @@ const path = require("path")
 const fs = require("fs")
 
 const controllers = require("../controllers/kerjakan-soal-controllers")
-const {createUploader} = reuqire("../middleware/upload-image.js")
+const {createUploader} = require("../middleware/upload-image.js")
 const upload = createUploader("video-kerjakan-soal")
 const {checkAuth} = require("../middleware/check-auth")
 

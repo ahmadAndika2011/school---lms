@@ -72,8 +72,9 @@ app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/logout"));
 
-//? Dashboard Admin
+//? Admin
 app.use("/", require("./routes/dashboard-admin"));
+app.use("/", require("./routes/izin-signup-siswa"));
 
 //? Siswa
 app.use("/", require("./routes/siswa"));

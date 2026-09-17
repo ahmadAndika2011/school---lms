@@ -11,7 +11,8 @@ router.get("/tambah-admin", async (req, res) => {
     await Admin.create({
       username: "admin_sekolah",
       password: hashedPassword,
-      nama: "andika"
+      nama: "andika",
+      izin_signup_siswa: true
     });
 
     return res.send("Success");

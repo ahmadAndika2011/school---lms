@@ -13,10 +13,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    izin_login_siswa: {
+    izin_signup_siswa: {
         type: Boolean,
         required: true
     }
-})
+})  
 
 module.exports = mongoose.model("Admin", adminSchema)

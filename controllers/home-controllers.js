@@ -4,6 +4,7 @@ const Guru = require("../models/Guru")
 const Siswa = require("../models/Siswa")
 const Berita = require("../models/Berita")
 const Soal = require("../models/Soal")
+const Admin = require("../models/Admin")
 
 module.exports.home = async (req, res) => {
     const user = req.session.user || null
@@ -16,6 +17,15 @@ module.exports.home = async (req, res) => {
     const jumlahSiswa = siswa.length
     const soal = await Soal.find({})
 
+    let izinSignupSiswa;
+    let izinAdmin = await Admin.find({})
+    izinAdmin = izinAdmin[0]
+    if(izinAdmin.izin_signup_siswa){
+        izinSignupSiswa = true
+    }else{
+        izinSignupSiswa = false
+    }
+
     let admin;
     if(user){
         if(user.role === "admin"){
@@ -26,5 +36,5 @@ module.exports.home = async (req, res) => {
     }
 
 
-    res.render("home", {user: user, ekstrakulikuler, fasilitas, berita, guru, jumlahGuru, jumlahSiswa, admin, soal})
+    res.render("home", {user: user, ekstrakulikuler, fasilitas, berita, guru, jumlahGuru, jumlahSiswa, admin, soal, izinSignupSiswa})
 }
