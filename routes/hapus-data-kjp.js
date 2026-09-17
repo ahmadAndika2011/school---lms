@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const controllers = require("../controllers/hapus-data-kjp-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.delete("/layanan/kjp/data/delete", controllers.hapusDataKjp)
+router.delete("/layanan/kjp/data/delete", checkAuth, controllers.hapusDataKjp)
 
 // const LayananKjp = require("../models/LayananKjp");
 // const path = require("path");

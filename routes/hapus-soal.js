@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/hapus-soal-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.delete("/hapus-soal/:id_soal", controllers.hapusSoal)
+router.delete("/hapus-soal/:id_soal", checkAuth, controllers.hapusSoal)
 
 // const Soal = require("../models/Soal")
 // const HasilSoal = require("../models/HasilSoal")

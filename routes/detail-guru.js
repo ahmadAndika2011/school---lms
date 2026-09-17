@@ -3,8 +3,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/detail-guru-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/guru/detail/:id_guru", controllers.detailGuru)
+router.get("/guru/detail/:id_guru", checkAuth, controllers.detailGuru)
 
 // const Guru = require("../models/Guru")
 

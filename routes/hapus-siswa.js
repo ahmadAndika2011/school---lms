@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/hapus-siswa-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.delete("/hapus-siswa/:siswa_id", controllers.hapusSiswa)
+router.delete("/hapus-siswa/:siswa_id", checkAuth, controllers.hapusSiswa)
 
 // const Siswa = require("../models/Siswa")
 // const path = require("path")

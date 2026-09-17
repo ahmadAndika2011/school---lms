@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/detail-berita-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/berita/detail/:berita_id", controllers.detailBerita)
+router.get("/berita/detail/:berita_id", checkAuth, controllers.detailBerita)
 
 // const Berita = require("../models/Berita")
 

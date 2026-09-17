@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/detail-siswa-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/siswa/detail/:id_siswa", controllers.detailSiswa)
+router.get("/siswa/detail/:id_siswa", checkAuth, controllers.detailSiswa)
 
 // const Siswa = require("../models/Siswa")
 // const HasilSoal = require("../models/HasilSoal")

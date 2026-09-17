@@ -12,6 +12,10 @@ const adminSchema = new mongoose.Schema({
     nama: {
         type: String,
         required: true
+    },
+    izin_login_siswa: {
+        type: Boolean,
+        required: true
     }
 })
 

@@ -19,9 +19,10 @@ const controllers = require("../controllers/layanan-kjp-controllers")
 
 const {createUploader} = require("../middleware/upload-image")
 const upload = createUploader("gambar-siswa-layanan-kjp")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/layanan/kjp", controllers.getLayananKjp)
-router.post("/layanan/kjp", upload.any(), controllers.postLayananKjp)
+router.get("/layanan/kjp", checkAuth, controllers.getLayananKjp)
+router.post("/layanan/kjp", checkAuth, upload.any(), controllers.postLayananKjp)
 
 // const LayananKjp = require("../models/LayananKjp");
 // const fs = require("fs")

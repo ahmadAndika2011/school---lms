@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/hapus-data-pip=controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.delete("/layanan/pip/data/delete", controllers.hapusDataPip)
+router.delete("/layanan/pip/data/delete", checkAuth, controllers.hapusDataPip)
 
 // const LayananPip = require("../models/LayananPip")
 // const path = require("path")

@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/hapus-data-ppdb-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.delete("/layanan/ppdb/data/delete", controllers.hapusDataPpdb)
+router.delete("/layanan/ppdb/data/delete", checkAuth, controllers.hapusDataPpdb)
 
 // const LayananPpdb = require("../models/LayananPpdb")
 // const path = require("path")

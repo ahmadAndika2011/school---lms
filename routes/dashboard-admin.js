@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const controllers = require("../controllers/dashboard-admin-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/dashboard-admin", controllers.dashboardAdmin)
+router.get("/dashboard-admin", checkAuth, controllers.dashboardAdmin)
 
 // const Admin = require("../models/Admin");
 // const Berita = require("../models/Berita");

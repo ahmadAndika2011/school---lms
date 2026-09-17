@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/layanan-pip-detail-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/layanan/pip/detail/:nisn_siswa", controllers.layananPipDetail)
+router.get("/layanan/pip/detail/:nisn_siswa", checkAuth, controllers.layananPipDetail)
 
 // const LayananPip = require("../models/LayananPip")
 

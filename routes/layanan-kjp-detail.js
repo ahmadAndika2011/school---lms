@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 const controllers = require("../controllers/layanan-kjp-detail-controllers")
+const {checkAuth} = require("../middleware/check-auth")
 
-router.get("/layanan/kjp/detail/:nisn_siswa", controllers.LayananKjpDetail)
+router.get("/layanan/kjp/detail/:nisn_siswa", checkAuth, controllers.LayananKjpDetail)
 
 // const LayananKjp = require("../models/LayananKjp")
 
